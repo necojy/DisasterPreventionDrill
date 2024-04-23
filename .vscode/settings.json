@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Disaster Prevention Drill.sln"
+    "dotnet.defaultSolution": "DisasterPreventionDrill.sln"
 }
