@@ -15,9 +15,11 @@ public class PlayerKnockedDown : MonoBehaviour
         if (isRotating)
         {
             menu.SetActive(true);
-            menu.transform.position = head2.position + new Vector3(head2.forward.x, 0, head2.forward.z).normalized * spawnDistance;
-            menu.transform.LookAt(new Vector3(head2.position.x, menu.transform.position.y, head2.position.z));
-            menu.transform.forward *= -1;
+            menu.transform.position = head2.position + new Vector3(head2.forward.x, head2.forward.y, head2.forward.z).normalized * spawnDistance;
+            menu.transform.LookAt(new Vector3(head2.position.x,-1 *  menu.transform.position.y,-1 *  head2.position.z));
+            menu.transform.rotation = Quaternion.Euler(menu.transform.rotation.eulerAngles.x -10f, menu.transform.rotation.eulerAngles.y, menu.transform.eulerAngles.z);
+
+            // menu.transform.forward *= -1;
         }
 
     }
