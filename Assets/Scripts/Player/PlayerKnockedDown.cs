@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class PlayerKnockedDown : MonoBehaviour
 {
-    public GameObject head;
-    public Transform head2;
-    public float spawnDistance = 2;
-    public GameObject menu;
+    public Transform body;
+    public Transform head;
+    public GameObject deadPanel;
+    public float canva_TO_headDistance = 2f; //死亡畫面到頭部的距離
+    public float knockedDownTime = 1f; // 旋轉的時間
+
+    public Animator animator;
+
     private bool isRotating = false;
 
+    private void Start() {
+        deadPanel.SetActive(false);
+    }
     private void Update()
     {
+        //更新死亡畫面位置
         if (isRotating)
         {
-            menu.SetActive(true);
-            menu.transform.position = head2.position + new Vector3(head2.forward.x, head2.forward.y, head2.forward.z).normalized * spawnDistance;
-            menu.transform.LookAt(new Vector3(head2.position.x,-1 *  menu.transform.position.y,-1 *  head2.position.z));
-            menu.transform.rotation = Quaternion.Euler(menu.transform.rotation.eulerAngles.x -10f, menu.transform.rotation.eulerAngles.y, menu.transform.eulerAngles.z);
-
-            // menu.transform.forward *= -1;
+            deadPanel.SetActive(true);
+            body.rotation = Quaternion.Euler(0,0,0);
         }
 
     }
@@ -28,27 +32,30 @@ public class PlayerKnockedDown : MonoBehaviour
         if (other.gameObject.CompareTag("Faling") && !isRotating)
         {
             StartCoroutine(RotateHead());
+            Destroy(other.gameObject);
         }
     }
 
+    //模擬人物倒下
     private IEnumerator RotateHead()
     {
 
-        Quaternion targetRotation = Quaternion.Euler(head.transform.rotation.eulerAngles.x - 90f, head.transform.rotation.eulerAngles.y, head.transform.rotation.eulerAngles.z);
-        float duration = 1f; // 旋轉的時間
+        Quaternion targetRotation = Quaternion.Euler(body.rotation.eulerAngles.x - 90f, body.rotation.eulerAngles.y, body.rotation.eulerAngles.z);
 
         float elapsedTime = 0f;
-        Quaternion startRotation = head.transform.rotation;
+        Quaternion startRotation = body.rotation;
 
-        while (elapsedTime < duration)
+        animator.SetBool("fadein",true);
+        while (elapsedTime < knockedDownTime)
         {
-            head.transform.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / duration);
+            body.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / knockedDownTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        head.transform.rotation = targetRotation;
+        body.rotation = targetRotation;
 
+        yield return new WaitForSeconds(0.5f);
         isRotating = true;
     }
 }
