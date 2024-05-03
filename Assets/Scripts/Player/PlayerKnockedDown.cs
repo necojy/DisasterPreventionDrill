@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,22 +10,16 @@ public class PlayerKnockedDown : MonoBehaviour
     public GameObject deadPanel;
     public float canva_TO_headDistance = 2f; //死亡畫面到頭部的距離
     public float knockedDownTime = 1f; // 旋轉的時間
-
     public Animator animator;
-
+    public Vector3 rebirthPos;
     private bool isRotating = false;
 
-    private void Start() {
+    private void Start() 
+    {
         deadPanel.SetActive(false);
     }
     private void Update()
     {
-        //更新死亡畫面位置
-        if (isRotating)
-        {
-            deadPanel.SetActive(true);
-            body.rotation = Quaternion.Euler(0,0,0);
-        }
 
     }
     private void OnTriggerEnter(Collider other)
@@ -57,5 +52,16 @@ public class PlayerKnockedDown : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         isRotating = true;
+
+        deadPanel.SetActive(true);
+        body.rotation = Quaternion.Euler(0,0,0);
+
+    }
+
+    public void Rebirth()
+    {
+        deadPanel.SetActive(false);
+        animator.SetBool("fadein",false);
+        body.position = rebirthPos;
     }
 }
