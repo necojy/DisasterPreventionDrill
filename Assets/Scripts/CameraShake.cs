@@ -25,7 +25,7 @@ public class CameraShake : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-        transform.localPosition = originalPos;
+        // transform.localPosition = originalPos;
         animator.SetBool("turn_off",true);
         //transform.localPosition = originalPos;
     }
