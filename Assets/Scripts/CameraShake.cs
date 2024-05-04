@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    public Animator animator;
     private void Start() {
         StartCoroutine(Shake(10f,0.4f));
 
@@ -25,6 +26,7 @@ public class CameraShake : MonoBehaviour
             yield return null;
         }
         transform.localPosition = originalPos;
+        animator.SetBool("turn_off",true);
     }
 
 }
