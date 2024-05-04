@@ -5,28 +5,29 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour
 {
     public Animator animator;
+    public Vector3 degree = new Vector3(0.05f,0.025f,0);
     private void Start() {
-        StartCoroutine(Shake(10f,0.4f));
+        StartCoroutine(Shake(10f));
 
     }
-    public IEnumerator Shake(float duration,float magnitude)
+    public IEnumerator Shake(float duration)
     {
 
-        Vector3 originalPos = transform.localPosition;
+        //Vector3 originalPos = transform.localPosition;
         float elapsed = 0.0f;
-        float x = 0.05f;
-        float y = 0.025f;
+
         while(elapsed < duration)
         {
-            //float x = Random.Range(-1f,1f) * magnitude;
-            x=-x;y=-y;
-            transform.localPosition += new Vector3(x,y,0);
+           
+            degree=-degree;
+            transform.localPosition += degree;
 
             elapsed += Time.deltaTime;
             yield return null;
         }
         transform.localPosition = originalPos;
         animator.SetBool("turn_off",true);
+        //transform.localPosition = originalPos;
     }
 
 }
