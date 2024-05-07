@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &12764495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 12764496}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &12764496
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12764495}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.04968524, y: 1.49, z: -16.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &48878702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2122,7 +2153,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347245387}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b28b92d15a228b4e8f3f049bbcfcb05, type: 3}
   m_Name: 
@@ -2133,7 +2164,7 @@ MonoBehaviour:
   canva_TO_headDistance: 2
   knockedDownTime: 1
   animator: {fileID: 175632408}
-  rebirthPos: {x: 0, y: 0, z: 0}
+  rebirthPos: {fileID: 0}
 --- !u!1001 &363329606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5665,6 +5696,8 @@ GameObject:
   - component: {fileID: 1294984989}
   - component: {fileID: 1294984992}
   - component: {fileID: 1294984993}
+  - component: {fileID: 1294984994}
+  - component: {fileID: 1294984995}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Untagged
@@ -5751,6 +5784,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1366547423}
   degree: {x: 0.05, y: 0.025, z: 0}
+--- !u!136 &1294984994
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294984988}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.31
+  m_Height: 4.994863
+  m_Direction: 1
+  m_Center: {x: -0.06999999, y: -0.02085042, z: -0.00999999}
+--- !u!114 &1294984995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294984988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b28b92d15a228b4e8f3f049bbcfcb05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 1920909938}
+  head: {fileID: 347245388}
+  deadPanel: {fileID: 585672198}
+  canva_TO_headDistance: 2
+  knockedDownTime: 1
+  animator: {fileID: 175632408}
+  rebirthPos: {fileID: 12764496}
 --- !u!1001 &1308483272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8081,11 +8147,21 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 347245391}
+    - target: {fileID: 4012830381493376163, guid: d9ff2396752dd31408c05828455d5875,
+        type: 3}
+      propertyPath: m_PlaneDistance
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 4012830382869165558, guid: d9ff2396752dd31408c05828455d5875,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 347245393}
+      objectReference: {fileID: 1294984995}
+    - target: {fileID: 4012830382869165558, guid: d9ff2396752dd31408c05828455d5875,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Rebirth
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9ff2396752dd31408c05828455d5875, type: 3}
 --- !u!1001 &5265950521699152891
