@@ -6,7 +6,10 @@ public class CameraShake : MonoBehaviour
 {   
     public float time=10f;
     public float level=0.25f;
+    public Animator animator;
+
     private void Start() {
+        animator.SetBool("Fall",true);
         StartCoroutine(Shake(time,level));
     }
     public IEnumerator Shake(float duration, float magnitude)
