@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2792,7 +2792,7 @@ Transform:
   - {fileID: 1148159517}
   - {fileID: 254939661}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &559120403
 PrefabInstance:
@@ -5483,7 +5483,7 @@ Transform:
   - {fileID: 741573929}
   - {fileID: 317136208}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117519549
 GameObject:
@@ -6441,7 +6441,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 5
   m_Radius: 0.3
-  m_SlopeLimit: 45
+  m_SlopeLimit: 10
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -6458,9 +6458,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bc49a73c4bc494389c47ec33a01954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HidePos: {x: 0, y: 0, z: 0}
-  OrigPos: {x: 0, y: 0, z: 0}
-  OrigRot: {x: 0, y: 0, z: 0, w: 0}
+  hidePos: {x: 0, y: 0, z: 0}
+  origPos: {x: 0, y: 0, z: 0}
+  origRot: {x: 0, y: 0, z: 0, w: 0}
+  flippedRotation: {x: 0, y: 0, z: 0, w: 0}
   isHiding: 0
 --- !u!1001 &1308483272
 PrefabInstance:
@@ -7549,7 +7550,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1811505780
 MonoBehaviour:
