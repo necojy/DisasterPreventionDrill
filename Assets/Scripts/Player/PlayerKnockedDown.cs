@@ -11,8 +11,11 @@ public class PlayerKnockedDown : MonoBehaviour
     public float canva_TO_headDistance = 2f; //死亡畫面到頭部的距離
     public float knockedDownTime = 1f; // 旋轉的時間
     public Animator animator;
-    public Vector3 rebirthPos;
     private bool isRotating = false;
+
+    //設定復活參數
+    public int rebirth_index = 0;
+    public Transform[] rebirthPos;
 
     private void Start() 
     {
@@ -62,6 +65,7 @@ public class PlayerKnockedDown : MonoBehaviour
     {
         deadPanel.SetActive(false);
         animator.SetBool("fadein",false);
-        body.position = rebirthPos;
+        body.position = rebirthPos[rebirth_index].position;
     }
+
 }

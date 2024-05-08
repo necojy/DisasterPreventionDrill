@@ -3,31 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraShake : MonoBehaviour
-{
+{   
+    public float time=10f;
+    public float level=0.25f;
     public Animator animator;
-    public Vector3 degree = new Vector3(0.05f,0.025f,0);
-    private void Start() {
-        StartCoroutine(Shake(10f));
 
+    private void Start() {
+        animator.SetBool("Fall",true);
+        StartCoroutine(Shake(time,level));
     }
-    public IEnumerator Shake(float duration)
+    public IEnumerator Shake(float duration, float magnitude)
     {
 
-        //Vector3 originalPos = transform.localPosition;
+        Vector3 originalPos = transform.localPosition;
         float elapsed = 0.0f;
 
         while(elapsed < duration)
         {
            
-            degree=-degree;
-            transform.localPosition += degree;
+            float x =Random.Range(-1f,1f)*magnitude;
+            float y =Random.Range(-1f,1f)*magnitude;
+            transform.localPosition = new Vector3(originalPos.x+x,originalPos.y+y,originalPos.z);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
-        // transform.localPosition = originalPos;
-        animator.SetBool("turn_off",true);
-        //transform.localPosition = originalPos;
+
+        transform.localPosition = originalPos;
     }
 
 }
