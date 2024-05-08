@@ -10,7 +10,7 @@ public class PlayerKnockedDown : MonoBehaviour
     public GameObject deadPanel;
     public float canva_TO_headDistance = 2f; //死亡畫面到頭部的距離
     public float knockedDownTime = 1f; // 旋轉的時間
-    public Animator animator;
+    public Animator fade_animator;
     private bool isRotating = false;
 
     //設定復活參數
@@ -20,10 +20,6 @@ public class PlayerKnockedDown : MonoBehaviour
     private void Start() 
     {
         deadPanel.SetActive(false);
-    }
-    private void Update()
-    {
-
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -43,7 +39,7 @@ public class PlayerKnockedDown : MonoBehaviour
         float elapsedTime = 0f;
         Quaternion startRotation = body.rotation;
 
-        animator.SetBool("fadein",true);
+        fade_animator.SetBool("fadein",true);
         while (elapsedTime < knockedDownTime)
         {
             body.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / knockedDownTime);
@@ -64,7 +60,7 @@ public class PlayerKnockedDown : MonoBehaviour
     public void Rebirth()
     {
         deadPanel.SetActive(false);
-        animator.SetBool("fadein",false);
+        fade_animator.SetBool("fadein",false);
         body.position = rebirthPos[rebirth_index].position;
     }
 
