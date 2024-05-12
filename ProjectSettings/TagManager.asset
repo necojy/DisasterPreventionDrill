@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Faling
   - Fire
+  - aaa
+  - Left Hand
+  - Right Hand
   layers:
   - Default
   - TransparentFX

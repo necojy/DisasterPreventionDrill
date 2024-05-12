@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerKnockedDown : MonoBehaviour
 {
+    // 判斷是否在地震當下
+    public CameraShake cameraShake;
     public Transform body;
     public Transform head;
     public GameObject deadPanel;
@@ -23,7 +25,7 @@ public class PlayerKnockedDown : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Faling") && !isRotating)
+        if (other.gameObject.CompareTag("Faling") && !isRotating && cameraShake.isShaking )
         {
             StartCoroutine(RotateHead());
             Destroy(other.gameObject);
