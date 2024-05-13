@@ -9,7 +9,10 @@ public class CameraShake : MonoBehaviour
     public Animator bookCase_animator;
     public GameObject Option_canvas;
 
-    public bool isShaking = false;
+    [HideInInspector] public bool isShaking = false;
+
+    public float waitForDown = 1f;
+    public GameObject[] Fall_Object;
 
     private void Start() 
     {
@@ -17,6 +20,7 @@ public class CameraShake : MonoBehaviour
         isShaking = true;
         StartCoroutine(Shake(time,level));
         bookCase_animator.SetBool("Fall",true);
+        InitFallObject();
     }
     public IEnumerator Shake(float duration, float magnitude)
     {
@@ -54,4 +58,22 @@ public class CameraShake : MonoBehaviour
         transform.localPosition = originalPos;
     }
 
+    private void InitFallObject()
+    {
+        foreach(GameObject Fall in Fall_Object)
+        {
+            Fall.GetComponent<Rigidbody>().useGravity = false;
+        }
+
+        StartCoroutine(Falling());
+    }
+
+    private IEnumerator Falling()
+    {
+        yield return new WaitForSeconds(waitForDown);
+        foreach(GameObject Fall in Fall_Object)
+        {
+            Fall.GetComponent<Rigidbody>().useGravity = true;
+        }
+    }
 }
