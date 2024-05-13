@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class HideUnderTable : MonoBehaviour
@@ -15,16 +16,21 @@ public class HideUnderTable : MonoBehaviour
    
     public bool isHiding = false;
     
+    public InputActionReference actionReference;
+    public InputAction action;
+
 
 
     void Start()
     {
         player = GameObject.Find("XR Origin (XR Rig)");
         locomotion = GameObject.Find("Locomotion Systeam");
-        table = GameObject.Find("FreeTable");
+        table = GameObject.Find("DeskToHide");
         coll = table.GetComponent<BoxCollider>();
         hidePos = table.transform.position;
-        hidePos.y += 1f;
+        
+        action = actionReference.action;
+        action.performed += ActivateBehavior;
         
     }
 
@@ -40,17 +46,29 @@ public class HideUnderTable : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.tag == "Player")
+        {   
+            isHiding=true;
+            Hide();
+        }
+    }
+
+    private void OnTriggerExit(Collider coll)
+    {
+        if (coll.tag == "Player")
+        {   
+            isHiding=false;
+        }
+    }
+
     public void Hide()
     {
        
-        isHiding = !isHiding;
         if (isHiding)
         {
-            StartCoroutine(MovePlayer(hidePos, Quaternion.Euler(0, 180, 0)));
-        }
-        else
-        {
-            StartCoroutine(MovePlayer(origPos, Quaternion.identity));
+            StartCoroutine(MovePlayer(hidePos, flippedRotation));
         }
     
     }
@@ -72,6 +90,14 @@ public class HideUnderTable : MonoBehaviour
 
         player.transform.position = targetPos;
         player.transform.rotation = targetRot;
+    }
+
+    private void ActivateBehavior(InputAction.CallbackContext context)
+    {
+        if (isHiding){
+            StartCoroutine(MovePlayer(origPos, origRot));
+            isHiding=false;
+        }       
     }
 
 }
