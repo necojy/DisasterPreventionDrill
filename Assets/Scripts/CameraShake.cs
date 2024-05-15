@@ -6,7 +6,7 @@ public class CameraShake : MonoBehaviour
 {   
     public float time=10f;
     public float level=0.25f;
-    public Animator bookCase_animator;
+    //public Animator bookCase_animator;
     public GameObject Option_canvas;
 
     [HideInInspector] public bool isShaking = false;
@@ -19,7 +19,7 @@ public class CameraShake : MonoBehaviour
         Option_canvas.SetActive(false);
         isShaking = true;
         StartCoroutine(Shake(time,level));
-        bookCase_animator.SetBool("Fall",true);
+        //bookCase_animator.SetBool("Fall",true);
         InitFallObject();
     }
     public IEnumerator Shake(float duration, float magnitude)
