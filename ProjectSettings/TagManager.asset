@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Faling
+  - Right Hand
+  - Left Hand
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -12,7 +15,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Camera
   - 
   - 
   - 

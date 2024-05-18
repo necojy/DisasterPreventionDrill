@@ -15,6 +15,7 @@ public class CameraShake : MonoBehaviour
     #region 搖晃後的掉落物
     public float waitForDown = 1f;
     public GameObject[] fallObjects;
+    private bool isFalling = false;
     #endregion
     public ShowCanvas showCanvas;
     private void Start()
@@ -32,7 +33,6 @@ public class CameraShake : MonoBehaviour
         }
 
         StartCoroutine(Shake(shakeDuration,shakeMagnitude));
-        // StartCoroutine(FallObjects());
     }
 
     public IEnumerator Shake(float duration, float magnitude)
@@ -52,10 +52,13 @@ public class CameraShake : MonoBehaviour
             transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
             elapsed += Time.deltaTime;
             yield return null;
+            if(elapsed < duration / 4 && !isFalling) StartCoroutine(FallObjects());
         }
+
 
         //給於提示
         yield return StartCoroutine(showCanvas.StartHint());
+
 
         while (elapsed < duration)
         {
@@ -72,6 +75,7 @@ public class CameraShake : MonoBehaviour
 
     private IEnumerator FallObjects()
     {
+        isFalling = true;
         yield return new WaitForSeconds(waitForDown);
         foreach (GameObject fallObject in fallObjects)
         {
