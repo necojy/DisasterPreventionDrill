@@ -1336,7 +1336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741293722194773166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.02}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2498,7 +2498,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741293722844646804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.95, z: -3.21}
+  m_LocalPosition: {x: 0, y: 1.95, z: -0.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2526,13 +2526,7 @@ MonoBehaviour:
   shakeMagnitude: 0.25
   isShaking: 0
   waitForDown: 1
-  fallObjects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  fallObjects: []
   showCanvas: {fileID: 361854743}
 --- !u!114 &361854743
 MonoBehaviour:
@@ -2553,13 +2547,14 @@ MonoBehaviour:
   rotate_Camera: {fileID: 332900167}
   optionCanvas: {fileID: 0}
   showCanvasTimes: 2
-  hint_Objs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  hint_Objs: []
+<<<<<<< HEAD
+  cameraShake: {fileID: 0}
   deadPosition: {fileID: 0}
   fade_animator: {fileID: 0}
   deadPanel: {fileID: 0}
+=======
+>>>>>>> 3472343436b7c929b4cedf41eccb303f254047c3
 --- !u!1 &1741293723549940207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2804,7 +2799,6 @@ GameObject:
   - component: {fileID: 1741293723663526136}
   - component: {fileID: 1741293723663526085}
   - component: {fileID: 1741293723663526087}
-  - component: {fileID: 1294984997}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
@@ -2870,8 +2864,8 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 3
-  m_Radius: 0.28
+  m_Height: 5
+  m_Radius: 0.3
   m_SlopeLimit: 20
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -2888,25 +2882,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.31
-  m_Height: 2.8783057
+  m_Height: 4.994863
   m_Direction: 1
-  m_Center: {x: 0, y: -0.03172505, z: 0}
---- !u!114 &1294984997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741293723663526137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b28b92d15a228b4e8f3f049bbcfcb05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rebirth_index: 0
-  rebirthPos: []
-  cameraShake: {fileID: 1741293722844646806}
-  showCanvas: {fileID: 361854743}
+  m_Center: {x: -0.06999999, y: -0.02085042, z: -0.00999999}
 --- !u!1 &2093006090867943049
 GameObject:
   m_ObjectHideFlags: 0

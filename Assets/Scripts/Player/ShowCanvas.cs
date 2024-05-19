@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class ShowCanvas : MonoBehaviour
@@ -14,6 +15,8 @@ public class ShowCanvas : MonoBehaviour
     #endregion
 
     #region 提示選項參數
+    [HideInInspector] public bool open_Timer = false;
+    public GameObject timer;
     public GameObject optionCanvas;
     public float showCanvasTimes = 2f;
     #endregion
@@ -31,6 +34,7 @@ public class ShowCanvas : MonoBehaviour
 
     private void Awake()
     {
+        timer.SetActive(false);
         optionCanvas.SetActive(false);
         rotate_Camera.enabled = false;
     }
@@ -43,8 +47,11 @@ public class ShowCanvas : MonoBehaviour
         Hint_Glow(true);
         yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false));
         yield return new WaitForSeconds(2f);
-
         Hint_Glow(false);
+
+        timer.SetActive(true);
+        open_Timer = true;
+
         mainCamera.enabled = true;
         rotate_Camera.enabled = false;
     }
@@ -63,11 +70,11 @@ public class ShowCanvas : MonoBehaviour
             yield return null;
         }
 
-        if (!is_dead) 
+        if (!is_dead)
         {
             yield return StartCoroutine(ShowOptionCanvas());
         }
-        else 
+        else
         {
             ShowDeadCanvas();
         }
@@ -84,7 +91,7 @@ public class ShowCanvas : MonoBehaviour
 
     private void ShowDeadCanvas()
     {
-        fade_animator.SetBool("fadein",true);
+        fade_animator.SetBool("fadein", true);
 
         isRotating = true;
 

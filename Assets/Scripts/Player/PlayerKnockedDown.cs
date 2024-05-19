@@ -12,9 +12,26 @@ public class PlayerKnockedDown : MonoBehaviour
 
     public CameraShake cameraShake;
     public ShowCanvas showCanvas;
+    public TimeControl timeControl;
+    public GameObject Timer;
+
+    public HideUnderTable hideUnderTable;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Falling") && cameraShake.isShaking)
+        {
+            showCanvas.Dead();
+        }
+    }
+
+    private void Update() {
+        
+        if(timeControl.timeOut)
+        {
+            Timer.SetActive(false);
+        }
+
+        if(!hideUnderTable.isHiding && timeControl.startGame && timeControl.timeOut)
         {
             showCanvas.Dead();
         }
