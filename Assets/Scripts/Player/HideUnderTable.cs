@@ -16,6 +16,7 @@ public class HideUnderTable : MonoBehaviour
    
     public bool isHiding = false;
     public bool inHidingArea = false;
+    public bool inputable = true;
     public InputActionReference actionReference;
     public InputAction action;
 
@@ -63,13 +64,12 @@ public class HideUnderTable : MonoBehaviour
     }
 
     public void Hide()
-    {
-       
-        if (isHiding)
-        {
-            StartCoroutine(MovePlayer(hidePos, flippedRotation));
-        }
-    
+    {         
+        StartCoroutine(MovePlayer(hidePos, flippedRotation));        
+    }
+    public void Leave()
+    {         
+        StartCoroutine(MovePlayer(origPos, origRot));        
     }
 
     IEnumerator MovePlayer(Vector3 targetPos, Quaternion targetRot)
@@ -89,17 +89,20 @@ public class HideUnderTable : MonoBehaviour
 
         player.transform.position = targetPos;
         player.transform.rotation = targetRot;
+        inputable=true;
     }
 
     private void ActivateBehavior(InputAction.CallbackContext context)
     {   
         
-        if (isHiding){
-            StartCoroutine(MovePlayer(origPos, origRot));
+        if (isHiding && inputable){
+            inputable=false;
+            Leave();
             isHiding=false;
-        }else if (inHidingArea){
-            isHiding=true;
+        }else if (!isHiding && inHidingArea && inputable){
+            inputable=false;
             Hide();     
+            isHiding=true;
         }       
     }
 
