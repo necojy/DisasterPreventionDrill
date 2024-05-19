@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Faling
   - Right Hand
   - Left Hand
   - Fire
+  - Falling
   layers:
   - Default
   - TransparentFX

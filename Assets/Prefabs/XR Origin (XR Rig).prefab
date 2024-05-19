@@ -2529,6 +2529,11 @@ MonoBehaviour:
   rotate_Camera: {fileID: 332900167}
   optionCanvas: {fileID: 0}
   showCanvasTimes: 2
+  hint_Objs: []
+  cameraShake: {fileID: 0}
+  deadPosition: {fileID: 0}
+  fade_animator: {fileID: 0}
+  deadPanel: {fileID: 0}
 --- !u!1 &1741293723549940207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,7 +2778,6 @@ GameObject:
   - component: {fileID: 1741293723663526136}
   - component: {fileID: 1741293723663526085}
   - component: {fileID: 1741293723663526087}
-  - component: {fileID: 1741293723663526086}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
   m_TagString: Player
@@ -2860,28 +2864,6 @@ CapsuleCollider:
   m_Height: 4.994863
   m_Direction: 1
   m_Center: {x: -0.06999999, y: -0.02085042, z: -0.00999999}
---- !u!114 &1741293723663526086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1741293723663526137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b28b92d15a228b4e8f3f049bbcfcb05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraShake: {fileID: 1741293722844646806}
-  body: {fileID: 1741293722844646807}
-  head: {fileID: 1741293722194773161}
-  deadPanel: {fileID: 0}
-  canva_TO_headDistance: 2
-  knockedDownTime: 1
-  fade_animator: {fileID: 0}
-  rebirth_index: 0
-  rebirthPos:
-  - {fileID: 0}
 --- !u!1 &2093006090867943049
 GameObject:
   m_ObjectHideFlags: 0

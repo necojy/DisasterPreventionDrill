@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowCanvas : MonoBehaviour
 {
-
     #region 旋轉視角參數
     public Transform camera_Offset;
+    // public Transform originalPosition;
     public Transform rotatePosition;
     public float rotateSpeed = 1f;
     private float rotateViewTime = 1f; // 旋轉視角的時間
@@ -23,6 +22,12 @@ public class ShowCanvas : MonoBehaviour
     public GameObject[] hint_Objs;
     #endregion
 
+    #region 死亡畫面
+    public Transform deadPosition;
+    public Animator fade_animator;
+    public GameObject deadPanel;
+    #endregion
+    private bool isRotating = false;
 
     private void Awake()
     {
@@ -36,38 +41,37 @@ public class ShowCanvas : MonoBehaviour
         mainCamera.enabled = false;
         rotate_Camera.enabled = true;
         Hint_Glow(true);
-        yield return StartCoroutine(RotateView(camera_Offset, rotatePosition, true));
+        yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false));
         yield return new WaitForSeconds(2f);
-        yield return StartCoroutine(RotateView(rotatePosition, camera_Offset, false));
+
         Hint_Glow(false);
         mainCamera.enabled = true;
         rotate_Camera.enabled = false;
     }
-
     //旋轉相機視角
-    private IEnumerator RotateView(Transform initial, Transform target, bool open)
+    private IEnumerator RotateView(Transform initial, Transform target, bool is_dead)
     {
         Quaternion initialRotation = initial.rotation;
         Vector3 direction = target.position - initial.position;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        //更新下次旋轉位置(恢復視角);
-        rotatePosition = camera_Offset;
-
         float elapsedTime = 0f;
         while (elapsedTime < rotateViewTime)
         {
-            transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / rotateViewTime);
+            camera_Offset.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / rotateViewTime);
             elapsedTime += Time.deltaTime * rotateSpeed;
             yield return null;
         }
 
-        // 確保最終旋轉到目標旋轉
-        transform.rotation = targetRotation;
+        if (!is_dead) 
+        {
+            yield return StartCoroutine(ShowOptionCanvas());
+        }
+        else 
+        {
+            ShowDeadCanvas();
+        }
 
-
-
-        if (open) yield return StartCoroutine(ShowOptionCanvas());
     }
 
     //開啟提示選項canvas
@@ -78,23 +82,44 @@ public class ShowCanvas : MonoBehaviour
         optionCanvas.SetActive(false);
     }
 
+    private void ShowDeadCanvas()
+    {
+        fade_animator.SetBool("fadein",true);
+
+        isRotating = true;
+
+        deadPanel.SetActive(true);
+    }
+
     // 呼叫提示物體發光
     private void Hint_Glow(bool is_open)
     {
-        foreach(GameObject hint_obj in hint_Objs)
+        foreach (GameObject hint_obj in hint_Objs)
         {
-            if(hint_obj != null)
+            if (hint_obj != null)
             {
                 Skode_Glinting skode_Glinting = hint_obj.GetComponent<Skode_Glinting>();
-                if(skode_Glinting != null)
+                if (skode_Glinting != null)
                 {
-                    if(is_open) skode_Glinting.StartGlinting();
+                    if (is_open) skode_Glinting.StartGlinting();
                     else skode_Glinting.StopGlinting();
                 }
             }
         }
-        
     }
-    
-}
 
+    //碰到觸發死亡
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Faling") && !isRotating)
+        {
+            StartCoroutine(RotateView(camera_Offset, deadPosition, true));
+            Destroy(other.gameObject);
+        }
+    }
+
+    public void Dead()
+    {
+        StartCoroutine(RotateView(mainCamera.transform, deadPosition, true));
+    }
+}

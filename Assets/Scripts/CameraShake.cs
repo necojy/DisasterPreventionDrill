@@ -17,10 +17,13 @@ public class CameraShake : MonoBehaviour
     public GameObject[] fallObjects;
     private bool isFalling = false;
     #endregion
+
+    #region 顯示提示畫布
     public ShowCanvas showCanvas;
+    #endregion
     private void Start()
     {
-        Init();
+        Init(); 
     }
 
     //初始化
