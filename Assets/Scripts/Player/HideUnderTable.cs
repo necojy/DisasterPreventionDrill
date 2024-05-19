@@ -15,7 +15,7 @@ public class HideUnderTable : MonoBehaviour
     private BoxCollider coll;
    
     public bool isHiding = false;
-    
+    public bool inHidingArea = false;
     public InputActionReference actionReference;
     public InputAction action;
 
@@ -25,7 +25,7 @@ public class HideUnderTable : MonoBehaviour
     {
         player = GameObject.Find("XR Origin (XR Rig)");
         locomotion = GameObject.Find("Locomotion Systeam");
-        table = GameObject.Find("DeskToHide");
+        table = GameObject.Find("TableToHide");
         coll = table.GetComponent<BoxCollider>();
         hidePos = table.transform.position;
         
@@ -46,12 +46,11 @@ public class HideUnderTable : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider coll)
+    private void OnTriggerStay(Collider coll)
     {
         if (coll.tag == "Player")
         {   
-            isHiding=true;
-            Hide();
+            inHidingArea=true;
         }
     }
 
@@ -59,7 +58,7 @@ public class HideUnderTable : MonoBehaviour
     {
         if (coll.tag == "Player")
         {   
-            isHiding=false;
+            inHidingArea=false;
         }
     }
 
@@ -93,10 +92,14 @@ public class HideUnderTable : MonoBehaviour
     }
 
     private void ActivateBehavior(InputAction.CallbackContext context)
-    {
+    {   
+        
         if (isHiding){
             StartCoroutine(MovePlayer(origPos, origRot));
             isHiding=false;
+        }else if (inHidingArea){
+            isHiding=true;
+            Hide();     
         }       
     }
 
