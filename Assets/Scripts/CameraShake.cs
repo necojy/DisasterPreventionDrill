@@ -21,6 +21,8 @@ public class CameraShake : MonoBehaviour
     #region 顯示提示畫布
     public ShowCanvas showCanvas;
     #endregion
+    
+    
     private void Start()
     {
         Init(); 

@@ -15,8 +15,9 @@ public class ShowCanvas : MonoBehaviour
     #endregion
 
     #region 提示選項參數
-    [HideInInspector] public bool open_Timer = false;
     public GameObject timer;
+    public TimeControl timeControl;
+
     public GameObject optionCanvas;
     public float showCanvasTimes = 2f;
     #endregion
@@ -50,7 +51,7 @@ public class ShowCanvas : MonoBehaviour
         Hint_Glow(false);
 
         timer.SetActive(true);
-        open_Timer = true;
+        StartCoroutine(timeControl.UpdateTimer());
 
         mainCamera.enabled = true;
         rotate_Camera.enabled = false;

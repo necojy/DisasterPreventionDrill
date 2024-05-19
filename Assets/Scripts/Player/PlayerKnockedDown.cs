@@ -5,37 +5,69 @@ using UnityEngine;
 
 public class PlayerKnockedDown : MonoBehaviour
 {
+
+    public ShowCanvas showCanvas;
+
+    #region Timer
+    public TimeControl timeControl;
+    public GameObject Timer;
+
+    #endregion
+
     #region 復活參數
     public int rebirth_index = 0;
     public Transform[] rebirthPos;
     #endregion
 
+    #region 事件
     public CameraShake cameraShake;
-    public ShowCanvas showCanvas;
-    public TimeControl timeControl;
-    public GameObject Timer;
+    public HideUnderTable hideUnderTable;     // 躲桌子
+    public Animator bookCaseAnimator;
+    private bool sucess = true;
 
-    public HideUnderTable hideUnderTable;
+    #endregion
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Falling") && cameraShake.isShaking)
+        if (cameraShake.isShaking && !timeControl.timeOut && other.CompareTag("Falling"))
         {
+            bookCaseAnimator.SetBool("isFalling",true);
             showCanvas.Dead();
         }
     }
 
-    private void Update() {
-        
+    private void Update()
+    {
         if(timeControl.timeOut)
         {
             Timer.SetActive(false);
         }
+        
+        if(!sucess) showCanvas.Dead();
 
-        if(!hideUnderTable.isHiding && timeControl.startGame && timeControl.timeOut)
+        // 沒在時間內躲在桌子下
+        if (cameraShake.isShaking && timeControl.timeOut && !hideUnderTable.isHiding)
         {
-            showCanvas.Dead();
+            sucess = false;
         }
+        
     }
+    // private void Update() {
+
+    //     if(timeControl.timeOut)
+    //     {
+    //         Timer.SetActive(false);
+    //     }
+
+    //     if(!hideUnderTable.isHiding && timeControl.startGame && timeControl.timeOut && !sucess)
+    //     {
+    //         showCanvas.Dead();
+    //     }
+    //     if(hideUnderTable.isHiding)
+    //     {
+    //         sucess = true;
+    //     }
+    // }
 
     // public void Rebirth()
     // {

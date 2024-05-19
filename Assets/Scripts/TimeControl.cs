@@ -4,52 +4,48 @@ using UnityEngine;
 using UnityEngine.UI;
 public class TimeControl : MonoBehaviour
 {
+    #region 時間條參數
     [SerializeField] RectTransform uiFill;
     float nowtime, maxtime;
     float oriW, oriH;
-    public int Duration;
-    private int remaingDuration;
+    #endregion
+    public CameraShake cameraShake;
     public ShowCanvas showCanvas;
-
+    public float diff = 9f;
     public bool timeOut = false;
-
-    public GameObject timer;
-
-    public bool startGame = false;
-    void Start()
+    void Awake()
     {
-        nowtime = Duration * 100;
-        maxtime = Duration * 100;
+        nowtime = (cameraShake.shakeDuration - diff) * 100;
+        maxtime = (cameraShake.shakeDuration - diff) * 100;
         oriW = uiFill.sizeDelta.x;
         oriH = uiFill.sizeDelta.y;
-        remaingDuration = Duration;
-        // StartCoroutine(UpdateTimer());
     }
-    void countHp()
-    {
-        uiFill.sizeDelta = new UnityEngine.Vector2(oriW / maxtime * nowtime, oriH);
-    }
-
     public IEnumerator UpdateTimer()
     {
+        timeOut = false;
+
         while (nowtime >= 0)
         {
-            nowtime -= 1;
-            countHp();
-            yield return new WaitForSeconds(0.01f);
+            nowtime -= Time.deltaTime * 100;
+            uiFill.sizeDelta = new Vector2(oriW / maxtime * nowtime, oriH);
+            yield return null;
         }
-        
-        showCanvas.open_Timer = false;
-        timeOut = true;
-        
-    }
 
-    private void Update() 
-    {
-        if(showCanvas.open_Timer)
-        {
-            startGame = true;
-            StartCoroutine(UpdateTimer());
-        }    
+        timeOut = true;
     }
+    // private IEnumerator TT()
+    // {
+    //     yield return new WaitForSeconds(Duration-12);
+    //     showCanvas.open_Timer = false;
+    //     timeOut = true;
+    // }
+    // private void Update()
+    // {
+    //     if (showCanvas.open_Timer)
+    //     {
+    //         startGame = true;
+    //         StartCoroutine(UpdateTimer());
+    //         StartCoroutine(TT());
+    //     }
+    // }
 }

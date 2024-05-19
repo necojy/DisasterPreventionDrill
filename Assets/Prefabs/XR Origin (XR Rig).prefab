@@ -2551,6 +2551,8 @@ MonoBehaviour:
   rotateSpeed: 1
   mainCamera: {fileID: 1741293722194773162}
   rotate_Camera: {fileID: 332900167}
+  open_Timer: 0
+  timer: {fileID: 0}
   optionCanvas: {fileID: 0}
   showCanvasTimes: 2
   hint_Objs:
@@ -2907,6 +2909,9 @@ MonoBehaviour:
   rebirthPos: []
   cameraShake: {fileID: 1741293722844646806}
   showCanvas: {fileID: 361854743}
+  timeControl: {fileID: 0}
+  Timer: {fileID: 0}
+  hideUnderTable: {fileID: 0}
 --- !u!1 &2093006090867943049
 GameObject:
   m_ObjectHideFlags: 0
