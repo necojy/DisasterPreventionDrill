@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class TimeControl : MonoBehaviour
 {
     #region 時間條參數
-    [SerializeField] RectTransform uiFill;
+    // [SerializeField] RectTransform uiFill;
+    public Slider timeBar;
     float nowtime, maxtime;
     float oriW, oriH;
     #endregion
@@ -15,21 +16,24 @@ public class TimeControl : MonoBehaviour
     public bool timeOut = false;
     void Awake()
     {
-        nowtime = (cameraShake.shakeDuration - diff) * 100;
-        maxtime = (cameraShake.shakeDuration - diff) * 100;
-        oriW = uiFill.sizeDelta.x;
-        oriH = uiFill.sizeDelta.y;
+        nowtime = cameraShake.shakeDuration - diff;
+        maxtime = cameraShake.shakeDuration - diff;
+        timeBar.maxValue = maxtime;
+        timeBar.value = nowtime;
     }
     public IEnumerator UpdateTimer()
     {
         timeOut = false;
 
-        while (nowtime >= 0)
+        while (nowtime > 0)
         {
-            nowtime -= Time.deltaTime * 100;
-            uiFill.sizeDelta = new Vector2(oriW / maxtime * nowtime, oriH);
+            nowtime -= Time.deltaTime;
+            timeBar.value = nowtime;
             yield return null;
         }
+
+        nowtime = 0;
+        timeBar.value = nowtime;
 
         timeOut = true;
     }
