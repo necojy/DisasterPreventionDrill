@@ -1350,7 +1350,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1741293722194773166}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -2551,8 +2551,8 @@ MonoBehaviour:
   rotateSpeed: 1
   mainCamera: {fileID: 1741293722194773162}
   rotate_Camera: {fileID: 332900167}
-  open_Timer: 0
   timer: {fileID: 0}
+  timeControl: {fileID: 0}
   optionCanvas: {fileID: 0}
   showCanvasTimes: 2
   hint_Objs:
@@ -2905,13 +2905,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b28b92d15a228b4e8f3f049bbcfcb05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rebirth_index: 0
-  rebirthPos: []
-  cameraShake: {fileID: 1741293722844646806}
   showCanvas: {fileID: 361854743}
   timeControl: {fileID: 0}
   Timer: {fileID: 0}
+  rebirth_index: 0
+  rebirthPos: []
+  cameraShake: {fileID: 1741293722844646806}
   hideUnderTable: {fileID: 0}
+  bookCaseAnimator: {fileID: 0}
 --- !u!1 &2093006090867943049
 GameObject:
   m_ObjectHideFlags: 0

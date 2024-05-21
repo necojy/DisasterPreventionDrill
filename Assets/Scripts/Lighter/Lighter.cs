@@ -6,6 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Lighter : MonoBehaviour 
 {
     public GameObject flame; 
+    public GameObject explosion;
 
     public Animator Lighter_model;
     private bool isIgnite = false;
@@ -21,6 +22,7 @@ public class Lighter : MonoBehaviour
     void Start()
     {
         flame.SetActive(false);
+        explosion.SetActive(false);
         isIgnite = false;
         controller = GetComponent<XRGrabInteractable>(); // 正確的初始化方式
         GrabHand = Left_Lighter_Animation;
@@ -40,6 +42,7 @@ public class Lighter : MonoBehaviour
             Lighter_model.SetBool("open_model",true);
             GrabHand.SetBool("Lighter_Open",true);
             StartCoroutine(AnimateAndToggle());
+            StartCoroutine(Explode());
         }
 
         else
@@ -51,6 +54,12 @@ public class Lighter : MonoBehaviour
         }
 
         
+    }
+
+    IEnumerator Explode()
+    {
+        yield return new WaitForSeconds(2.0f);
+        explosion.SetActive(true);
     }
 
     //等待動畫撥放完畢

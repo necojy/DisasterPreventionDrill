@@ -10,6 +10,7 @@ public class HideUnderTable : MonoBehaviour
     public Quaternion origRot;
     public Quaternion flippedRotation;
     private GameObject player;
+    private GameObject camera;
     private GameObject table;
     private GameObject locomotion;
     private BoxCollider coll;
@@ -26,10 +27,11 @@ public class HideUnderTable : MonoBehaviour
     {
         player = GameObject.Find("XR Origin (XR Rig)");
         locomotion = GameObject.Find("Locomotion Systeam");
+        camera = GameObject.Find("Main Camera");
         table = GameObject.Find("TableToHide");
         coll = table.GetComponent<BoxCollider>();
         hidePos = table.transform.position;
-        
+        hidePos.y+=1;
         action = actionReference.action;
         action.performed += ActivateBehavior;
         
@@ -49,7 +51,7 @@ public class HideUnderTable : MonoBehaviour
 
     private void OnTriggerStay(Collider coll)
     {
-        if (coll.tag == "Player")
+        if (coll.tag == "Left Hand" || coll.tag == "Right Hand") 
         {   
             inHidingArea=true;
         }
@@ -57,7 +59,7 @@ public class HideUnderTable : MonoBehaviour
 
     private void OnTriggerExit(Collider coll)
     {
-        if (coll.tag == "Player")
+        if (coll.tag == "Left Hand" || coll.tag == "Right Hand")
         {   
             inHidingArea=false;
         }
@@ -89,6 +91,7 @@ public class HideUnderTable : MonoBehaviour
 
         player.transform.position = targetPos;
         player.transform.rotation = targetRot;
+        camera.transform.position = new Vector3(0,0,0);
         inputable=true;
     }
 
