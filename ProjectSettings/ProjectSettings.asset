@@ -135,7 +135,9 @@ PlayerSettings:
     16:9: 1
     Others: 1
   bundleVersion: 0.1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 11400000, guid: 9c35cd6050d6e3844848be2a1de91aa7, type: 2}
+  - {fileID: 5300828363782556859, guid: a10646d3a96eb9746a0390a1a7d6969b, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -885,7 +887,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Collab: 0
+    Game Performance: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -900,11 +908,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: d04440fe-18b2-4a0b-b281-b7fb449e0240
+  cloudProjectId: 64d33b4a-22bc-40fa-add6-4b1397076461
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Disaster Prevention Drill
-  organizationId: jim2323098
+  organizationId: nomnomboo2304
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
