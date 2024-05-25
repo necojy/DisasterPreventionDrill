@@ -14,16 +14,12 @@ public class PlayerKnockedDown : MonoBehaviour
 
     #endregion
 
-    #region 復活參數
-    public int rebirth_index = 0;
-    public Transform[] rebirthPos;
-    #endregion
 
     #region 事件
     public CameraShake cameraShake;
     public HideUnderTable hideUnderTable;     // 躲桌子
     public Animator bookCaseAnimator;
-    private bool sucess = true;
+    // private bool sucess = true;
 
     #endregion
 
@@ -43,37 +39,16 @@ public class PlayerKnockedDown : MonoBehaviour
             Timer.SetActive(false);
         }
         
-        if(!sucess) showCanvas.Dead();
+        // if(!sucess) showCanvas.Dead();
 
         // 沒在時間內躲在桌子下
-        if (cameraShake.isShaking && timeControl.timeOut && !hideUnderTable.isHiding)
+        if (cameraShake.isShaking && timeControl.timeOut && !hideUnderTable.isHiding && !showCanvas.reStart)
         {
-            sucess = false;
+            showCanvas.Dead();
         }
         
     }
-    // private void Update() {
 
-    //     if(timeControl.timeOut)
-    //     {
-    //         Timer.SetActive(false);
-    //     }
-
-    //     if(!hideUnderTable.isHiding && timeControl.startGame && timeControl.timeOut && !sucess)
-    //     {
-    //         showCanvas.Dead();
-    //     }
-    //     if(hideUnderTable.isHiding)
-    //     {
-    //         sucess = true;
-    //     }
-    // }
-
-    // public void Rebirth()
-    // {
-    //     deadPanel.SetActive(false);
-    //     fade_animator.SetBool("fadein",false);
-    //     camera_offset.position = rebirthPos[rebirth_index].position;
-    // }
+    
 
 }

@@ -9,7 +9,7 @@ public class CameraShake : MonoBehaviour
     #region 搖晃參數   
     public float shakeDuration = 10f;
     public float shakeMagnitude = 0.25f;
-    [HideInInspector] public bool isShaking = false;
+    public bool isShaking = false;
     #endregion
 
     #region 搖晃後的掉落物
@@ -60,9 +60,9 @@ public class CameraShake : MonoBehaviour
             if(elapsed < duration / 4 && !isFalling) StartCoroutine(FallObjects());
         }
 
-
-        //給於提示
-        yield return StartCoroutine(showCanvas.StartHint());
+        //給於提示 : 設定提示參數
+        int optionCanvas_index = 0;
+        yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,1,0,1));
 
 
         while (elapsed < duration)

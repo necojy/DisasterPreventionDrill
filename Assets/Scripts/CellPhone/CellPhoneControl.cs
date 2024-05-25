@@ -12,6 +12,6 @@ public class CellPhoneControl : MonoBehaviour
 
     public void OpenSpotLight()
     {
-        spotlight.SetActive(!spotlight.active);
+        spotlight.SetActive(!spotlight.activeSelf);
     }
 }

@@ -10,7 +10,7 @@ public class HideUnderTable : MonoBehaviour
     public Quaternion origRot;
     public Quaternion flippedRotation;
     private GameObject player;
-    private GameObject camera;
+    private GameObject mainCamera;
     private GameObject table;
     private GameObject locomotion;
     private BoxCollider coll;
@@ -22,12 +22,12 @@ public class HideUnderTable : MonoBehaviour
     public InputAction action;
 
 
-
+    public ShowCanvas showCanvas;
     void Start()
     {
         player = GameObject.Find("XR Origin (XR Rig)");
         locomotion = GameObject.Find("Locomotion Systeam");
-        camera = GameObject.Find("Main Camera");
+        mainCamera = GameObject.Find("Main Camera");
         table = GameObject.Find("TableToHide");
         coll = table.GetComponent<BoxCollider>();
         hidePos = table.transform.position;
@@ -72,6 +72,7 @@ public class HideUnderTable : MonoBehaviour
     public void Leave()
     {         
         StartCoroutine(MovePlayer(origPos, origRot));        
+        StartCoroutine(Open_OptionCanva());
     }
 
     IEnumerator MovePlayer(Vector3 targetPos, Quaternion targetRot)
@@ -91,7 +92,7 @@ public class HideUnderTable : MonoBehaviour
 
         player.transform.position = targetPos;
         player.transform.rotation = targetRot;
-        camera.transform.position = new Vector3(0,0,0);
+        mainCamera.transform.position = new Vector3(0,0,0);
         inputable=true;
     }
 
@@ -107,6 +108,12 @@ public class HideUnderTable : MonoBehaviour
             Hide();     
             isHiding=true;
         }       
+    }
+
+    private IEnumerator Open_OptionCanva()
+    {
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(showCanvas.StartHint(1,2,2,3));
     }
 
 }

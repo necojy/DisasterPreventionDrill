@@ -4,7 +4,6 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-
 namespace UnityStandardAssets.CrossPlatformInput
 {
     [ExecuteInEditMode]
@@ -17,11 +16,11 @@ namespace UnityStandardAssets.CrossPlatformInput
         // the Cross Platform Input package.
 
 #if !UNITY_EDITOR
-	void OnEnable()
-	{
-		CheckEnableControlRig();
-	}
-	#endif
+        void OnEnable()
+        {
+            CheckEnableControlRig();
+        }
+#endif
 
         private void Start()
         {
@@ -32,12 +31,11 @@ namespace UnityStandardAssets.CrossPlatformInput
                 UnityEngine.EventSystems.EventSystem system = GameObject.FindObjectOfType<UnityEngine.EventSystems.EventSystem>();
 
                 if (system == null)
-                {//the scene have no event system, spawn one
+                { //the scene has no event system, spawn one
                     GameObject o = new GameObject("EventSystem");
 
                     o.AddComponent<UnityEngine.EventSystems.EventSystem>();
                     o.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
-                    o.AddComponent<UnityEngine.EventSystems.TouchInputModule>();
                 }
             }
         }
@@ -50,13 +48,11 @@ namespace UnityStandardAssets.CrossPlatformInput
             EditorApplication.update += Update;
         }
 
-
         private void OnDisable()
         {
             EditorUserBuildSettings.activeBuildTargetChanged -= Update;
             EditorApplication.update -= Update;
         }
-
 
         private void Update()
         {
@@ -64,16 +60,14 @@ namespace UnityStandardAssets.CrossPlatformInput
         }
 #endif
 
-
         private void CheckEnableControlRig()
         {
 #if MOBILE_INPUT
-		EnableControlRig(true);
-		#else
+            EnableControlRig(true);
+#else
             EnableControlRig(false);
 #endif
         }
-
 
         private void EnableControlRig(bool enabled)
         {
