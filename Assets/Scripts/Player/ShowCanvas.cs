@@ -198,9 +198,10 @@ public class ShowCanvas : MonoBehaviour
         }
     }
 
-    public void Dead()
+    public void Dead(int deadIndex)
     {
         StartCoroutine(RotateView(mainCamera.transform, deadPosition, true, -1));
+        rebirth_index = deadIndex;
     }
     private void ShowDeadCanvas()
     {
@@ -210,8 +211,16 @@ public class ShowCanvas : MonoBehaviour
 
         deadPanel.SetActive(true);
 
-        Time.timeScale = 0;
+        StartCoroutine(TT());
+        // Time.timeScale = 0;
     }
+
+    IEnumerator TT()
+    {
+        yield return new WaitForSeconds(3f);
+        Rebirth();
+    }
+
 
     public void Rebirth()
     {
@@ -219,9 +228,21 @@ public class ShowCanvas : MonoBehaviour
         fade_animator.SetBool("fadein",false);
         isRotating = false;
         reStart = true;
-        // player.transform.position =  rebirthPos[rebirth_index].position;
-        string sceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(sceneName);
-        Time.timeScale = 1;
+
+        camera_Offset.rotation = Quaternion.Euler(0,0,0);
+        if(rebirth_index == 1)
+        {
+            string sceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(sceneName);
+        }
+
+        else if(rebirth_index == 2)
+        {
+            player.transform.position =  rebirthPos[0].position;
+        }
+
+        //恢復時間
+        // Time.timeScale = 1;
+        
     }
 }

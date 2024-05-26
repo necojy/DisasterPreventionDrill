@@ -18,6 +18,8 @@ public class Lighter : MonoBehaviour
     public Animator Right_Lighter_Animation;
     private Animator GrabHand = null;
 
+    public ShowCanvas showCanvas;
+
 
     void Start()
     {
@@ -41,6 +43,7 @@ public class Lighter : MonoBehaviour
 
             Lighter_model.SetBool("open_model",true);
             GrabHand.SetBool("Lighter_Open",true);
+            AudioManager.instance.PlayItemSound("Open_lightet");
             StartCoroutine(AnimateAndToggle());
             StartCoroutine(Explode());
         }
@@ -60,6 +63,10 @@ public class Lighter : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         explosion.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+        showCanvas.Dead(2);
+        flame.SetActive(false);
     }
 
     //等待動畫撥放完畢

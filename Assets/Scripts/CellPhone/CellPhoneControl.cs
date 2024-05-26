@@ -12,6 +12,7 @@ public class CellPhoneControl : MonoBehaviour
 
     public void OpenSpotLight()
     {
+        AudioManager.instance.PlayItemSound("Open_cellPhone");
         spotlight.SetActive(!spotlight.activeSelf);
     }
 }

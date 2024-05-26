@@ -22,7 +22,10 @@ public class CameraShake : MonoBehaviour
     public ShowCanvas showCanvas;
     #endregion
     
-    
+    public GasEffect gasEffect;
+
+    public GameObject[] shakingItems;
+
     private void Start()
     {
         Init(); 
@@ -50,7 +53,10 @@ public class CameraShake : MonoBehaviour
         Vector3 originalPosition = transform.localPosition;
         float elapsed = 0.0f;
 
-        while (elapsed < duration / 2)
+        AudioManager.instance.PlayBackground("Earthquake");
+        StartCoroutine(ItemShaking());
+        
+        while (elapsed < duration / 4)
         {
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
@@ -60,10 +66,17 @@ public class CameraShake : MonoBehaviour
             if(elapsed < duration / 4 && !isFalling) StartCoroutine(FallObjects());
         }
 
+
+        //暫停音樂
+        AudioManager.instance.PauseSound("BackgroundSource");
+
         //給於提示 : 設定提示參數
         int optionCanvas_index = 0;
         yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,1,0,1));
 
+        gasEffect.showEffect();
+
+        AudioManager.instance.ResumeSound("BackgroundSource");
 
         while (elapsed < duration)
         {
@@ -88,5 +101,16 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    
+    private IEnumerator ItemShaking()
+    {
+        foreach(GameObject shakingItem in shakingItems)
+        {
+            yield return new WaitForSeconds(0.5f);
+            Animator shakingItemAnimator = shakingItem.GetComponent<Animator>();
+            if(shakingItemAnimator != null)
+            {
+                shakingItemAnimator.SetBool("objectShaking",true);
+            }
+        }
+    }
 }

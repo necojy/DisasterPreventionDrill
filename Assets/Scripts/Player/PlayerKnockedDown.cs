@@ -28,7 +28,7 @@ public class PlayerKnockedDown : MonoBehaviour
         if (cameraShake.isShaking && !timeControl.timeOut && other.CompareTag("Falling"))
         {
             bookCaseAnimator.SetBool("isFalling",true);
-            showCanvas.Dead();
+            showCanvas.Dead(1);
         }
     }
 
@@ -44,7 +44,7 @@ public class PlayerKnockedDown : MonoBehaviour
         // 沒在時間內躲在桌子下
         if (cameraShake.isShaking && timeControl.timeOut && !hideUnderTable.isHiding && !showCanvas.reStart)
         {
-            showCanvas.Dead();
+            showCanvas.Dead(1);
         }
         
     }

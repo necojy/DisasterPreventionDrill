@@ -11,11 +11,6 @@ public class GasEffect : MonoBehaviour
         gas.SetActive(false);
     }
 
-    void Update()
-    {
-        
-    }
-
     public void showEffect()
     {
         gas.SetActive(true);

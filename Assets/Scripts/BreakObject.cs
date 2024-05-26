@@ -23,6 +23,7 @@ public class BreakObject : MonoBehaviour
             rb.AddForce(force);
         }
         
+        AudioManager.instance.PlayItemSound("Breaking_glass");
         Destroy(gameObject);
     }
 }
