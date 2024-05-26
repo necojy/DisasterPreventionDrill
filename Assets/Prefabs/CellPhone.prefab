@@ -448,6 +448,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1009526989508425474, guid: 8d12ea9c61fcdab40bd4d14321d9bc9e,
         type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1009526989508425474, guid: 8d12ea9c61fcdab40bd4d14321d9bc9e,
+        type: 3}
       propertyPath: m_Name
       value: Iphone model
       objectReference: {fileID: 0}

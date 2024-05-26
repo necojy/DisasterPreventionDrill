@@ -93,7 +93,7 @@ public class ShowCanvas : MonoBehaviour
 
         //使用什麼工具旋轉視角
         if (usingWhat == 1) yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false, optionCanvas_index));
-        else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator());
+        else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator(optionCanvas_index));
 
         yield return new WaitForSeconds(2f);
         Hint_Glow(false, hint_start, hint_end);
@@ -136,12 +136,13 @@ public class ShowCanvas : MonoBehaviour
     }
 
     //使用動畫旋轉相機視角
-    private IEnumerator RotateView_Animator()
+    private IEnumerator RotateView_Animator(int optionCanvas_index)
     {
         mainCamera.enabled = false;
         Animator_Camera.enabled = true;
         Animator_Control.SetBool("canRotate", true);
 
+        yield return StartCoroutine(ShowOptionCanvas(optionCanvas_index));
         yield return new WaitForSeconds(2f);
 
     }
@@ -174,7 +175,7 @@ public class ShowCanvas : MonoBehaviour
     //開啟字幕
     public void OpenScreenText(int optionCanvas_index)
     {
-        if(optionCanvas_index == 0) showCaption.ChangeCaptionContent("1231231");
+        if(optionCanvas_index == 0) showCaption.ChangeCaptionContent("");
         else if(optionCanvas_index == 1) showCaption.ChangeCaptionContent("好像有奇怪的味道");
         // screenText.SetActive(true);
 
