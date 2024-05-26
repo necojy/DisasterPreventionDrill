@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.018259993, g: 0.022831216, b: 0.03071768, a: 0.1}
+  m_IndirectSpecularColor: {r: 0.018259961, g: 0.022831151, b: 0.03071759, a: 0.1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -45816,6 +45816,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4012830381130596370, guid: d9ff2396752dd31408c05828455d5875,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4012830381358028032, guid: d9ff2396752dd31408c05828455d5875,
         type: 3}
       propertyPath: m_Camera
@@ -45941,7 +45946,7 @@ PrefabInstance:
     - target: {fileID: 4295634710340071189, guid: 80b7bf876e32edf45be60e7a39a757e0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -18.892998
+      value: -20.023
       objectReference: {fileID: 0}
     - target: {fileID: 4295634710340071189, guid: 80b7bf876e32edf45be60e7a39a757e0,
         type: 3}
@@ -45951,7 +45956,7 @@ PrefabInstance:
     - target: {fileID: 4295634710340071189, guid: 80b7bf876e32edf45be60e7a39a757e0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.532
+      value: -0.598
       objectReference: {fileID: 0}
     - target: {fileID: 4295634710340071189, guid: 80b7bf876e32edf45be60e7a39a757e0,
         type: 3}
@@ -46023,10 +46028,60 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5248399693371460077, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693371460077, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693371460077, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693371460077, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5248399693385425715, guid: 80b7bf876e32edf45be60e7a39a757e0,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693385594487, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693385667749, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693385667749, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693385667749, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693385667749, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0915
+      objectReference: {fileID: 0}
+    - target: {fileID: 5248399693385667749, guid: 80b7bf876e32edf45be60e7a39a757e0,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80b7bf876e32edf45be60e7a39a757e0, type: 3}
