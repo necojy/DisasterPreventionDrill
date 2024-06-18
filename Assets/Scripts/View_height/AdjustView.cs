@@ -8,6 +8,7 @@ public class AdjustView : MonoBehaviour
 {
     public InputActionReference actionReference;
     public RectTransform viewer;
+    private int offsetValue = 0;
 
     private void Start() 
     {
@@ -24,18 +25,19 @@ public class AdjustView : MonoBehaviour
     }
 
     private void ActivateBehavior(InputAction.CallbackContext context)
-    {   
-        Debug.Log("123");
-        
+    {           
         Vector2 input = context.ReadValue<Vector2>();
         if (input.y < 0) // Down button
         {
             viewer.anchoredPosition = new Vector2(viewer.anchoredPosition.x, viewer.anchoredPosition.y - 100f);
+            offsetValue -= 100;
         }
         else if (input.y > 0) // Up button
         {
             viewer.anchoredPosition = new Vector2(viewer.anchoredPosition.x, viewer.anchoredPosition.y + 100f);
+            offsetValue += 100;
         }
 
+        PlayerPrefs.SetInt("offsetValue", offsetValue);
     }
 }
