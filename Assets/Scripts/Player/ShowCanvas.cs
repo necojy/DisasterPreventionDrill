@@ -211,7 +211,7 @@ public class ShowCanvas : MonoBehaviour
 
         deadPanel.SetActive(true);
 
-        StartCoroutine(TT());
+        // StartCoroutine(TT());
         // Time.timeScale = 0;
     }
 

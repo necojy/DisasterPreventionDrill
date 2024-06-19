@@ -1872,6 +1872,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "XR \u57FA\u672C\u8A2D\u5B9A"
       objectReference: {fileID: 0}
+    - target: {fileID: 3375470512307527691, guid: 794a366a8516d9b40a581d4151c3c61c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3961266973262659707, guid: 794a366a8516d9b40a581d4151c3c61c,
         type: 3}
       propertyPath: m_RootOrder
@@ -1926,6 +1931,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5751551597600856123, guid: 794a366a8516d9b40a581d4151c3c61c,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6247194317723779514, guid: 794a366a8516d9b40a581d4151c3c61c,
+        type: 3}
+      propertyPath: m_IsTrackedAction.m_Action.m_Flags
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
