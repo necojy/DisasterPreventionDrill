@@ -26,9 +26,11 @@ public class CameraShake : MonoBehaviour
 
     public GameObject[] shakingItems;
 
+    public Camera option1Camera;
     private void Start()
     {
         Init(); 
+        option1Camera.enabled = false;
     }
 
     //初始化
@@ -72,7 +74,7 @@ public class CameraShake : MonoBehaviour
 
         //給於提示 : 設定提示參數
         int optionCanvas_index = 0;
-        yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,1,0,1));
+        yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,2,0,1,option1Camera));
 
         gasEffect.showEffect();
 

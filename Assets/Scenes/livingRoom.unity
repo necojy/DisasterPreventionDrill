@@ -7117,7 +7117,7 @@ Transform:
   m_GameObject: {fileID: 357475419}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.560001, y: 11.4, z: -2.26}
+  m_LocalPosition: {x: 16.560001, y: 4.04, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13521,6 +13521,120 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2120882072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &647967711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 647967712}
+  - component: {fileID: 647967715}
+  - component: {fileID: 647967714}
+  - component: {fileID: 647967713}
+  m_Layer: 0
+  m_Name: option1Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &647967712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647967711}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.836, y: 4.5, z: -8.226}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1721544496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &647967713
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647967711}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d2313c1f59911374587a8fdbda4924ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!81 &647967714
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647967711}
+  m_Enabled: 1
+--- !u!20 &647967715
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647967711}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1001 &662507879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27985,6 +28099,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  option2Camera: {fileID: 1567461344}
   showCanvas: {fileID: 3280577917223877021}
 --- !u!54 &1258708552
 Rigidbody:
@@ -33277,7 +33392,7 @@ GameObject:
   - component: {fileID: 1567461343}
   - component: {fileID: 1567461345}
   m_Layer: 0
-  m_Name: Animator_Camera
+  m_Name: option2Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35905,6 +36020,7 @@ Transform:
   - {fileID: 1567461342}
   - {fileID: 357475420}
   - {fileID: 306789727}
+  - {fileID: 647967712}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1724113873
@@ -42380,7 +42496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &1991105874
 Camera:
   m_ObjectHideFlags: 0
@@ -47650,7 +47766,6 @@ MonoBehaviour:
   rotatePosition: {fileID: 357475420}
   rotateSpeed: 1
   mainCamera: {fileID: 3991324636368706495}
-  rotate_Camera: {fileID: 1991105874}
   Animator_Camera: {fileID: 1567461344}
   Animator_Control: {fileID: 1567461345}
   timer: {fileID: 746469788}
@@ -47687,7 +47802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTime: 2
   shakeDuration: 14
-  shakeMagnitude: 0.15
+  shakeMagnitude: 0.1
   isShaking: 0
   waitForDown: 1
   fallObjects:
@@ -47703,6 +47818,7 @@ MonoBehaviour:
   shakingItems:
   - {fileID: 2114118774}
   - {fileID: 48206537}
+  option1Camera: {fileID: 647967715}
 --- !u!33 &3469287838332714495
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -47903,7 +48019,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.5
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -47934,7 +48050,11 @@ PrefabInstance:
     - target: {fileID: 1668052923, guid: d9ff2396752dd31408c05828455d5875, type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1991105874}
+      objectReference: {fileID: 3991324636368706495}
+    - target: {fileID: 1668052923, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1059444626952010889, guid: d9ff2396752dd31408c05828455d5875,
         type: 3}
       propertyPath: m_Camera
@@ -49951,7 +50071,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 3007005375387498781}
   m_CameraFloorOffsetObject: {fileID: 475625031381505973}
   m_RequestedTrackingOriginMode: 0
-  m_CameraYOffset: 1.36144
+  m_CameraYOffset: 7.11
 --- !u!4 &6200477866304620213
 Transform:
   m_ObjectHideFlags: 0
