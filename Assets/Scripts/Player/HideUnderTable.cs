@@ -24,6 +24,7 @@ public class HideUnderTable : MonoBehaviour
     public InputAction action;
 
     
+    public Camera option2Camera;
 
     public ShowCanvas showCanvas;
     void Start()
@@ -34,8 +35,7 @@ public class HideUnderTable : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
         table = GameObject.Find("TableToHide");
         //coll = table.GetComponent<BoxCollider>();
-        hidePos = table.transform.position;
-        hidePos.y += 1;
+        hidePos = table.transform.position;  
         action = actionReference.action;
         action.performed += ActivateBehavior;
         
@@ -43,6 +43,7 @@ public class HideUnderTable : MonoBehaviour
 
     void Update()
     {
+        hidePos = table.transform.position;
         if (!isHiding)
         {
             mainCamera.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
@@ -51,6 +52,7 @@ public class HideUnderTable : MonoBehaviour
             flippedRotation = Quaternion.Euler(origRot.x, origRot.eulerAngles.y + 180f, origRot.z);
         }else{
             player.transform.position = hidePos;
+            hidePos.y += 1;
             mainCamera.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
             mainCamera.transform.position = hidePos;
         }
@@ -122,7 +124,7 @@ public class HideUnderTable : MonoBehaviour
     private IEnumerator Open_OptionCanva()
     {
         yield return new WaitForSeconds(1f);
-        StartCoroutine(showCanvas.StartHint(1,2,2,3));
+        StartCoroutine(showCanvas.StartHint(1,2,2,3,option2Camera));
     }
 
 }

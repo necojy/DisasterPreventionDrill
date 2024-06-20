@@ -22,8 +22,6 @@ public class ShowCanvas : MonoBehaviour
     public float rotateSpeed = 1f;
     private float rotateViewTime = 1f; // 旋轉視角的時間
     public Camera mainCamera;
-    private GameObject uu;
-    public Camera rotate_Camera;
     public Camera Animator_Camera;
     public Animator Animator_Control;    //用動畫控制旋轉視野
 
@@ -61,7 +59,6 @@ public class ShowCanvas : MonoBehaviour
     {
         timer.SetActive(false);
         Caption.SetActive(false);
-        rotate_Camera.enabled = false;
         isRotating = false;
 
         foreach (GameObject optionCanva in optionCanvas)
@@ -70,14 +67,8 @@ public class ShowCanvas : MonoBehaviour
         }
 
         player = GameObject.Find("XR Origin (XR Rig)");
-       
-    }
-    void Start()
-    {
-         uu=GameObject.Find("Main Camera");
-    }
 
-
+    }
     void Update()
     {
         if (!isRotating)
@@ -94,22 +85,15 @@ public class ShowCanvas : MonoBehaviour
 
 
     // 更換攝影機以旋轉到提示畫面
-    public IEnumerator StartHint(int optionCanvas_index, int usingWhat, int hint_start, int hint_end)
+    public IEnumerator StartHint(int optionCanvas_index, int usingWhat, int hint_start, int hint_end, Camera rotateCamera)
     {
 
         isRotating = true;
-        //mainCamera.enabled = false;
-        rotate_Camera.enabled = true;
         Hint_Glow(true, hint_start, hint_end);
 
         //使用什麼工具旋轉視角
-        
-        Transform TT = mainCamera.transform;
-        //uu.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
-        mainCamera.transform.position = new Vector3(TT.position.x,TT.position.y,TT.position.z); 
-
         if (usingWhat == 1) yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false, optionCanvas_index));
-        else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator(optionCanvas_index));
+        else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator(optionCanvas_index, rotateCamera));
 
         yield return new WaitForSeconds(2f);
         Hint_Glow(false, hint_start, hint_end);
@@ -119,11 +103,10 @@ public class ShowCanvas : MonoBehaviour
 
         OpenScreenText(optionCanvas_index);
 
-        mainCamera.enabled = true;
-        rotate_Camera.enabled = false;
         Animator_Camera.enabled = false;
 
         isRotating = false;
+
     }
     //旋轉相機視角
     private IEnumerator RotateView(Transform initial, Transform target, bool is_dead, int optionCanvas_index)
@@ -152,15 +135,19 @@ public class ShowCanvas : MonoBehaviour
     }
 
     //使用動畫旋轉相機視角
-    private IEnumerator RotateView_Animator(int optionCanvas_index)
+    private IEnumerator RotateView_Animator(int optionCanvas_index, Camera rotateCamera)
     {
         mainCamera.enabled = false;
-        Animator_Camera.enabled = true;
-        Animator_Control.SetBool("canRotate", true);
+        rotateCamera.enabled = true;
+
+        Animator animatorCamera = rotateCamera.GetComponent<Animator>();
+        animatorCamera.SetBool("canRotate", true);
 
         yield return StartCoroutine(ShowOptionCanvas(optionCanvas_index));
         yield return new WaitForSeconds(2f);
 
+        mainCamera.enabled = true;
+        rotateCamera.enabled = false;
     }
 
     //開啟提示選項canvas
@@ -191,8 +178,8 @@ public class ShowCanvas : MonoBehaviour
     //開啟字幕
     public void OpenScreenText(int optionCanvas_index)
     {
-        if(optionCanvas_index == 0) showCaption.ChangeCaptionContent("");
-        else if(optionCanvas_index == 1) showCaption.ChangeCaptionContent("好像有奇怪的味道");
+        if (optionCanvas_index == 0) showCaption.ChangeCaptionContent("");
+        else if (optionCanvas_index == 1) showCaption.ChangeCaptionContent("好像有奇怪的味道");
         // screenText.SetActive(true);
 
         StartCoroutine(showCaption.ShowWords());
@@ -241,24 +228,24 @@ public class ShowCanvas : MonoBehaviour
     public void Rebirth()
     {
         deadPanel.SetActive(false);
-        fade_animator.SetBool("fadein",false);
+        fade_animator.SetBool("fadein", false);
         isRotating = false;
         reStart = true;
 
-        camera_Offset.rotation = Quaternion.Euler(0,0,0);
-        if(rebirth_index == 1)
+        camera_Offset.rotation = Quaternion.Euler(0, 0, 0);
+        if (rebirth_index == 1)
         {
             string sceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(sceneName);
         }
 
-        else if(rebirth_index == 2)
+        else if (rebirth_index == 2)
         {
-            player.transform.position =  rebirthPos[0].position;
+            player.transform.position = rebirthPos[0].position;
         }
 
         //恢復時間
         // Time.timeScale = 1;
-        
+
     }
 }
