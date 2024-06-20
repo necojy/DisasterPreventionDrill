@@ -61,8 +61,10 @@ public class CameraShake : MonoBehaviour
         while (elapsed < duration / 4)
         {
             float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+            // float y = Random.Range(-1f, 1f) * magnitude;
+            float z = Random.Range(-1f, 1f) * magnitude;
+            
+            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y, originalPosition.z + z);
             elapsed += Time.deltaTime;
             yield return null;
             if(elapsed < duration / 4 && !isFalling) StartCoroutine(FallObjects());
@@ -72,9 +74,12 @@ public class CameraShake : MonoBehaviour
         //暫停音樂
         AudioManager.instance.PauseSound("BackgroundSource");
 
+        // option1Camera.enabled = true;
         //給於提示 : 設定提示參數
         int optionCanvas_index = 0;
         yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,2,0,1,option1Camera));
+
+        // option1Camera.enabled = false;
 
         gasEffect.showEffect();
 

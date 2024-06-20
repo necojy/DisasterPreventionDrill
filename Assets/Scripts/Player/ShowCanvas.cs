@@ -54,6 +54,7 @@ public class ShowCanvas : MonoBehaviour
     [HideInInspector] public bool reStart = false;
     #endregion
 
+    private float recipNum = 5f;
 
     private void Awake()
     {
@@ -91,11 +92,18 @@ public class ShowCanvas : MonoBehaviour
         isRotating = true;
         Hint_Glow(true, hint_start, hint_end);
 
+        // rotateCamera.enabled = true;
+        // mainCamera.enabled = false;
+
         //使用什麼工具旋轉視角
         if (usingWhat == 1) yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false, optionCanvas_index));
         else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator(optionCanvas_index, rotateCamera));
 
-        yield return new WaitForSeconds(2f);
+        // rotateCamera.enabled = false;
+        // mainCamera.enabled = true;
+
+
+        yield return new WaitForSeconds(1.5f);
         Hint_Glow(false, hint_start, hint_end);
 
         timer.SetActive(true);
@@ -178,7 +186,8 @@ public class ShowCanvas : MonoBehaviour
     //開啟字幕
     public void OpenScreenText(int optionCanvas_index)
     {
-        if (optionCanvas_index == 0) showCaption.ChangeCaptionContent("");
+        if (optionCanvas_index == -1) showCaption.ChangeCaptionContent(recipNum.ToString());
+        else if (optionCanvas_index == 0) showCaption.ChangeCaptionContent("");
         else if (optionCanvas_index == 1) showCaption.ChangeCaptionContent("好像有奇怪的味道");
         // screenText.SetActive(true);
 
@@ -214,13 +223,13 @@ public class ShowCanvas : MonoBehaviour
 
         deadPanel.SetActive(true);
 
-        // StartCoroutine(TT());
-        // Time.timeScale = 0;
+        StartCoroutine(DeadRecip());
     }
 
-    IEnumerator TT()
+    IEnumerator DeadRecip()
     {
-        yield return new WaitForSeconds(3f);
+        fade_animator.SetBool("isDead", true);
+        yield return new WaitForSeconds(5f);
         Rebirth();
     }
 
@@ -241,7 +250,8 @@ public class ShowCanvas : MonoBehaviour
 
         else if (rebirth_index == 2)
         {
-            player.transform.position = rebirthPos[0].position;
+            SceneManager.LoadScene("Story2");
+            // player.transform.position = rebirthPos[0].position;
         }
 
         //恢復時間

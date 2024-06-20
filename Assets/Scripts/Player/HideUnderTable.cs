@@ -23,10 +23,11 @@ public class HideUnderTable : MonoBehaviour
     public InputActionReference actionReference;
     public InputAction action;
 
-    
-    public Camera option2Camera;
 
+    public Camera option2Camera;
     public ShowCanvas showCanvas;
+    private bool isEnding = false;
+
     void Start()
     {
         player = GameObject.Find("XR Origin (XR Rig)");
@@ -35,10 +36,10 @@ public class HideUnderTable : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
         table = GameObject.Find("TableToHide");
         //coll = table.GetComponent<BoxCollider>();
-        hidePos = table.transform.position;  
+        hidePos = table.transform.position;
         action = actionReference.action;
         action.performed += ActivateBehavior;
-        
+
     }
 
     void Update()
@@ -50,7 +51,9 @@ public class HideUnderTable : MonoBehaviour
             origPos = player.transform.position;
             origRot = player.transform.rotation;
             flippedRotation = Quaternion.Euler(origRot.x, origRot.eulerAngles.y + 180f, origRot.z);
-        }else{
+        }
+        else
+        {
             player.transform.position = hidePos;
             hidePos.y += 1;
             mainCamera.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
@@ -60,28 +63,28 @@ public class HideUnderTable : MonoBehaviour
 
     private void OnTriggerStay(Collider coll)
     {
-        if (coll.tag == "Left Hand" || coll.tag == "Right Hand") 
-        {   
-            inHidingArea=true;
+        if (coll.tag == "Left Hand" || coll.tag == "Right Hand")
+        {
+            inHidingArea = true;
         }
     }
 
     private void OnTriggerExit(Collider coll)
     {
         if (coll.tag == "Left Hand" || coll.tag == "Right Hand")
-        {   
-            inHidingArea=false;
+        {
+            inHidingArea = false;
         }
     }
 
     public void Hide()
-    {         
+    {
         charCtrlDriver.enabled = false;
-        StartCoroutine(MovePlayer(hidePos, flippedRotation));        
+        StartCoroutine(MovePlayer(hidePos, flippedRotation));
     }
     public void Leave()
-    {         
-        StartCoroutine(MovePlayer(origPos, origRot));        
+    {
+        StartCoroutine(MovePlayer(origPos, origRot));
         StartCoroutine(Open_OptionCanva());
         charCtrlDriver.enabled = true;
     }
@@ -103,28 +106,33 @@ public class HideUnderTable : MonoBehaviour
 
         player.transform.position = targetPos;
         player.transform.rotation = targetRot;
-        mainCamera.transform.position = new Vector3(0,0,0);
-        inputable=true;
+        mainCamera.transform.position = new Vector3(0, 0, 0);
+        inputable = true;
     }
 
     private void ActivateBehavior(InputAction.CallbackContext context)
-    {   
-        
-        if (isHiding && inputable){
-            inputable=false;
+    {
+
+        if (isHiding && inputable)
+        {
             Leave();
-            isHiding=false;
-        }else if (!isHiding && inHidingArea && inputable){
-            inputable=false;
-            Hide();     
-            isHiding=true;
-        }       
+            isHiding = false;
+            inputable = false;
+
+        }
+        else if (!isHiding && inHidingArea && inputable)
+        {
+            inputable = false;
+            Hide();
+            isHiding = true;
+        }
     }
 
     private IEnumerator Open_OptionCanva()
     {
         yield return new WaitForSeconds(1f);
-        StartCoroutine(showCanvas.StartHint(1,2,2,3,option2Camera));
+        StartCoroutine(showCanvas.StartHint(1, 2, 2, 3, option2Camera));
+        inputable = false; //確保只能躲一次
     }
 
 }
