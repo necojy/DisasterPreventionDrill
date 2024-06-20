@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class HideUnderTable : MonoBehaviour
@@ -13,25 +15,27 @@ public class HideUnderTable : MonoBehaviour
     private GameObject mainCamera;
     private GameObject table;
     private GameObject locomotion;
-    private BoxCollider coll;
-   
+    //private BoxCollider coll;
+    private CharacterControllerDriver charCtrlDriver;
     public bool isHiding = false;
     public bool inHidingArea = false;
     public bool inputable = true;
     public InputActionReference actionReference;
     public InputAction action;
 
+    
 
     public ShowCanvas showCanvas;
     void Start()
     {
         player = GameObject.Find("XR Origin (XR Rig)");
+        charCtrlDriver = player.GetComponent<CharacterControllerDriver>();
         locomotion = GameObject.Find("Locomotion Systeam");
         mainCamera = GameObject.Find("Main Camera");
         table = GameObject.Find("TableToHide");
-        coll = table.GetComponent<BoxCollider>();
+        //coll = table.GetComponent<BoxCollider>();
         hidePos = table.transform.position;
-        hidePos.y+=1;
+        hidePos.y += 1;
         action = actionReference.action;
         action.performed += ActivateBehavior;
         
@@ -41,11 +45,14 @@ public class HideUnderTable : MonoBehaviour
     {
         if (!isHiding)
         {
+            mainCamera.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
             origPos = player.transform.position;
             origRot = player.transform.rotation;
             flippedRotation = Quaternion.Euler(origRot.x, origRot.eulerAngles.y + 180f, origRot.z);
         }else{
             player.transform.position = hidePos;
+            mainCamera.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
+            mainCamera.transform.position = hidePos;
         }
     }
 
@@ -67,12 +74,14 @@ public class HideUnderTable : MonoBehaviour
 
     public void Hide()
     {         
+        charCtrlDriver.enabled = false;
         StartCoroutine(MovePlayer(hidePos, flippedRotation));        
     }
     public void Leave()
     {         
         StartCoroutine(MovePlayer(origPos, origRot));        
         StartCoroutine(Open_OptionCanva());
+        charCtrlDriver.enabled = true;
     }
 
     IEnumerator MovePlayer(Vector3 targetPos, Quaternion targetRot)

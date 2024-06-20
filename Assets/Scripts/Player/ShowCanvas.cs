@@ -1,7 +1,12 @@
 using System.Collections;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShowCanvas : MonoBehaviour
 {
@@ -17,6 +22,7 @@ public class ShowCanvas : MonoBehaviour
     public float rotateSpeed = 1f;
     private float rotateViewTime = 1f; // 旋轉視角的時間
     public Camera mainCamera;
+    private GameObject uu;
     public Camera rotate_Camera;
     public Camera Animator_Camera;
     public Animator Animator_Control;    //用動畫控制旋轉視野
@@ -64,6 +70,11 @@ public class ShowCanvas : MonoBehaviour
         }
 
         player = GameObject.Find("XR Origin (XR Rig)");
+       
+    }
+    void Start()
+    {
+         uu=GameObject.Find("Main Camera");
     }
 
 
@@ -87,11 +98,16 @@ public class ShowCanvas : MonoBehaviour
     {
 
         isRotating = true;
-        mainCamera.enabled = false;
+        //mainCamera.enabled = false;
         rotate_Camera.enabled = true;
         Hint_Glow(true, hint_start, hint_end);
 
         //使用什麼工具旋轉視角
+        
+        Transform TT = mainCamera.transform;
+        //uu.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
+        mainCamera.transform.position = new Vector3(TT.position.x,TT.position.y,TT.position.z); 
+
         if (usingWhat == 1) yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false, optionCanvas_index));
         else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator(optionCanvas_index));
 
@@ -211,7 +227,7 @@ public class ShowCanvas : MonoBehaviour
 
         deadPanel.SetActive(true);
 
-        StartCoroutine(TT());
+        // StartCoroutine(TT());
         // Time.timeScale = 0;
     }
 

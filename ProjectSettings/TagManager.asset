@@ -8,6 +8,8 @@ TagManager:
   - Left Hand
   - Fire
   - Falling
+  - viewArea_Up
+  - viewArea_Down
   layers:
   - Default
   - TransparentFX
