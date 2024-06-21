@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731892, g: 0.13414863, b: 0.12107824, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731941, g: 0.13414887, b: 0.12107834, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18136,7 +18136,7 @@ Transform:
   m_GameObject: {fileID: 1043069724}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.52, y: 4.86, z: 7.54}
+  m_LocalPosition: {x: -4.1, y: 4.86, z: 7.54}
   m_LocalScale: {x: 1, y: 7.81, z: 8.94}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20984,7 +20984,7 @@ Transform:
   m_GameObject: {fileID: 1245636999}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.9969359, z: -0, w: -0.07822348}
-  m_LocalPosition: {x: 28.32, y: 2, z: 5.48}
+  m_LocalPosition: {x: -4.54, y: 2, z: 5.48}
   m_LocalScale: {x: 2.25, y: 2.25, z: 2.25}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -22043,7 +22043,7 @@ PrefabInstance:
     - target: {fileID: 8128322320853617336, guid: e9a47cdb5968d66499f6b4ee53467cd4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.56
+      value: -9.410001
       objectReference: {fileID: 0}
     - target: {fileID: 8128322320853617336, guid: e9a47cdb5968d66499f6b4ee53467cd4,
         type: 3}
@@ -27316,7 +27316,7 @@ Transform:
   m_GameObject: {fileID: 1751946188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -34.96, y: 0, z: 14.86}
+  m_LocalPosition: {x: -34.95, y: 0, z: 14.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27524,7 +27524,7 @@ PrefabInstance:
     - target: {fileID: 8128322320853617336, guid: e9a47cdb5968d66499f6b4ee53467cd4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.56
+      value: -9.41
       objectReference: {fileID: 0}
     - target: {fileID: 8128322320853617336, guid: e9a47cdb5968d66499f6b4ee53467cd4,
         type: 3}
