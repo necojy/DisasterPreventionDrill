@@ -6,20 +6,16 @@ public class ElevatorControl : MonoBehaviour
 {
     public GameObject elevator;
     public Animator anim;
+    
     void Start()
     {
         elevator = GameObject.Find("Elevator");
         anim = elevator.GetComponent<Animator>();
     }
 
-    void Update()
-    {
-
-    }
-
     private void OnTriggerStay(Collider coll)
     {
-        if (coll.tag == "Player") 
+        if (coll.CompareTag("Player")) 
         {   
             Debug.Log("Enter");
             Open();
@@ -27,24 +23,20 @@ public class ElevatorControl : MonoBehaviour
     }
     private void OnTriggerExit(Collider coll)
     {
-        if (coll.tag == "Player")
+        if (coll.CompareTag("Player"))
         {   
-             Debug.Log("Leave");
+            Debug.Log("Leave");
             Close();
         }
     }
 
     public void Open(){
-        anim.SetBool("isClosing",false);
-        anim.SetBool("isOpening",true);
+        anim.SetBool("isClosing", false);
+        anim.SetBool("isOpening", true);
     }
+
     public void Close(){
-        anim.SetBool("isOpening",false);
-        anim.SetBool("isClosing",true);
+        anim.SetBool("isOpening", false);
+        anim.SetBool("isClosing", true);
     }
-    public void Shake(){
-        anim.SetBool("isClosing",false);
-        anim.SetBool("isShaking",true);
-    }
-    
 }
