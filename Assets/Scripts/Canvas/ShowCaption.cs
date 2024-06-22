@@ -24,9 +24,10 @@ public class ShowCaption : MonoBehaviour
     }
     public IEnumerator ShowWords()
     {
-        // yield return new WaitForSeconds(starttime);
         OpenCaption();
+
         int duration_temp = duration;
+        
         while (duration_temp >= 0)
         {
             duration_temp -= 1;
@@ -47,10 +48,12 @@ public class ShowCaption : MonoBehaviour
         Caption.SetActive(false);
     }
 
+    //設定字幕內容
     public void ChangeCaptionContent(string changeContent)
     {
         captionTextComponent.text = changeContent;
     }
+
 
     public void ChangeRebirthContent(string changeContent)
     {

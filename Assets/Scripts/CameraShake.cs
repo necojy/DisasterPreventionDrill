@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    //地震開始時間
     public float startTime = 3f;
 
     #region 搖晃參數   
     public float shakeDuration = 10f;
     public float shakeMagnitude = 0.25f;
-    public bool isShaking = false;
+    [HideInInspector] public bool isShaking = false;
     #endregion
 
     #region 搖晃後的掉落物
@@ -19,18 +20,22 @@ public class CameraShake : MonoBehaviour
     #endregion
 
     #region 顯示提示畫布
-    public ShowCanvas showCanvas;
+    private ShowCanvas showCanvas;
+    private Camera option1Camera; //故事 1 提示
     #endregion
     
+    public GameObject[] shakingItems;
     public GasEffect gasEffect;
 
-    public GameObject[] shakingItems;
 
-    public Camera option1Camera;
+    public Animator livingroomShakeAni;
     private void Start()
     {
+        showCanvas = GameObject.Find("Camera Offset").GetComponent<ShowCanvas>();
+        option1Camera = GameObject.Find("option1Camera").GetComponent<Camera>();
+        option1Camera.enabled = false; // 選項 1 相機關閉
+
         Init(); 
-        option1Camera.enabled = false;
     }
 
     //初始化
@@ -57,14 +62,16 @@ public class CameraShake : MonoBehaviour
 
         AudioManager.instance.PlayBackground("Earthquake");
         StartCoroutine(ItemShaking());
-        
+
+
+        livingroomShakeAni.SetBool("isShaking",true);
         while (elapsed < duration / 4)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            // float y = Random.Range(-1f, 1f) * magnitude;
-            float z = Random.Range(-1f, 1f) * magnitude;
+            // float x = Random.Range(-0.2f, 0.2f) * magnitude;
+            // // float y = Random.Range(-1f, 1f) * magnitude;
+            // float z = Random.Range(-0.2f, 0.2f) * magnitude;
             
-            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y, originalPosition.z + z);
+            // transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y, originalPosition.z + z);
             elapsed += Time.deltaTime;
             yield return null;
             if(elapsed < duration / 4 && !isFalling) StartCoroutine(FallObjects());
@@ -74,29 +81,31 @@ public class CameraShake : MonoBehaviour
         //暫停音樂
         AudioManager.instance.PauseSound("BackgroundSource");
 
-        // option1Camera.enabled = true;
         //給於提示 : 設定提示參數
         int optionCanvas_index = 0;
         yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,2,0,1,option1Camera));
 
-        // option1Camera.enabled = false;
-
-        gasEffect.showEffect();
-
         AudioManager.instance.ResumeSound("BackgroundSource");
+        livingroomShakeAni.SetBool("maxShaking",true);
 
         while (elapsed < duration)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+            // float x = Random.Range(-0.2f, 0.2f) * magnitude;
+            // // float y = Random.Range(-1f, 1f) * magnitude;
+            // float z = Random.Range(-0.2f, 0.2f) * magnitude;
+            // transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y, originalPosition.z + z);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
+        livingroomShakeAni.SetBool("maxShaking",false);
+        livingroomShakeAni.SetBool("isShaking",false);
+
         isShaking = false;
         transform.localPosition = originalPosition;
-    }
+        
+        
+    }   
 
     private IEnumerator FallObjects()
     {

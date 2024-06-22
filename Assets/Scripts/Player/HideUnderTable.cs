@@ -27,6 +27,7 @@ public class HideUnderTable : MonoBehaviour
     public Camera option2Camera;
     public ShowCanvas showCanvas;
     private bool isEnding = false;
+    public GasEffect gasEffect;
 
     void Start()
     {
@@ -130,6 +131,7 @@ public class HideUnderTable : MonoBehaviour
 
     private IEnumerator Open_OptionCanva()
     {
+        gasEffect.ShowEffect();
         yield return new WaitForSeconds(1f);
         StartCoroutine(showCanvas.StartHint(1, 2, 2, 3, option2Camera));
         inputable = false; //確保只能躲一次

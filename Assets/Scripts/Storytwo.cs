@@ -32,7 +32,7 @@ public class Storytwo : MonoBehaviour
         mainCamera = GameObject.Find("Main Camera");
         player = GameObject.Find("XR Origin (XR Rig)");
 
-        gasEffect.showEffect();
+        gasEffect.ShowEffect();
     }
 
     public void Dead(int deadIndex)

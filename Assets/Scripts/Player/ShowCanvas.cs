@@ -17,13 +17,11 @@ public class ShowCanvas : MonoBehaviour
     private Quaternion origRot; //紀錄玩家位置跟方向
 
     private bool isRotating = false;
-    public Transform camera_Offset;
-    public Transform rotatePosition;
-    public float rotateSpeed = 1f;
+    private Transform camera_Offset;
+    private float rotateSpeed = 1f;
     private float rotateViewTime = 1f; // 旋轉視角的時間
-    public Camera mainCamera;
-    public Camera Animator_Camera;
-    public Animator Animator_Control;    //用動畫控制旋轉視野
+    private Camera mainCamera; 
+    private Transform rotatePosition;
 
     #endregion
 
@@ -68,6 +66,9 @@ public class ShowCanvas : MonoBehaviour
         }
 
         player = GameObject.Find("XR Origin (XR Rig)");
+        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        camera_Offset = GameObject.Find("Camera Offset").transform;
+
 
     }
     void Update()
@@ -85,38 +86,34 @@ public class ShowCanvas : MonoBehaviour
 
 
 
-    // 更換攝影機以旋轉到提示畫面
+    //更換攝影機以旋轉到提示畫面(第幾個提示,提示index_start,提示index_end,物理旋轉到的位置,動畫旋轉使用的相機)
     public IEnumerator StartHint(int optionCanvas_index, int usingWhat, int hint_start, int hint_end, Camera rotateCamera)
     {
 
         isRotating = true;
+        
+        //物品發光提示
         Hint_Glow(true, hint_start, hint_end);
-
-        // rotateCamera.enabled = true;
-        // mainCamera.enabled = false;
 
         //使用什麼工具旋轉視角
         if (usingWhat == 1) yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false, optionCanvas_index));
         else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator(optionCanvas_index, rotateCamera));
 
-        // rotateCamera.enabled = false;
-        // mainCamera.enabled = true;
+        yield return new WaitForSeconds(1.25f);
 
-
-        yield return new WaitForSeconds(1.5f);
         Hint_Glow(false, hint_start, hint_end);
 
+        //開啟計時器
         timer.SetActive(true);
         StartCoroutine(timeControl.UpdateTimer());
 
+        //開啟字幕
         OpenScreenText(optionCanvas_index);
-
-        Animator_Camera.enabled = false;
 
         isRotating = false;
 
     }
-    //旋轉相機視角
+    //旋轉相機視角(物理旋轉)
     private IEnumerator RotateView(Transform initial, Transform target, bool is_dead, int optionCanvas_index)
     {
         Quaternion initialRotation = initial.rotation;
@@ -145,15 +142,17 @@ public class ShowCanvas : MonoBehaviour
     //使用動畫旋轉相機視角
     private IEnumerator RotateView_Animator(int optionCanvas_index, Camera rotateCamera)
     {
+        //切換提示相機
         mainCamera.enabled = false;
         rotateCamera.enabled = true;
 
         Animator animatorCamera = rotateCamera.GetComponent<Animator>();
         animatorCamera.SetBool("canRotate", true);
 
+        // 開啟提示選項canvas
         yield return StartCoroutine(ShowOptionCanvas(optionCanvas_index));
-        yield return new WaitForSeconds(2f);
 
+        //關閉提示相機
         mainCamera.enabled = true;
         rotateCamera.enabled = false;
     }
@@ -166,10 +165,10 @@ public class ShowCanvas : MonoBehaviour
         optionCanvas[index].SetActive(false);
     }
 
-    // 呼叫提示物體發光
-    private void Hint_Glow(bool is_open, int start, int end)
+    // 呼叫提示物體發光 (開關，編號幾到幾發光)
+    private void Hint_Glow(bool is_open, int start_index, int end_index)
     {
-        for (int i = start; i <= end; i++)
+        for (int i = start_index; i <= end_index; i++)
         {
             if (hint_Objs[i] != null)
             {
@@ -186,17 +185,13 @@ public class ShowCanvas : MonoBehaviour
     //開啟字幕
     public void OpenScreenText(int optionCanvas_index)
     {
+        // 設定字幕內容
         if (optionCanvas_index == -1) showCaption.ChangeCaptionContent(recipNum.ToString());
         else if (optionCanvas_index == 0) showCaption.ChangeCaptionContent("");
         else if (optionCanvas_index == 1) showCaption.ChangeCaptionContent("好像有奇怪的味道");
-        // screenText.SetActive(true);
 
+        // 開啟字幕
         StartCoroutine(showCaption.ShowWords());
-
-        // yield return new WaitForSeconds(showCaption.duration);
-
-        // screenText.SetActive(false);
-
     }
 
 
