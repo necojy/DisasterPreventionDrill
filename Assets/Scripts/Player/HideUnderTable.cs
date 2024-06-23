@@ -134,7 +134,7 @@ public class HideUnderTable : MonoBehaviour
     {
         gasEffect.ShowEffect();
         yield return new WaitForSeconds(1f);
-        StartCoroutine(showCanvas.StartHint(1, 2, 2, 3, option2Camera));
+        StartCoroutine(showCanvas.StartHint(1, 2, 4, 5, option2Camera));
         inputable = false; //確保只能躲一次
     }
 

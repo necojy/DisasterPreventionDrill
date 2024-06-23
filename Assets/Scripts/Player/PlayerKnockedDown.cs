@@ -42,7 +42,6 @@ public class PlayerKnockedDown : MonoBehaviour
         // if(!sucess) showCanvas.Dead();
 
         // 沒在時間內躲在桌子下
-        // if (timeControl.timeOut && !hideUnderTable.isHiding && !showCanvas.reStart)
         if (cameraShake.isShaking && timeControl.timeOut && !hideUnderTable.isHiding && !showCanvas.reStart)
         {
             showCanvas.Dead(1);
