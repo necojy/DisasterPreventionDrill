@@ -64,7 +64,7 @@ public class AudioManager : MonoBehaviour
         //使用一個參數 x 來遍歷 ItemSound 陣列中的元素，並檢查每個元素的 name 屬性是否等於 name 參數。
         Sound s = Array.Find(itemSounds, itemSound => itemSound.name == name);
 
-        itemSources.Stop();
+        // itemSources.Stop();
 
         if (s == null)
         {
@@ -79,6 +79,10 @@ public class AudioManager : MonoBehaviour
             itemSources.PlayOneShot(s.clip);
         }
         else if (s.name == "Breaking_glass")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "Breaking_glass_2")
         {
             itemSources.PlayOneShot(s.clip);
         }

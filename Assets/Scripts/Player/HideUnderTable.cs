@@ -29,6 +29,7 @@ public class HideUnderTable : MonoBehaviour
     private bool isEnding = false;
     public GasEffect gasEffect;
 
+    public TimeControl Countdown;
     void Start()
     {
         player = GameObject.Find("XR Origin (XR Rig)");
@@ -36,7 +37,7 @@ public class HideUnderTable : MonoBehaviour
         locomotion = GameObject.Find("Locomotion Systeam");
         mainCamera = GameObject.Find("Main Camera");
         table = GameObject.Find("TableToHide");
-        //coll = table.GetComponent<BoxCollider>();
+
         hidePos = table.transform.position;
         action = actionReference.action;
         action.performed += ActivateBehavior;
@@ -86,7 +87,7 @@ public class HideUnderTable : MonoBehaviour
     public void Leave()
     {
         StartCoroutine(MovePlayer(origPos, origRot));
-        StartCoroutine(Open_OptionCanva());
+        if(Countdown.timeOut) StartCoroutine(Open_OptionCanva());
         charCtrlDriver.enabled = true;
     }
 

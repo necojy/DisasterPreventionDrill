@@ -8,9 +8,10 @@ public class CameraShake : MonoBehaviour
     public float startTime = 3f;
 
     #region 搖晃參數   
-    public float shakeDuration = 10f;
+    public float shakeDuration_small = 3f;
+    public float shakeDuration_max = 10f;
     public float shakeMagnitude = 0.25f;
-    [HideInInspector] public bool isShaking = false;
+    public bool isShaking = false;
     #endregion
 
     #region 搖晃後的掉落物
@@ -25,8 +26,6 @@ public class CameraShake : MonoBehaviour
     #endregion
     
     public GameObject[] shakingItems;
-    public GasEffect gasEffect;
-
 
     public Animator livingroomShakeAni;
     private void Start()
@@ -47,10 +46,10 @@ public class CameraShake : MonoBehaviour
             fallObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
-        StartCoroutine(Shake(shakeDuration,shakeMagnitude));
+        StartCoroutine(Shake());
     }
 
-    public IEnumerator Shake(float duration, float magnitude)
+    public IEnumerator Shake()
     {
         yield return new WaitForSeconds(startTime);
 
@@ -65,16 +64,11 @@ public class CameraShake : MonoBehaviour
 
 
         livingroomShakeAni.SetBool("isShaking",true);
-        while (elapsed < duration / 4)
+        
+        while (elapsed < shakeDuration_small)
         {
-            // float x = Random.Range(-0.2f, 0.2f) * magnitude;
-            // // float y = Random.Range(-1f, 1f) * magnitude;
-            // float z = Random.Range(-0.2f, 0.2f) * magnitude;
-            
-            // transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y, originalPosition.z + z);
             elapsed += Time.deltaTime;
             yield return null;
-            if(elapsed < duration / 4 && !isFalling) StartCoroutine(FallObjects());
         }
 
 
@@ -88,12 +82,10 @@ public class CameraShake : MonoBehaviour
         AudioManager.instance.ResumeSound("BackgroundSource");
         livingroomShakeAni.SetBool("maxShaking",true);
 
-        while (elapsed < duration)
+        elapsed = 0.0f;
+        while (elapsed < shakeDuration_max)
         {
-            // float x = Random.Range(-0.2f, 0.2f) * magnitude;
-            // // float y = Random.Range(-1f, 1f) * magnitude;
-            // float z = Random.Range(-0.2f, 0.2f) * magnitude;
-            // transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y, originalPosition.z + z);
+            if(elapsed < shakeDuration_max / 4 && !isFalling) StartCoroutine(FallObjects());
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -101,8 +93,8 @@ public class CameraShake : MonoBehaviour
         livingroomShakeAni.SetBool("maxShaking",false);
         livingroomShakeAni.SetBool("isShaking",false);
 
-        isShaking = false;
         transform.localPosition = originalPosition;
+        isShaking = false;
         
         
     }   
@@ -113,6 +105,7 @@ public class CameraShake : MonoBehaviour
         yield return new WaitForSeconds(waitForDown);
         foreach (GameObject fallObject in fallObjects)
         {
+            yield return new WaitForSeconds(Random.Range(0.8f, 1.25f));
             fallObject.GetComponent<Rigidbody>().useGravity = true;
         }
     }

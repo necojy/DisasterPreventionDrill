@@ -12,12 +12,12 @@ public class TimeControl : MonoBehaviour
     #endregion
     public CameraShake cameraShake;
     public ShowCanvas showCanvas;
-    public float diff = 9f;
+    public float diff = 0f;
     public bool timeOut = false;
     void Awake()
     {
-        nowtime = cameraShake.shakeDuration - diff;
-        maxtime = cameraShake.shakeDuration - diff;
+        nowtime = cameraShake.shakeDuration_max - diff;
+        maxtime = cameraShake.shakeDuration_max - diff;
         timeBar.maxValue = maxtime;
         timeBar.value = nowtime;
     }
@@ -37,19 +37,5 @@ public class TimeControl : MonoBehaviour
 
         timeOut = true;
     }
-    // private IEnumerator TT()
-    // {
-    //     yield return new WaitForSeconds(Duration-12);
-    //     showCanvas.open_Timer = false;
-    //     timeOut = true;
-    // }
-    // private void Update()
-    // {
-    //     if (showCanvas.open_Timer)
-    //     {
-    //         startGame = true;
-    //         StartCoroutine(UpdateTimer());
-    //         StartCoroutine(TT());
-    //     }
-    // }
+
 }
