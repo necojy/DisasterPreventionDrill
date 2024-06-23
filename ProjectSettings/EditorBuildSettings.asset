@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Test.unity
     guid: 57500b2421ab01c42917b588dc53f7b9
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
     path: Assets/Scenes/ViewSetting.unity
     guid: c4dc980145a56bc44b2e3e5c2dc4ae24
   - enabled: 1
@@ -20,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Liu.unity
     guid: 0ad3c78e845c7d34cbb86e136842cb6f
+  - enabled: 1
+    path: Assets/Scenes/Story2.unity
+    guid: 191db6bbb7e090a41ab15a4702454246
+  - enabled: 0
+    path: Assets/Scenes/Backup2.unity
+    guid: 88c82504763790d4aa1645df5bfc1781
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 534199b313cf46f41a1cbfb12c3500ef,
       type: 2}

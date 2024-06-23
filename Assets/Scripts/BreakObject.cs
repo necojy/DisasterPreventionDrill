@@ -16,14 +16,17 @@ public class BreakObject : MonoBehaviour
     public void Break()
     {
         GameObject frac = Instantiate(fractured, transform.position, transform.rotation);
-        
-        foreach(Rigidbody rb in frac.GetComponentsInChildren<Rigidbody>())
+
+        int music_index = 1;
+        foreach (Rigidbody rb in frac.GetComponentsInChildren<Rigidbody>())
         {
             Vector3 force = (rb.transform.position - transform.position).normalized * breakForce;
             rb.AddForce(force);
+            if (music_index == 1) AudioManager.instance.PlayItemSound("Breaking_glass");
+            // else if (music_index == -1) AudioManager.instance.PlayItemSound("Breaking_glass_2");
+            // music_index *= -1;
         }
-        
-        AudioManager.instance.PlayItemSound("Breaking_glass");
+
         Destroy(gameObject);
     }
 }

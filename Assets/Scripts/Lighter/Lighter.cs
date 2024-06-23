@@ -19,8 +19,9 @@ public class Lighter : MonoBehaviour
     private Animator GrabHand = null;
 
     public ShowCanvas showCanvas;
+    public Storytwo storytwo;
 
-
+    public bool isStory2 = false;
     void Start()
     {
         flame.SetActive(false);
@@ -65,7 +66,8 @@ public class Lighter : MonoBehaviour
         explosion.SetActive(true);
 
         yield return new WaitForSeconds(1f);
-        showCanvas.Dead(2);
+        if(isStory2) storytwo.Dead(2);
+        else showCanvas.Dead(2);
         flame.SetActive(false);
     }
 

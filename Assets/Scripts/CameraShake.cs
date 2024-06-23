@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
+    //地震開始時間
     public float startTime = 3f;
 
     #region 搖晃參數   
-    public float shakeDuration = 10f;
+    public float shakeDuration_small = 3f;
+    public float shakeDuration_max = 10f;
     public float shakeMagnitude = 0.25f;
     public bool isShaking = false;
     #endregion
@@ -19,18 +21,20 @@ public class CameraShake : MonoBehaviour
     #endregion
 
     #region 顯示提示畫布
-    public ShowCanvas showCanvas;
+    private ShowCanvas showCanvas;
+    private Camera option1Camera; //故事 1 提示
     #endregion
     
-    public GasEffect gasEffect;
-
     public GameObject[] shakingItems;
 
-    public Camera option1Camera;
+    public Animator livingroomShakeAni;
     private void Start()
     {
+        showCanvas = GameObject.Find("Camera Offset").GetComponent<ShowCanvas>();
+        option1Camera = GameObject.Find("option1Camera").GetComponent<Camera>();
+        option1Camera.enabled = false; // 選項 1 相機關閉
+
         Init(); 
-        option1Camera.enabled = false;
     }
 
     //初始化
@@ -42,10 +46,10 @@ public class CameraShake : MonoBehaviour
             fallObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
-        StartCoroutine(Shake(shakeDuration,shakeMagnitude));
+        StartCoroutine(Shake());
     }
 
-    public IEnumerator Shake(float duration, float magnitude)
+    public IEnumerator Shake()
     {
         yield return new WaitForSeconds(startTime);
 
@@ -57,15 +61,14 @@ public class CameraShake : MonoBehaviour
 
         AudioManager.instance.PlayBackground("Earthquake");
         StartCoroutine(ItemShaking());
+
+
+        livingroomShakeAni.SetBool("isShaking",true);
         
-        while (elapsed < duration / 4)
+        while (elapsed < shakeDuration_small)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
             elapsed += Time.deltaTime;
             yield return null;
-            if(elapsed < duration / 4 && !isFalling) StartCoroutine(FallObjects());
         }
 
 
@@ -76,22 +79,25 @@ public class CameraShake : MonoBehaviour
         int optionCanvas_index = 0;
         yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,2,0,1,option1Camera));
 
-        gasEffect.showEffect();
-
         AudioManager.instance.ResumeSound("BackgroundSource");
+        livingroomShakeAni.SetBool("maxShaking",true);
 
-        while (elapsed < duration)
+        elapsed = 0.0f;
+        while (elapsed < shakeDuration_max)
         {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-            transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
+            if(elapsed < shakeDuration_max / 4 && !isFalling) StartCoroutine(FallObjects());
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        isShaking = false;
+        livingroomShakeAni.SetBool("maxShaking",false);
+        livingroomShakeAni.SetBool("isShaking",false);
+
         transform.localPosition = originalPosition;
-    }
+        isShaking = false;
+        
+        
+    }   
 
     private IEnumerator FallObjects()
     {
@@ -99,6 +105,7 @@ public class CameraShake : MonoBehaviour
         yield return new WaitForSeconds(waitForDown);
         foreach (GameObject fallObject in fallObjects)
         {
+            yield return new WaitForSeconds(Random.Range(0.8f, 1.25f));
             fallObject.GetComponent<Rigidbody>().useGravity = true;
         }
     }
