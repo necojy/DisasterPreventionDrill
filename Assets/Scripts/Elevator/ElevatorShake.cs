@@ -28,8 +28,9 @@ public class ElevatorShake : MonoBehaviour
     IEnumerator Shake(){
         Debug.Log("Elevator broken");
         anim.SetBool("isShaking",true);
-        yield return new WaitForSeconds(5);
-        anim.SetBool("isShaking",false);
+        AudioManager.instance.PlayItemSound("mechanical-25592");
+        yield return new WaitForSeconds(0.1f);
+        //anim.SetBool("isShaking",false);
         light.SetActive(false);
     }
 
