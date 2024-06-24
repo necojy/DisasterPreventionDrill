@@ -77,7 +77,7 @@ public class CameraShake : MonoBehaviour
 
         //給於提示 : 設定提示參數
         int optionCanvas_index = 0;
-        yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,2,0,1,option1Camera));
+        yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,2,0,3,option1Camera));
 
         AudioManager.instance.ResumeSound("BackgroundSource");
         livingroomShakeAni.SetBool("maxShaking",true);
