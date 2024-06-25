@@ -790,6 +790,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "secondaryButton",
+                    "type": "Button",
+                    "id": "04a2f674-134b-40e8-978e-762769d3c411",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -977,6 +986,17 @@
                     "processors": "",
                     "groups": "Noncontinuous Move",
                     "action": "ViewAdjust",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1722007e-7d0b-402c-b282-7ecf7414acb7",
+                    "path": "<XRController>{LeftHand}/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "secondaryButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
