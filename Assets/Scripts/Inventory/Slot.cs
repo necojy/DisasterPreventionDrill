@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Slot : MonoBehaviour
 {
+    public GameObject inventory;
     public GameObject ItemInSlot;
     public Image slotImage;
     public GameObject item;
@@ -37,18 +34,39 @@ public class Slot : MonoBehaviour
         item = coll.gameObject;
         inArea = true;
 
+        XRGrabInteractable grabInteractable = item.GetComponent<XRGrabInteractable>();
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectExited.AddListener(OnSelectExited);
+        }
     }
+
     private void OnTriggerExit(Collider coll)
     {
+        if (item != null)
+        {
+            XRGrabInteractable grabInteractable = item.GetComponent<XRGrabInteractable>();
+            if (grabInteractable != null)
+            {
+                grabInteractable.selectExited.RemoveListener(OnSelectExited);
+            }
+        }
+
         item = null;
         inArea = false;
-
     }
 
-    //放開按鈕 放入道具
+    private void OnSelectExited(SelectExitEventArgs args)
+    {
+        if (inArea && ItemInSlot == null)
+        {
+            InsertItem(args.interactableObject.transform.gameObject);
+        }
+    }
+
     private void OnActionCanceled(InputAction.CallbackContext context)
     {
-        if(inArea && ItemInSlot == null)
+        if (inArea && ItemInSlot == null)
         {
             InsertItem(item);
             item = null;
@@ -57,36 +75,69 @@ public class Slot : MonoBehaviour
 
     private void OnActionPerformed(InputAction.CallbackContext context)
     {
-        if(ItemInSlot != null)
+        if (ItemInSlot != null && inventory.activeSelf)
             RemoveItem();
     }
 
     bool IsItem(GameObject obj)
     {
-        return obj.GetComponent<Item>();
+        return obj.GetComponent<Item>() != null;
     }
-    void InsertItem(GameObject obj)
+
+    public void InsertItem(GameObject obj)
     {
+        // 使用全局管理器來添加物品到插槽中
+        SlotItemManager.Instance.RegisterItem(obj,this);
+
         Debug.Log("insert item");
-        obj.GetComponent<Rigidbody>().isKinematic = true;
+
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+        
         obj.transform.SetParent(gameObject.transform, true);
         obj.transform.localPosition = Vector3.zero;
-        obj.transform.localEulerAngles = obj.GetComponent<Item>().slotRotation;
-        obj.GetComponent<Item>().inSlot = true;
-        obj.GetComponent<Item>().currentSlot = this;
+        obj.transform.localRotation = Quaternion.identity;
+
+        Item itemComponent = obj.GetComponent<Item>();
+        if (itemComponent != null)
+        {
+            obj.transform.localEulerAngles = itemComponent.slotRotation;
+            itemComponent.inSlot = true;
+            itemComponent.currentSlot = this;
+        }
+
         ItemInSlot = obj;
         slotImage.color = Color.clear;
     }
 
-    void RemoveItem()
+    public void RemoveItem()
     {
-        Debug.Log("remove item");
-        ItemInSlot.GetComponent<Rigidbody>().isKinematic = false;
-        ItemInSlot.transform.SetParent(null);
-        ItemInSlot.GetComponent<Item>().inSlot = false;
-        ItemInSlot.GetComponent<Item>().currentSlot = null;
-        ItemInSlot = null;
-        ResetColor();
+        // 使用全局管理器來移除插槽中的物品
+        SlotItemManager.Instance.UnregisterItem(this);
+        if (ItemInSlot != null)
+        {
+            Rigidbody rb = ItemInSlot.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false;
+                rb.useGravity = true;
+            }
+            
+            ItemInSlot.transform.SetParent(null);
+            Item itemComponent = ItemInSlot.GetComponent<Item>();
+            if (itemComponent != null)
+            {
+                itemComponent.inSlot = false;
+                itemComponent.currentSlot = null;
+            }
+            
+            ItemInSlot = null;
+            ResetColor();
+        }
     }
 
     public void ResetColor()

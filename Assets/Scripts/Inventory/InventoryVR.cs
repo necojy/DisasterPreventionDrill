@@ -17,6 +17,7 @@ public class InventoryVR : MonoBehaviour
 
     private void Start()
     {
+        
         Inventory.SetActive(false);
         UIActive = false;
         action = actionReference.action;
@@ -25,6 +26,7 @@ public class InventoryVR : MonoBehaviour
 
     private void Update()
     {
+        Anchor = GameObject.Find("Inventory Anchor");
         if (UIActive)
         {
             Inventory.transform.position = Anchor.transform.position;
