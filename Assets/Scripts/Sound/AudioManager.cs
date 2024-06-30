@@ -90,6 +90,10 @@ public class AudioManager : MonoBehaviour
         {
             itemSources.PlayOneShot(s.clip);
         }
+        else if (s.name == "Open_door")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
     }
 
 
