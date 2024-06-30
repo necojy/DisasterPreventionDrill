@@ -17,7 +17,6 @@ public class InventoryVR : MonoBehaviour
 
     private void Start()
     {
-        
         Inventory.SetActive(false);
         UIActive = false;
         action = actionReference.action;
@@ -36,6 +35,7 @@ public class InventoryVR : MonoBehaviour
 
     private void ActivateBehavior(InputAction.CallbackContext context)
     {
+        Debug.Log("aaa..");
         UIActive = !UIActive;
         Inventory.SetActive(UIActive);
     }

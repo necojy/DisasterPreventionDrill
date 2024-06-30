@@ -6,14 +6,20 @@ public class DebrisFalling : MonoBehaviour
 {
     private ShowCaption showCaption;
     private bool isFalling = false;
+    private bool isHint = false;
+    public GameObject left_door;
+    private Pulldoor pulldoor;
     public GameObject[] fallObjects;
     public Animator fade_animator;
     public GameObject deadPanel;
+    private GameObject SelectRoadHint;
 
 
     private void Start()
     {
         showCaption = GameObject.Find("ScreenText").GetComponent<ShowCaption>();
+        SelectRoadHint = GameObject.Find("SelectRoad");
+        pulldoor = left_door.GetComponent<Pulldoor>();
         Init();
     }
 
@@ -26,26 +32,26 @@ public class DebrisFalling : MonoBehaviour
         }
 
         fallObjects[0].SetActive(false);
-        StartHint();
     }
 
     private void Update()
     {
+        if (pulldoor.isOpening && !isHint)
+        {
+            StartHint();
+        }
+
         // 加上背包判定
-        // if (isFalling)
-        // {
-        //     ShowDeadCanvas();
-        // }
+        // if(isFalling && 包包沒背)
     }
 
     //開門時觸發提示
     private void StartHint()
     {
+        isHint = true;
         fallObjects[0].SetActive(true);
-        // AudioManager.instance.PlayItemSound("rock slide");
         // StartCoroutine(FallObjects(0, 3));
         OpenScreenText();
-
     }
 
     //觸碰後開始事件
@@ -53,7 +59,7 @@ public class DebrisFalling : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(FallObjects(1, 12));
+            StartCoroutine(FallObjects(1, 7));
         }
     }
 
