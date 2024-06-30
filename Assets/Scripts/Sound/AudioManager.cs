@@ -90,7 +90,15 @@ public class AudioManager : MonoBehaviour
         {
             itemSources.PlayOneShot(s.clip);
         }
-        else if (s.name == "Open_door")
+        else if (s.name == "tile")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "tile2")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "rock slide")
         {
             itemSources.PlayOneShot(s.clip);
         }
