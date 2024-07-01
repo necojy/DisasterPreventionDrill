@@ -44,9 +44,14 @@ public class Pulldoor : MonoBehaviour
     {
 
         float currentLocation = CalculateLocation(hand);
+<<<<<<< Updated upstream
         if (currentLocation > (89 / 90))
         {
 
+=======
+        if(currentLocation>(89/90)){
+            //關閉(處理bug)
+>>>>>>> Stashed changes
         }
         //obj.transform.position = startPos;
         //handle.position = hand.position;
