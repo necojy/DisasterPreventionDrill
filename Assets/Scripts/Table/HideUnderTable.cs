@@ -14,15 +14,12 @@ public class HideUnderTable : MonoBehaviour
     private GameObject player;
     private GameObject mainCamera;
     private GameObject table;
-    private GameObject locomotion;
-    //private BoxCollider coll;
     private CharacterControllerDriver charCtrlDriver;
     public bool isHiding = false;
-    public bool inHidingArea = false;
-    public bool inputable = true;
+    //public bool inHidingArea = false;
+    public bool canHide = true;
     public InputActionReference actionReference;
     public InputAction action;
-
 
     public Camera option2Camera;
     public ShowCanvas showCanvas;
@@ -30,65 +27,75 @@ public class HideUnderTable : MonoBehaviour
     public GasEffect gasEffect;
 
     public TimeControl Countdown;
+    private GameObject trackedObject;
+
     void Start()
     {
         player = GameObject.Find("XR Origin (XR Rig)");
         charCtrlDriver = player.GetComponent<CharacterControllerDriver>();
-        locomotion = GameObject.Find("Locomotion Systeam");
         mainCamera = GameObject.Find("Main Camera");
         table = GameObject.Find("TableToHide");
 
         hidePos = table.transform.position;
         action = actionReference.action;
-        action.performed += ActivateBehavior;
+        //action.performed += ActivateBehavior;
 
+        // 創建一個GameObject來追蹤實際位置
+        trackedObject = new GameObject("TrackedObject");
+        trackedObject.transform.SetParent(player.transform);
     }
 
     void Update()
     {
         hidePos = table.transform.position;
+
         if (!isHiding)
         {
-            mainCamera.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
             origPos = player.transform.position;
             origRot = player.transform.rotation;
-            flippedRotation = Quaternion.Euler(origRot.x, origRot.eulerAngles.y + 180f, origRot.z);
+            //flippedRotation = Quaternion.Euler(origRot.eulerAngles.x, origRot.eulerAngles.y + 180f, origRot.eulerAngles.z);
+            flippedRotation = Quaternion.Euler(0, 270f, 0);
         }
         else
         {
-            player.transform.position = hidePos;
-            hidePos.y += 1;
-            mainCamera.GetComponent<TrackedPoseDriver>().trackingType = TrackedPoseDriver.TrackingType.RotationOnly;
-            mainCamera.transform.position = hidePos;
+            // 在躲藏狀態下，確保玩家位置保持在 hidePos
+            //player.transform.position = hidePos;
+            trackedObject.transform.position = mainCamera.transform.position; // 保持追蹤實際位置
+            trackedObject.transform.rotation = mainCamera.transform.rotation;
         }
     }
 
-    private void OnTriggerStay(Collider coll)
+    private void OnTriggerEnter(Collider coll)
     {
-        if (coll.tag == "Left Hand" || coll.tag == "Right Hand")
+        if (coll.CompareTag("Player") && canHide)
         {
-            inHidingArea = true;
+            Hide();
+            //inHidingArea = true;
         }
     }
 
     private void OnTriggerExit(Collider coll)
     {
-        if (coll.tag == "Left Hand" || coll.tag == "Right Hand")
+        if (coll.CompareTag("Player"))
         {
-            inHidingArea = false;
+            Leave();
+            //inHidingArea = false;
         }
     }
 
     public void Hide()
     {
-        charCtrlDriver.enabled = false;
+        charCtrlDriver.enabled = false; // 禁用移動控制器
+        isHiding = true;
         StartCoroutine(MovePlayer(hidePos, flippedRotation));
     }
+
     public void Leave()
     {
-        StartCoroutine(MovePlayer(origPos, origRot));
-        if(Countdown.timeOut) StartCoroutine(Open_OptionCanva());
-        charCtrlDriver.enabled = true;
+        //StartCoroutine(MovePlayer(origPos, origRot));
+        if (Countdown.timeOut && canHide) StartCoroutine(Open_OptionCanva());
+        isHiding = false;
+        charCtrlDriver.enabled = true; // 重新啟用移動控制器
     }
 
     IEnumerator MovePlayer(Vector3 targetPos, Quaternion targetRot)
@@ -106,36 +113,33 @@ public class HideUnderTable : MonoBehaviour
             yield return null;
         }
 
+        // 確保最後的位置和旋轉是準確的
         player.transform.position = targetPos;
         player.transform.rotation = targetRot;
-        mainCamera.transform.position = new Vector3(0, 0, 0);
-        inputable = true;
+        canHide = true;
     }
 
-    private void ActivateBehavior(InputAction.CallbackContext context)
+    /* private void ActivateBehavior(InputAction.CallbackContext context)
     {
-
-        if (isHiding && inputable)
+        if (isHiding && canHide)
         {
             Leave();
             isHiding = false;
-            inputable = false;
-
+            canHide = false;
         }
-        else if (!isHiding && inHidingArea && inputable)
+        else if (!isHiding && inHidingArea && canHide)
         {
-            inputable = false;
+            canHide = false;
             Hide();
             isHiding = true;
         }
-    }
+    } */
 
     private IEnumerator Open_OptionCanva()
     {
         gasEffect.ShowEffect();
         yield return new WaitForSeconds(1f);
         StartCoroutine(showCanvas.StartHint(1, 2, 4, 5, option2Camera));
-        inputable = false; //確保只能躲一次
+        canHide = false; // 確保只能躲一次
     }
-
 }

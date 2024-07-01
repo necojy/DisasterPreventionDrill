@@ -210,7 +210,7 @@ public class ShowCanvas : MonoBehaviour
         StartCoroutine(RotateView(mainCamera.transform, deadPosition, true, -1));
         rebirth_index = deadIndex;
     }
-    private void ShowDeadCanvas()
+    public void ShowDeadCanvas()
     {
         isRotating = true;
 
