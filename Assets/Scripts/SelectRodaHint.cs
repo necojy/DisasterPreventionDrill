@@ -13,7 +13,7 @@ public class SelectRodaHint : MonoBehaviour
 
     private GameObject right;
     private Animator rightAnimator;
-
+    private bool isTrigger = false;
 
     private void Start()
     {
@@ -35,7 +35,7 @@ public class SelectRodaHint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isTrigger)
         {
             StartCoroutine(StartHint());
         }
@@ -43,6 +43,8 @@ public class SelectRodaHint : MonoBehaviour
 
     private IEnumerator StartHint()
     {
+        isTrigger = true;
+
         hintCamera.SetActive(true);
         mainCamera.SetActive(false);
         left.SetActive(true);
