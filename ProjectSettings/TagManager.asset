@@ -10,6 +10,7 @@ TagManager:
   - Falling
   - viewArea_Up
   - viewArea_Down
+  - Item
   layers:
   - Default
   - TransparentFX

@@ -29,6 +29,9 @@ public class HideUnderTable : MonoBehaviour
     public TimeControl Countdown;
     private GameObject trackedObject;
 
+    public GameObject handGuide;
+    public Animator handPrompt;
+
     void Start()
     {
         player = GameObject.Find("XR Origin (XR Rig)");
@@ -43,12 +46,16 @@ public class HideUnderTable : MonoBehaviour
         // 創建一個GameObject來追蹤實際位置
         trackedObject = new GameObject("TrackedObject");
         trackedObject.transform.SetParent(player.transform);
+
+        handGuide = GameObject.Find("HandGuide");
+        handPrompt = handGuide.GetComponent<Animator>();
+        handGuide.SetActive(false);
     }
 
     void Update()
     {
         hidePos = table.transform.position;
-
+        hidePos.z += 0.5f;
         if (!isHiding)
         {
             origPos = player.transform.position;
@@ -88,6 +95,7 @@ public class HideUnderTable : MonoBehaviour
         charCtrlDriver.enabled = false; // 禁用移動控制器
         isHiding = true;
         StartCoroutine(MovePlayer(hidePos, flippedRotation));
+        StartCoroutine(ShowHandGuide());
     }
 
     public void Leave()
@@ -142,4 +150,13 @@ public class HideUnderTable : MonoBehaviour
         StartCoroutine(showCanvas.StartHint(1, 2, 4, 5, option2Camera));
         canHide = false; // 確保只能躲一次
     }
+    private IEnumerator ShowHandGuide()
+    {
+        handGuide.SetActive(true);
+        handPrompt.SetBool("showPrompt",true);
+        yield return new WaitForSeconds(2.5f);
+        handPrompt.SetBool("showPrompt",false);
+        handGuide.SetActive(false);
+    }
+
 }
