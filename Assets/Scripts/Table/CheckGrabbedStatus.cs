@@ -8,12 +8,13 @@ public class CheckGrabbedStatus : MonoBehaviour
     private XRGrabInteractable grabInteractable;
     private CameraShake cameraShake;
     private ShowCanvas showCanvas;
+    private HideUnderTable hideUnderTable;
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
         cameraShake = FindObjectOfType<CameraShake>();
         showCanvas = FindObjectOfType<ShowCanvas>();
-
+        hideUnderTable = GameObject.Find("HideArea").GetComponent<HideUnderTable>();
         if (grabInteractable != null)
         {
             // 訂閱抓取事件
@@ -33,8 +34,12 @@ public class CheckGrabbedStatus : MonoBehaviour
         else
         {
             Debug.Log("Object is not grabbed.");
-            // 在這裡添加相應的處理邏輯
+            if( hideUnderTable.PromptEnd && cameraShake.isShaking == true){
+                showCanvas.ShowDeadCanvas();
+            }
+
         }
+        
     }
 
     // 處理被抓取事件

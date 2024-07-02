@@ -31,6 +31,7 @@ public class HideUnderTable : MonoBehaviour
 
     public GameObject handGuide;
     public Animator handPrompt;
+    public bool PromptEnd = false;
 
     void Start()
     {
@@ -157,6 +158,7 @@ public class HideUnderTable : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         handPrompt.SetBool("showPrompt",false);
         handGuide.SetActive(false);
+        PromptEnd = true;
     }
 
 }
