@@ -11,7 +11,6 @@ public class NextScene : MonoBehaviour
     {
         if (coll.CompareTag("Player"))
         {
-            Debug.Log("dsjkdlal");
             SceneManager.LoadScene(nextSceneName);
         }
     }

@@ -59,7 +59,7 @@ public class DebrisFalling : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(FallObjects(1, 7));
+            StartCoroutine(StartFalling());
         }
     }
 
@@ -94,5 +94,11 @@ public class DebrisFalling : MonoBehaviour
         // deadPanel.SetActive(true);
 
         // StartCoroutine(DeadRecip());
+    }
+
+    private IEnumerator StartFalling()
+    {
+        yield return StartCoroutine(FallObjects(1, 7));
+        Destroy(gameObject);
     }
 }
