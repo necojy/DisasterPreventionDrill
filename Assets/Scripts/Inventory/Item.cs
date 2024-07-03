@@ -29,7 +29,7 @@ public class Item : MonoBehaviour
 
     private void OnSelectExited(SelectExitEventArgs args)
     {
-        if (currentSlot != null && currentSlot.inArea)
+        if (currentSlot != null && currentSlot.ItemInArea)
         {
             currentSlot.InsertItem(gameObject);
         }
