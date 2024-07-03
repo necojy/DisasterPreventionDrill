@@ -23,7 +23,7 @@ public class HideUnderTable : MonoBehaviour
 
     public Camera option2Camera;
     public ShowCanvas showCanvas;
-    private bool isEnding = false;
+
     public GasEffect gasEffect;
 
     public TimeControl Countdown;

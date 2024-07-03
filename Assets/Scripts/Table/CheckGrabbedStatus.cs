@@ -33,7 +33,7 @@ public class CheckGrabbedStatus : MonoBehaviour
         }
         else
         {
-            Debug.Log("Object is not grabbed.");
+            //Debug.Log("Object is not grabbed.");
             if( hideUnderTable.PromptEnd && cameraShake.isShaking == true){
                 showCanvas.ShowDeadCanvas();
             }

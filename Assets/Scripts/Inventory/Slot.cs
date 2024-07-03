@@ -75,7 +75,7 @@ public class Slot : MonoBehaviour
 
     private void OnActionPerformed(InputAction.CallbackContext context)
     {
-        if (ItemInSlot != null && inventory.activeSelf)
+        if (ItemInSlot != null && gameObject.activeSelf)
             RemoveItem();
     }
 
