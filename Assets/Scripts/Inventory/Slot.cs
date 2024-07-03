@@ -25,20 +25,21 @@ public class Slot : MonoBehaviour
         action.canceled += OnActionCanceled;
         action.performed += OnActionPerformed;
         ItemInArea = false;
+        HandInArea = false;
     }
 
     private void OnTriggerStay(Collider coll)
     {
-        if (ItemInSlot == null && IsItem(coll.gameObject)) {
+        if (ItemInSlot == null && IsItem(coll.gameObject))
+        {
             item = coll.gameObject;
             ItemInArea = true;
         }
 
-        if(coll.CompareTag("Left Hand") || coll.CompareTag("Right Hand")){
+        if (coll.CompareTag("Left Hand") || coll.CompareTag("Right Hand"))
+        {
             HandInArea = true;
         }
-
-        
     }
 
     private void OnTriggerExit(Collider coll)
@@ -48,11 +49,10 @@ public class Slot : MonoBehaviour
             item = null;
             ItemInArea = false;
         }
-        if(coll.CompareTag("Left Hand") || coll.CompareTag("Right Hand")){
+        if (coll.CompareTag("Left Hand") || coll.CompareTag("Right Hand"))
+        {
             HandInArea = false;
         }
-
-        
     }
 
     private void OnActionCanceled(InputAction.CallbackContext context)
@@ -67,7 +67,9 @@ public class Slot : MonoBehaviour
     private void OnActionPerformed(InputAction.CallbackContext context)
     {
         if (ItemInSlot != null && gameObject.activeSelf && HandInArea)
+        {
             RemoveItem();
+        }
     }
 
     bool IsItem(GameObject obj)
@@ -78,7 +80,7 @@ public class Slot : MonoBehaviour
     public void InsertItem(GameObject obj)
     {
         // 使用全局管理器來添加物品到插槽中
-        SlotItemManager.Instance.RegisterItem(obj,this);
+        SlotItemManager.Instance.RegisterItem(obj, this);
 
         Debug.Log("insert item");
 
@@ -88,7 +90,13 @@ public class Slot : MonoBehaviour
             rb.isKinematic = true;
             rb.useGravity = false;
         }
-        
+
+        Collider itemCollider = obj.GetComponent<Collider>();
+        if (itemCollider != null)
+        {
+            itemCollider.isTrigger = true;
+        }
+
         obj.transform.SetParent(gameObject.transform, true);
         obj.transform.localPosition = Vector3.zero;
         obj.transform.localRotation = Quaternion.identity;
@@ -117,7 +125,13 @@ public class Slot : MonoBehaviour
                 rb.isKinematic = false;
                 rb.useGravity = true;
             }
-            
+
+            Collider itemCollider = ItemInSlot.GetComponent<Collider>();
+            if (itemCollider != null)
+            {
+                itemCollider.isTrigger = false;
+            }
+
             ItemInSlot.transform.SetParent(null);
             Item itemComponent = ItemInSlot.GetComponent<Item>();
             if (itemComponent != null)
@@ -125,7 +139,7 @@ public class Slot : MonoBehaviour
                 itemComponent.inSlot = false;
                 itemComponent.currentSlot = null;
             }
-            
+
             ItemInSlot = null;
             ResetColor();
         }
