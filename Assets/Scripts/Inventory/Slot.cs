@@ -14,7 +14,8 @@ public class Slot : MonoBehaviour
     public InputActionReference actionReference;
     public InputAction action;
 
-    public bool inArea;
+    public bool ItemInArea;
+    public bool HandInArea;
 
     void Start()
     {
@@ -23,50 +24,40 @@ public class Slot : MonoBehaviour
         action = actionReference.action;
         action.canceled += OnActionCanceled;
         action.performed += OnActionPerformed;
-        inArea = false;
+        ItemInArea = false;
     }
 
     private void OnTriggerStay(Collider coll)
     {
-        if (ItemInSlot != null || !IsItem(coll.gameObject)) 
-            return;
-
-        item = coll.gameObject;
-        inArea = true;
-
-        XRGrabInteractable grabInteractable = item.GetComponent<XRGrabInteractable>();
-        if (grabInteractable != null)
-        {
-            grabInteractable.selectExited.AddListener(OnSelectExited);
+        if (ItemInSlot == null && IsItem(coll.gameObject)) {
+            item = coll.gameObject;
+            ItemInArea = true;
         }
+
+        if(coll.CompareTag("Left Hand") || coll.CompareTag("Right Hand")){
+            HandInArea = true;
+        }
+
+        
     }
 
     private void OnTriggerExit(Collider coll)
     {
-        if (item != null)
+        if (IsItem(coll.gameObject))
         {
-            XRGrabInteractable grabInteractable = item.GetComponent<XRGrabInteractable>();
-            if (grabInteractable != null)
-            {
-                grabInteractable.selectExited.RemoveListener(OnSelectExited);
-            }
+            item = null;
+            ItemInArea = false;
+        }
+        if(coll.CompareTag("Left Hand") || coll.CompareTag("Right Hand")){
+            HandInArea = false;
         }
 
-        item = null;
-        inArea = false;
-    }
-
-    private void OnSelectExited(SelectExitEventArgs args)
-    {
-        if (inArea && ItemInSlot == null)
-        {
-            InsertItem(args.interactableObject.transform.gameObject);
-        }
+        
     }
 
     private void OnActionCanceled(InputAction.CallbackContext context)
     {
-        if (inArea && ItemInSlot == null)
+        if (ItemInArea && ItemInSlot == null)
         {
             InsertItem(item);
             item = null;
@@ -75,7 +66,7 @@ public class Slot : MonoBehaviour
 
     private void OnActionPerformed(InputAction.CallbackContext context)
     {
-        if (ItemInSlot != null && gameObject.activeSelf)
+        if (ItemInSlot != null && gameObject.activeSelf && HandInArea)
             RemoveItem();
     }
 
