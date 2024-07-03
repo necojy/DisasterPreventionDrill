@@ -31,6 +31,7 @@ public class HideUnderTable : MonoBehaviour
 
     public GameObject handGuide;
     public Animator handPrompt;
+    public float promptTime = 3f;
     public bool PromptEnd = false;
 
     void Start()
@@ -155,7 +156,7 @@ public class HideUnderTable : MonoBehaviour
     {
         handGuide.SetActive(true);
         handPrompt.SetBool("showPrompt",true);
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(promptTime);
         handPrompt.SetBool("showPrompt",false);
         handGuide.SetActive(false);
         PromptEnd = true;

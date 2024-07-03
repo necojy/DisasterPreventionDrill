@@ -36468,6 +36468,7 @@ MonoBehaviour:
   Countdown: {fileID: 358380516}
   handGuide: {fileID: 0}
   handPrompt: {fileID: 0}
+  promptTime: 3
   PromptEnd: 0
 --- !u!54 &1258708552
 Rigidbody:
@@ -50525,6 +50526,7 @@ MonoBehaviour:
   Countdown: {fileID: 358380516}
   handGuide: {fileID: 0}
   handPrompt: {fileID: 0}
+  promptTime: 3.5
   PromptEnd: 0
 --- !u!54 &1835448442
 Rigidbody:
@@ -62561,6 +62563,11 @@ PrefabInstance:
       objectReference: {fileID: 1760840156459398980}
     - target: {fileID: 4012830381493376163, guid: d9ff2396752dd31408c05828455d5875,
         type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4012830381493376163, guid: d9ff2396752dd31408c05828455d5875,
+        type: 3}
       propertyPath: m_SortingOrder
       value: 5
       objectReference: {fileID: 0}
@@ -62573,6 +62580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingLayerID
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4012830381493376168, guid: d9ff2396752dd31408c05828455d5875,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4012830381887816376, guid: d9ff2396752dd31408c05828455d5875,
         type: 3}
