@@ -11,6 +11,7 @@ TagManager:
   - viewArea_Up
   - viewArea_Down
   - Item
+  - Bag
   layers:
   - Default
   - TransparentFX

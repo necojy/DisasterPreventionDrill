@@ -15477,7 +15477,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4012830381887816376, guid: d9ff2396752dd31408c05828455d5875,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1410284983}
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 4012830381887816376, guid: d9ff2396752dd31408c05828455d5875,
         type: 3}
       insertIndex: -1
@@ -122327,7 +122327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade_animator: {fileID: 236244354}
   deadPanel: {fileID: 236244353}
-  deadReasonText: {fileID: 1410284984}
+  deadReasonText: {fileID: 0}
   deadReason: ttt
 --- !u!65 &1888590469
 BoxCollider:

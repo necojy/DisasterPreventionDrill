@@ -12,14 +12,14 @@ public class DebrisFalling : MonoBehaviour
     private ShowDeadCanvas showDeadCanvas;
 
     #region 包包判定
-    private BagLeftTop bagLeftTop;
-    private BagRightBottom bagRightBottom;
+    private BagLeftTop Bleft;
+    private BagRightBottom Bright;
     #endregion
     private void Start()
     {
         showCaption = GameObject.Find("ScreenText").GetComponent<ShowCaption>();
-        bagLeftTop = GameObject.Find("leftTop").GetComponent<BagLeftTop>();
-        bagRightBottom = GameObject.Find("rightBottom").GetComponent<BagRightBottom>();
+        Bleft = GameObject.Find("Bleft").GetComponent<BagLeftTop>();
+        Bright = GameObject.Find("Bright").GetComponent<BagRightBottom>();
         showDeadCanvas = GetComponent<ShowDeadCanvas>();
         Init();
     }
@@ -35,6 +35,8 @@ public class DebrisFalling : MonoBehaviour
         fallObjects[0].SetActive(false);
     }
 
+
+
     private void Update()
     {
         // if (pulldoor.isOpening && !isHint)
@@ -43,7 +45,7 @@ public class DebrisFalling : MonoBehaviour
         // }
 
         // 加上背包判定
-        if (isFalling && (!bagLeftTop.isPuting || !bagRightBottom.isPuting))
+        if (isFalling && (!Bleft.isPuting || !Bright.isPuting))
         {
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
         }
@@ -77,7 +79,6 @@ public class DebrisFalling : MonoBehaviour
 
     private IEnumerator FallObjects(int start_index, int end_index)
     {
-        isFalling = true;
 
         for (int i = start_index; i < end_index; i++)
         {
@@ -85,9 +86,16 @@ public class DebrisFalling : MonoBehaviour
             fallObjects[i].GetComponent<Rigidbody>().useGravity = true;
         }
 
+        yield return new WaitForSeconds(1f);
+        isFalling = true;
+
         yield return new WaitForSeconds(4f);
-        // isFalling = false;
-        StartCoroutine(selectRoadHint.StartHint());
+        isFalling = false;
+
+        if (!showDeadCanvas.isDead)
+        {
+            StartCoroutine(selectRoadHint.StartHint());
+        }
 
     }
 
