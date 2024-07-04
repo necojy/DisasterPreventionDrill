@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DebrisFalling : MonoBehaviour
 {
     private ShowCaption showCaption;
     private bool isFalling = false;
-    private bool isHint = false;
-    public GameObject left_door;
-    private Pulldoor pulldoor;
     public GameObject[] fallObjects;
-    public Animator fade_animator;
-    public GameObject deadPanel;
-    private GameObject SelectRoadHint;
+    public SelectRodaHint selectRoadHint;
+    private ShowDeadCanvas showDeadCanvas;
 
-
+    #region 包包判定
+    private BagLeftTop bagLeftTop;
+    private BagRightBottom bagRightBottom;
+    #endregion
     private void Start()
     {
         showCaption = GameObject.Find("ScreenText").GetComponent<ShowCaption>();
-        SelectRoadHint = GameObject.Find("SelectRoad");
-        pulldoor = left_door.GetComponent<Pulldoor>();
+        bagLeftTop = GameObject.Find("leftTop").GetComponent<BagLeftTop>();
+        bagRightBottom = GameObject.Find("rightBottom").GetComponent<BagRightBottom>();
+        showDeadCanvas = GetComponent<ShowDeadCanvas>();
         Init();
     }
 
@@ -36,28 +37,29 @@ public class DebrisFalling : MonoBehaviour
 
     private void Update()
     {
-        if (pulldoor.isOpening && !isHint)
-        {
-            StartHint();
-        }
+        // if (pulldoor.isOpening && !isHint)
+        // {
+        //     StartHint();
+        // }
 
         // 加上背包判定
-        // if(isFalling && 包包沒背)
+        if (isFalling && (!bagLeftTop.isPuting || !bagRightBottom.isPuting))
+        {
+            StartCoroutine(showDeadCanvas.ShowDeadCanva());
+        }
     }
 
     //開門時觸發提示
-    private void StartHint()
+    public void StartHint()
     {
-        isHint = true;
         fallObjects[0].SetActive(true);
-        // StartCoroutine(FallObjects(0, 3));
         OpenScreenText();
     }
 
     //觸碰後開始事件
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isFalling)
         {
             StartCoroutine(StartFalling());
         }
@@ -83,22 +85,16 @@ public class DebrisFalling : MonoBehaviour
             fallObjects[i].GetComponent<Rigidbody>().useGravity = true;
         }
 
-        isFalling = false;
+        yield return new WaitForSeconds(4f);
+        // isFalling = false;
+        StartCoroutine(selectRoadHint.StartHint());
 
-    }
-
-    private void ShowDeadCanvas()
-    {
-        fade_animator.SetBool("fadein", true);
-        //要等1s
-        // deadPanel.SetActive(true);
-
-        // StartCoroutine(DeadRecip());
     }
 
     private IEnumerator StartFalling()
     {
         yield return StartCoroutine(FallObjects(1, 7));
-        Destroy(gameObject);
+        // yield return new WaitForSeconds(1f);
+        // Destroy(gameObject);
     }
 }

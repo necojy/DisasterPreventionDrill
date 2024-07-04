@@ -30,21 +30,23 @@ public class AlleyEnd : MonoBehaviour
             //StartCoroutine(PlayDead());
         }
     }
-    private IEnumerator StartHint(){
+    private IEnumerator StartHint()
+    {
         isTrigger = true;
         hintCamera.SetActive(true);
         mainCamera.SetActive(false);
-        hintCameraAnimator.SetBool("Alley",true);
-        objAnimator.SetBool("isFalling",true);
+        hintCameraAnimator.SetBool("Alley", true);
+        objAnimator.SetBool("isFalling", true);
         yield return new WaitForSeconds(7f);
-        objAnimator.SetBool("isFalling",false);
+        objAnimator.SetBool("isFalling", false);
         yield return new WaitForSeconds(1f);
         mainCamera.SetActive(true);
         hintCamera.SetActive(false);
         //yield return null;
     }
-    private IEnumerator PlayDead(){
-        
+    private IEnumerator PlayDead()
+    {
+
         yield return new WaitForSeconds(5f);
     }
 }
