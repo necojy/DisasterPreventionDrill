@@ -4515,7 +4515,7 @@ PrefabInstance:
     - target: {fileID: 4663679174155961175, guid: 9311617b76dd8d049b198314d66ddeb5,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6317672751797125516, guid: 9311617b76dd8d049b198314d66ddeb5,
         type: 3}
@@ -13720,7 +13720,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  inArea: 0
+  ItemInArea: 0
+  HandInArea: 0
 --- !u!54 &539603893
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18862,7 +18863,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5065442235521567714, guid: 2a83511a782a6aa4dafed1f5a2bd3803, type: 3}
 --- !u!23 &694162016
@@ -23841,6 +23842,9 @@ GameObject:
   - component: {fileID: 854281736}
   - component: {fileID: 854281738}
   - component: {fileID: 854281737}
+  - component: {fileID: 854281742}
+  - component: {fileID: 854281741}
+  - component: {fileID: 854281739}
   m_Layer: 0
   m_Name: Knob.001
   m_TagString: Untagged
@@ -23856,13 +23860,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854281735}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.050858498, y: -0.00011646933, z: -0.42445087}
+  m_LocalRotation: {x: 0.57771933, y: 0.14765283, z: 0.00041103354, w: 0.8027695}
+  m_LocalPosition: {x: 0.0508, y: 0.0001, z: -0.4244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 121743668}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 68.038, y: 39.43, z: 27.253}
 --- !u!23 &854281737
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -23913,6 +23917,74 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854281735}
   m_Mesh: {fileID: -5440263977055669386, guid: 2a83511a782a6aa4dafed1f5a2bd3803, type: 3}
+--- !u!114 &854281739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854281735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8850a5f9a832517458e1b200874d2867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LeftReference: {fileID: -6131295136447488360, guid: 87a2c5ac04641de4ea7833078497e18a,
+    type: 3}
+  RightReference: {fileID: 187161793506945269, guid: 005fe9176b16791449ccb22152b5f093,
+    type: 3}
+  gasEffect: {fileID: 0}
+  stove: {fileID: 0}
+--- !u!54 &854281741
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854281735}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!136 &854281742
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854281735}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.052955985
+  m_Height: 0.10736087
+  m_Direction: 1
+  m_Center: {x: 0.033453804, y: 0.0020814491, z: 0.00000007462988}
 --- !u!1 &862102351
 GameObject:
   m_ObjectHideFlags: 0
@@ -41524,6 +41596,8 @@ GameObject:
   - component: {fileID: 1471637665}
   - component: {fileID: 1471637664}
   - component: {fileID: 1471637667}
+  - component: {fileID: 1471637669}
+  - component: {fileID: 1471637670}
   m_Layer: 0
   m_Name: Stove_01 (2)
   m_TagString: Untagged
@@ -41646,6 +41720,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8933326, y: 1.285811, z: 1.1117284}
   m_Center: {x: 0.0014709089, y: 0.6598228, z: -0.00000008940699}
+--- !u!95 &1471637669
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471637662}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 150171e6fe0141047a1d3f63f84a63d2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!54 &1471637670
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471637662}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1472917703
 GameObject:
   m_ObjectHideFlags: 0
@@ -62003,7 +62125,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738496733138316619}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -68868,7 +68990,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  inArea: 0
+  ItemInArea: 0
+  HandInArea: 0
 --- !u!114 &9121438845255317406
 MonoBehaviour:
   m_ObjectHideFlags: 0

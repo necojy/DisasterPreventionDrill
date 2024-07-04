@@ -18,8 +18,8 @@ public class CheckGrabbedStatus : MonoBehaviour
         if (grabInteractable != null)
         {
             // 訂閱抓取事件
-            grabInteractable.onSelectEntered.AddListener(OnGrabbed);
-            grabInteractable.onSelectExited.AddListener(OnReleased);
+            grabInteractable.selectEntered.AddListener(OnGrabbed);
+            grabInteractable.selectExited.AddListener(OnReleased);
         }
     }
 
@@ -43,14 +43,14 @@ public class CheckGrabbedStatus : MonoBehaviour
     }
 
     // 處理被抓取事件
-    private void OnGrabbed(XRBaseInteractor interactor)
+    private void OnGrabbed(SelectEnterEventArgs args)
     {
         Debug.Log("Object grabbed!");
         // 在這裡處理被抓取時的行為
     }
 
     // 處理被釋放事件
-    private void OnReleased(XRBaseInteractor interactor)
+    private void OnReleased(SelectExitEventArgs args)
     {
         // 在這裡處理被釋放時的行為
         if(cameraShake.isShaking == true){

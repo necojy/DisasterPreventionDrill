@@ -117,6 +117,8 @@ public class Slot : MonoBehaviour
     {
         // 使用全局管理器來移除插槽中的物品
         SlotItemManager.Instance.UnregisterItem(this);
+        Debug.Log("remove item");
+        
         if (ItemInSlot != null)
         {
             Rigidbody rb = ItemInSlot.GetComponent<Rigidbody>();
