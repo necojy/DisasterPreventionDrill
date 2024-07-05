@@ -20,7 +20,7 @@ public class CloseComponent : MonoBehaviour
 
     private void Update()
     {
-        if(math.distance(Player.position,GrabGameObject.position) > dis)
+        if (math.distance(Player.position, GrabGameObject.position) > dis)
         {
             xRGrabInteractable.enabled = false;
         }

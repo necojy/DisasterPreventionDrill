@@ -7,18 +7,33 @@ public class AlleyEnd : MonoBehaviour
 {
     private GameObject mainCamera;
     private GameObject hintCamera;
+    private GameObject tempCamera;
     public GameObject obj;
     private Animator objAnimator;
     private Animator hintCameraAnimator;
+    private Animator tempCameraAnimator;
     private bool isTrigger = false;
     // Start is called before the first frame update
+
+    private ShowDeadCanvas showDeadCanvas;
+
     void Start()
     {
-        mainCamera = GameObject.Find("Main Camera");
-        hintCamera = GameObject.Find("EndingCamera");
-        hintCameraAnimator = hintCamera.GetComponent<Animator>();
-        objAnimator = obj.GetComponent<Animator>();
-        hintCamera.SetActive(false);
+        StartCoroutine(showDeadCanvas.ShowDeadCanva());
+
+        // mainCamera = GameObject.Find("Main Camera");
+        // hintCamera = GameObject.Find("EndingCamera");
+        // tempCamera = GameObject.Find("tempCamera");
+
+        // hintCameraAnimator = hintCamera.GetComponent<Animator>();
+        // tempCameraAnimator = tempCamera.GetComponent<Animator>();
+        // objAnimator = obj.GetComponent<Animator>();
+
+        // hintCamera.SetActive(false);
+        // tempCamera.SetActive(false);
+
+        showDeadCanvas = GetComponent<ShowDeadCanvas>();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,19 +49,25 @@ public class AlleyEnd : MonoBehaviour
     {
         isTrigger = true;
         hintCamera.SetActive(true);
-        mainCamera.SetActive(false);
+        tempCamera.SetActive(true);
+        // mainCamera.SetActive(false);
+
         hintCameraAnimator.SetBool("Alley", true);
+        tempCameraAnimator.SetBool("Alley", true);
+
         objAnimator.SetBool("isFalling", true);
         yield return new WaitForSeconds(7f);
+
         objAnimator.SetBool("isFalling", false);
         yield return new WaitForSeconds(1f);
-        mainCamera.SetActive(true);
+
+
+
+        // mainCamera.SetActive(true);
         hintCamera.SetActive(false);
+        tempCamera.SetActive(false);
+        // StartCoroutine(showDeadCanvas.ShowDeadCanva());
         //yield return null;
     }
-    private IEnumerator PlayDead()
-    {
 
-        yield return new WaitForSeconds(5f);
-    }
 }
