@@ -20,7 +20,7 @@ public class DebrisFalling : MonoBehaviour
         showCaption = GameObject.Find("ScreenText").GetComponent<ShowCaption>();
         Bleft = GameObject.Find("Bleft").GetComponent<BagLeftTop>();
         Bright = GameObject.Find("Bright").GetComponent<BagRightBottom>();
-        showDeadCanvas = GetComponent<ShowDeadCanvas>();
+        showDeadCanvas = GameObject.Find("player deadth control").GetComponent<ShowDeadCanvas>();
         Init();
     }
 
@@ -47,6 +47,7 @@ public class DebrisFalling : MonoBehaviour
         // 加上背包判定
         if (isFalling && (!Bleft.isPuting || !Bright.isPuting))
         {
+            showDeadCanvas.deadReason = "被掉落物砸死";
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
         }
     }
