@@ -12,6 +12,8 @@ public class BagRightBottom : MonoBehaviour
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         objectRenderer = GetComponent<Renderer>();
+        objectRenderer.material.color = Color.red;
+
 
     }
 
@@ -25,7 +27,7 @@ public class BagRightBottom : MonoBehaviour
         if (other.CompareTag("Bag"))
         {
             isPuting = true;
-            objectRenderer.material.color = Color.red;
+            objectRenderer.material.color = Color.green;
         }
     }
 
@@ -34,7 +36,7 @@ public class BagRightBottom : MonoBehaviour
         if (other.CompareTag("Bag"))
         {
             isPuting = false;
-            objectRenderer.material.color = Color.white;
+            objectRenderer.material.color = Color.red;
         }
     }
 }

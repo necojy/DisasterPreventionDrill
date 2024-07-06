@@ -56,6 +56,7 @@ public class AlleyEnd : MonoBehaviour
 
         // objAnimator.SetBool("isFalling", false);
         // yield return new WaitForSeconds(1f);
+        showDeadCanvas.deadReason = "被掉落物砸死";
         StartCoroutine(showDeadCanvas.ShowDeadCanva());
 
         // hintCamera.SetActive(false);
