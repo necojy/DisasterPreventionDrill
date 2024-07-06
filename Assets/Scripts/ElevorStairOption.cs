@@ -16,41 +16,39 @@ public class ElevorStairOption : MonoBehaviour
     public float rotateViewTime = 1f;
     public Camera mainCamera;
     public Camera optionCamera;
-    // void Start()
-    // {
-    //     StartCoroutine(MovePlayer(mainCamera.transform, optionCamera.transform, xr_orig));
-    // }
+
 
     void Update()
     {
-        
+
     }
     public void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             optionCamera.enabled = true;
             optionCamera.transform.position = mainCamera.transform.position;
             optionCamera.transform.rotation = mainCamera.transform.rotation;
             mainCamera.enabled = false;
-            
+
 
             StartCoroutine(MovePlayer(optionCamera.transform, rotatePosition1, xr_orig));
             StartCoroutine(Wait2Sec());
-            
+
             //optionCamera.enabled = false;
             //mainCamera.enabled = true;
         }
     }
-    IEnumerator Wait2Sec(){
+    IEnumerator Wait2Sec()
+    {
         yield return new WaitForSeconds(2f);
     }
-    IEnumerator MovePlayer(Transform initial,Transform target, Transform playerPos)
+    IEnumerator MovePlayer(Transform initial, Transform target, Transform playerPos)
     {
-        
+
         //初始角度、目標角度
-        Quaternion initialRotation = initial.rotation; 
-        Quaternion targetRotation = target.rotation; 
+        Quaternion initialRotation = initial.rotation;
+        Quaternion targetRotation = target.rotation;
         //初始位置、目標位置
         Vector3 initialPos = initial.position;
         Vector3 targetPos = target.position;
@@ -63,19 +61,19 @@ public class ElevorStairOption : MonoBehaviour
             elapsedTime += Time.deltaTime * rotateSpeed;
             yield return null;
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         StartCoroutine(MovePlayer2(optionCamera.transform, rotatePosition2, xr_orig));
-        
-   
+
+
         //glowbox.SetActive(false);
 
     }
-    IEnumerator MovePlayer2(Transform initial,Transform target, Transform playerPos)
+    IEnumerator MovePlayer2(Transform initial, Transform target, Transform playerPos)
     {
-        
+
         //初始角度、目標角度
-        Quaternion initialRotation = initial.rotation; 
-        Quaternion targetRotation = target.rotation; 
+        Quaternion initialRotation = initial.rotation;
+        Quaternion targetRotation = target.rotation;
         //初始位置、目標位置
         Vector3 initialPos = initial.position;
         Vector3 targetPos = target.position;
@@ -88,11 +86,12 @@ public class ElevorStairOption : MonoBehaviour
             elapsedTime += Time.deltaTime * rotateSpeed;
             yield return null;
         }
+        yield return new WaitForSeconds(3f);
         optionCamera.enabled = false;
         mainCamera.enabled = true;
-       
-        
-        yield return new WaitForSeconds(3f);
+
+
+
         //glowbox.SetActive(false);
 
     }

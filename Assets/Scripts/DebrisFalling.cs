@@ -12,16 +12,32 @@ public class DebrisFalling : MonoBehaviour
     private ShowDeadCanvas showDeadCanvas;
 
     #region 包包判定
+    private GameObject BagColleft;
+    private GameObject BagColRight;
     private BagLeftTop Bleft;
     private BagRightBottom Bright;
+    private GameObject BagImage;
+    private Animator bagHintAnimator;
+    private bool hintIsPlaying = false;
     #endregion
     private void Start()
     {
         showCaption = GameObject.Find("ScreenText").GetComponent<ShowCaption>();
+
+        BagColleft = GameObject.Find("Bleft");
         Bleft = GameObject.Find("Bleft").GetComponent<BagLeftTop>();
+
+        BagColRight = GameObject.Find("Bright");
         Bright = GameObject.Find("Bright").GetComponent<BagRightBottom>();
-        showDeadCanvas = GetComponent<ShowDeadCanvas>();
+
+        showDeadCanvas = GameObject.Find("player deadth control").GetComponent<ShowDeadCanvas>();
+
+        BagImage = GameObject.Find("bag_image");
+        bagHintAnimator = GameObject.Find("bag_image").GetComponent<Animator>();
+        BagImage.SetActive(false);
+
         Init();
+        CloseBagCol();
     }
 
     // 控制物體先不掉落 
@@ -39,14 +55,10 @@ public class DebrisFalling : MonoBehaviour
 
     private void Update()
     {
-        // if (pulldoor.isOpening && !isHint)
-        // {
-        //     StartHint();
-        // }
-
         // 加上背包判定
         if (isFalling && (!Bleft.isPuting || !Bright.isPuting))
         {
+            showDeadCanvas.deadReason = "被掉落物砸死";
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
         }
     }
@@ -54,8 +66,27 @@ public class DebrisFalling : MonoBehaviour
     //開門時觸發提示
     public void StartHint()
     {
+        OpenBagCol();
+
         fallObjects[0].SetActive(true);
         OpenScreenText();
+        StartCoroutine(OpenBagHint());
+    }
+
+    private IEnumerator OpenBagHint()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (!hintIsPlaying)
+        {
+            BagImage.SetActive(true);
+            hintIsPlaying = true;
+            bagHintAnimator.SetBool("isHint", true);
+            yield return new WaitForSeconds(3.5f);
+            bagHintAnimator.SetBool("isHint", false);
+            BagImage.SetActive(false);
+
+        }
     }
 
     //觸碰後開始事件
@@ -89,8 +120,10 @@ public class DebrisFalling : MonoBehaviour
         yield return new WaitForSeconds(1f);
         isFalling = true;
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
         isFalling = false;
+
+        CloseBagCol();
 
         if (!showDeadCanvas.isDead)
         {
@@ -102,7 +135,16 @@ public class DebrisFalling : MonoBehaviour
     private IEnumerator StartFalling()
     {
         yield return StartCoroutine(FallObjects(1, 7));
-        // yield return new WaitForSeconds(1f);
-        // Destroy(gameObject);
+    }
+
+    private void OpenBagCol()
+    {
+        BagColleft.SetActive(true);
+        BagColRight.SetActive(true);
+    }
+    private void CloseBagCol()
+    {
+        BagColleft.SetActive(false);
+        BagColRight.SetActive(false);
     }
 }
