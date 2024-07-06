@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class Lighter : MonoBehaviour 
+public class Lighter : MonoBehaviour
 {
-    public GameObject flame; 
+    public GameObject flame;
     public GameObject explosion;
 
     public Animator Lighter_model;
@@ -20,6 +20,7 @@ public class Lighter : MonoBehaviour
 
     public ShowCanvas showCanvas;
     public Storytwo storytwo;
+    private ShowDeadCanvas showDeadCanvas;
 
     public bool isStory2 = false;
     void Start()
@@ -29,11 +30,13 @@ public class Lighter : MonoBehaviour
         isIgnite = false;
         controller = GetComponent<XRGrabInteractable>(); // 正確的初始化方式
         GrabHand = Left_Lighter_Animation;
+        showDeadCanvas = GameObject.Find("player deadth control").GetComponent<ShowDeadCanvas>();
+
     }
 
     public void Ignite()
     {
-        if(!isIgnite)
+        if (!isIgnite)
         {
             isIgnite = true;
             if (controller.selectingInteractor != null)
@@ -42,8 +45,8 @@ public class Lighter : MonoBehaviour
                 else if (controller.selectingInteractor.CompareTag("Right Hand")) GrabHand = Right_Lighter_Animation;
             }
 
-            Lighter_model.SetBool("open_model",true);
-            GrabHand.SetBool("Lighter_Open",true);
+            Lighter_model.SetBool("open_model", true);
+            GrabHand.SetBool("Lighter_Open", true);
             AudioManager.instance.PlayItemSound("Open_lightet");
             StartCoroutine(AnimateAndToggle());
             StartCoroutine(Explode());
@@ -53,11 +56,11 @@ public class Lighter : MonoBehaviour
         {
             isIgnite = false;
             flame.SetActive(false);
-            GrabHand.SetBool("Lighter_Open",false);
-            Lighter_model.SetBool("open_model",false);
+            GrabHand.SetBool("Lighter_Open", false);
+            Lighter_model.SetBool("open_model", false);
         }
 
-        
+
     }
 
     IEnumerator Explode()
@@ -66,8 +69,12 @@ public class Lighter : MonoBehaviour
         explosion.SetActive(true);
 
         yield return new WaitForSeconds(1f);
-        if(isStory2) storytwo.Dead(2);
-        else showCanvas.Dead(2);
+        if (isStory2) storytwo.Dead(2);
+        else
+        {
+            showDeadCanvas.deadReason = "被掉落物砸死";
+            StartCoroutine(showDeadCanvas.ShowDeadCanva());
+        }
         flame.SetActive(false);
     }
 

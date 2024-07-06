@@ -7,13 +7,17 @@ public class CheckGrabbedStatus : MonoBehaviour
 {
     private XRGrabInteractable grabInteractable;
     private CameraShake cameraShake;
-    private ShowCanvas showCanvas;
+    // private ShowCanvas showCanvas;
     private HideUnderTable hideUnderTable;
+    private ShowDeadCanvas showDeadCanvas;
+
     void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
         cameraShake = FindObjectOfType<CameraShake>();
-        showCanvas = FindObjectOfType<ShowCanvas>();
+        // showCanvas = FindObjectOfType<ShowCanvas>();
+        showDeadCanvas = GameObject.Find("player deadth control").GetComponent<ShowDeadCanvas>();
+
         hideUnderTable = GameObject.Find("HideArea").GetComponent<HideUnderTable>();
         if (grabInteractable != null)
         {
@@ -34,12 +38,15 @@ public class CheckGrabbedStatus : MonoBehaviour
         else
         {
             //Debug.Log("Object is not grabbed.");
-            if( hideUnderTable.PromptEnd && cameraShake.isShaking == true){
-                showCanvas.ShowDeadCanvas();
+            if (hideUnderTable.PromptEnd && cameraShake.isShaking == true)
+            {
+                // showCanvas.ShowDeadCanvas();
+                showDeadCanvas.deadReason = "被掉落物砸死";
+                StartCoroutine(showDeadCanvas.ShowDeadCanva());
             }
 
         }
-        
+
     }
 
     // 處理被抓取事件
@@ -53,8 +60,11 @@ public class CheckGrabbedStatus : MonoBehaviour
     private void OnReleased(SelectExitEventArgs args)
     {
         // 在這裡處理被釋放時的行為
-        if(cameraShake.isShaking == true){
-            showCanvas.ShowDeadCanvas();
+        if (cameraShake.isShaking == true)
+        {
+            showDeadCanvas.deadReason = "被掉落物砸死";
+            StartCoroutine(showDeadCanvas.ShowDeadCanva());
+            // showCanvas.ShowDeadCanvas();
         }
     }
 }

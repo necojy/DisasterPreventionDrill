@@ -24,7 +24,7 @@ public class CameraShake : MonoBehaviour
     private ShowCanvas showCanvas;
     private Camera option1Camera; //故事 1 提示
     #endregion
-    
+
     public GameObject[] shakingItems;
 
     public Animator livingroomShakeAni;
@@ -34,7 +34,7 @@ public class CameraShake : MonoBehaviour
         option1Camera = GameObject.Find("option1Camera").GetComponent<Camera>();
         option1Camera.enabled = false; // 選項 1 相機關閉
 
-        Init(); 
+        Init();
     }
 
     //初始化
@@ -51,6 +51,7 @@ public class CameraShake : MonoBehaviour
 
     public IEnumerator Shake()
     {
+        AudioManager.instance.PlayItemSound("alert_Sound");
         yield return new WaitForSeconds(startTime);
 
         //開始搖晃
@@ -63,8 +64,8 @@ public class CameraShake : MonoBehaviour
         StartCoroutine(ItemShaking());
 
 
-        livingroomShakeAni.SetBool("isShaking",true);
-        
+        livingroomShakeAni.SetBool("isShaking", true);
+
         while (elapsed < shakeDuration_small)
         {
             elapsed += Time.deltaTime;
@@ -77,27 +78,27 @@ public class CameraShake : MonoBehaviour
 
         //給於提示 : 設定提示參數
         int optionCanvas_index = 0;
-        yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index,2,0,3,option1Camera));
+        yield return StartCoroutine(showCanvas.StartHint(optionCanvas_index, 2, 0, 3, option1Camera));
 
         AudioManager.instance.ResumeSound("BackgroundSource");
-        livingroomShakeAni.SetBool("maxShaking",true);
+        livingroomShakeAni.SetBool("maxShaking", true);
 
         elapsed = 0.0f;
         while (elapsed < shakeDuration_max)
         {
-            if(elapsed < shakeDuration_max / 4 && !isFalling) StartCoroutine(FallObjects());
+            if (elapsed < shakeDuration_max / 4 && !isFalling) StartCoroutine(FallObjects());
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        livingroomShakeAni.SetBool("maxShaking",false);
-        livingroomShakeAni.SetBool("isShaking",false);
+        livingroomShakeAni.SetBool("maxShaking", false);
+        livingroomShakeAni.SetBool("isShaking", false);
 
         transform.localPosition = originalPosition;
         isShaking = false;
-        
-        
-    }   
+
+
+    }
 
     private IEnumerator FallObjects()
     {
@@ -112,13 +113,13 @@ public class CameraShake : MonoBehaviour
 
     private IEnumerator ItemShaking()
     {
-        foreach(GameObject shakingItem in shakingItems)
+        foreach (GameObject shakingItem in shakingItems)
         {
             yield return new WaitForSeconds(0.5f);
             Animator shakingItemAnimator = shakingItem.GetComponent<Animator>();
-            if(shakingItemAnimator != null)
+            if (shakingItemAnimator != null)
             {
-                shakingItemAnimator.SetBool("objectShaking",true);
+                shakingItemAnimator.SetBool("objectShaking", true);
             }
         }
     }

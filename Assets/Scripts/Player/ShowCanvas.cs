@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.UI;
 
 public class ShowCanvas : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ShowCanvas : MonoBehaviour
     private Transform camera_Offset;
     private float rotateSpeed = 1f;
     private float rotateViewTime = 1f; // 旋轉視角的時間
-    private Camera mainCamera; 
+    private Camera mainCamera;
     private Transform rotatePosition;
 
     #endregion
@@ -40,6 +41,10 @@ public class ShowCanvas : MonoBehaviour
     #endregion
 
     #region 死亡畫面
+    private GameObject locomotion;
+    public string deadReason;
+    private Text deadReasonText;
+
     public Transform deadPosition;
     public Animator fade_animator;
     public GameObject deadPanel;
@@ -68,7 +73,10 @@ public class ShowCanvas : MonoBehaviour
         player = GameObject.Find("XR Origin (XR Rig)");
         mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         camera_Offset = GameObject.Find("Camera Offset").transform;
+        locomotion = GameObject.Find("Locomotion System");
+        deadReasonText = GameObject.Find("deadReason").GetComponent<Text>();
 
+        // deadPanel.SetActive(false);
 
     }
     void Update()
@@ -91,7 +99,7 @@ public class ShowCanvas : MonoBehaviour
     {
 
         isRotating = true;
-        
+
         //物品發光提示
         Hint_Glow(true, hint_start, hint_end);
 
@@ -135,7 +143,7 @@ public class ShowCanvas : MonoBehaviour
         }
         else
         {
-            ShowDeadCanvas();
+            // StartCoroutine(ShowDeadCanvas());
         }
     }
 
@@ -205,52 +213,56 @@ public class ShowCanvas : MonoBehaviour
         }
     }
 
-    public void Dead(int deadIndex)
-    {
-        StartCoroutine(RotateView(mainCamera.transform, deadPosition, true, -1));
-        rebirth_index = deadIndex;
-    }
-    public void ShowDeadCanvas()
-    {
-        isRotating = true;
+    // public void Dead(int deadIndex)
+    // {
+    //     StartCoroutine(RotateView(mainCamera.transform, deadPosition, true, -1));
+    //     rebirth_index = deadIndex;
+    // }
+    // public IEnumerator ShowDeadCanvas()
+    // {
+    //     isRotating = true;
+    //     fade_animator.SetBool("fadein", true);
+    //     locomotion.SetActive(false);
 
-        fade_animator.SetBool("fadein", true);
+    //     deadReasonText.text = deadReason;
+    //     yield return new WaitForSeconds(1f);
+    //     deadPanel.SetActive(true);
 
-        deadPanel.SetActive(true);
-
-        StartCoroutine(DeadRecip());
-    }
-
-    IEnumerator DeadRecip()
-    {
-        fade_animator.SetBool("isDead", true);
-        yield return new WaitForSeconds(5f);
-        Rebirth();
-    }
+    //     StartCoroutine(DeadRecip());
 
 
-    public void Rebirth()
-    {
-        deadPanel.SetActive(false);
-        fade_animator.SetBool("fadein", false);
-        isRotating = false;
-        reStart = true;
+    // }
 
-        camera_Offset.rotation = Quaternion.Euler(0, 0, 0);
-        if (rebirth_index == 1)
-        {
-            string sceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(sceneName);
-        }
+    // IEnumerator DeadRecip()
+    // {
+    //     fade_animator.SetBool("isDead", true);
+    //     yield return new WaitForSeconds(5f);
+    //     Rebirth();
+    // }
 
-        else if (rebirth_index == 2)
-        {
-            SceneManager.LoadScene("Story2");
-            // player.transform.position = rebirthPos[0].position;
-        }
 
-        //恢復時間
-        // Time.timeScale = 1;
+    // public void Rebirth()
+    // {
+    //     deadPanel.SetActive(false);
+    //     fade_animator.SetBool("fadein", false);
+    //     isRotating = false;
+    //     reStart = true;
 
-    }
+    //     camera_Offset.rotation = Quaternion.Euler(0, 0, 0);
+    //     if (rebirth_index == 1)
+    //     {
+    //         string sceneName = SceneManager.GetActiveScene().name;
+    //         SceneManager.LoadScene(sceneName);
+    //     }
+
+    //     else if (rebirth_index == 2)
+    //     {
+    //         SceneManager.LoadScene("Story2");
+    //         // player.transform.position = rebirthPos[0].position;
+    //     }
+
+    //     //恢復時間
+    //     // Time.timeScale = 1;
+
+    // }
 }

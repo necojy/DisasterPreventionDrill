@@ -102,6 +102,10 @@ public class AudioManager : MonoBehaviour
         {
             itemSources.PlayOneShot(s.clip);
         }
+        else if (s.name == "alert_Sound")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
     }
 
 
