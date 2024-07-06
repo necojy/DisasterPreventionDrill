@@ -110,12 +110,9 @@ public class CameraShake : MonoBehaviour
         yield return new WaitForSeconds(waitForDown);
         foreach (GameObject fallObject in fallObjects)
         {
-            // Debug.Log(fallObject.name);
-            if (!fallObject)
-            {
-                yield return new WaitForSeconds(Random.Range(0.8f, 1.25f));
-                fallObject.GetComponent<Rigidbody>().useGravity = true;
-            }
+            Debug.Log(fallObject.name);
+            yield return new WaitForSeconds(Random.Range(0.8f, 1.25f));
+            fallObject.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 

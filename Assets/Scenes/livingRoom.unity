@@ -20,12 +20,12 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.080544665, g: 0.085142985, b: 0.09433961, a: 1}
-  m_AmbientEquatorColor: {r: 0.1882353, g: 0.1882353, b: 0.1882353, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 0.040272333, g: 0.042571492, b: 0.047169805, a: 1}
+  m_AmbientEquatorColor: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 1}
+  m_AmbientGroundColor: {r: 0.0235, g: 0.0215, b: 0.0175, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.41662508, g: 0.44929966, b: 0.5320754, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -8839,7 +8839,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
-      objectReference: {fileID: 1760840156459398980}
+      objectReference: {fileID: 1348453126}
     - target: {fileID: 6207502133327596440, guid: c3db203fee4cb524ca4b18955d4a17f5,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -45237,6 +45237,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1655882273}
   m_Mesh: {fileID: 501411545219660215, guid: 2a83511a782a6aa4dafed1f5a2bd3803, type: 3}
+--- !u!1 &1663630508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5265950519992916546, guid: 022e31052241cb742a95cfca58e83a8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5265950521699152891}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1663630513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663630508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c767c5383bc8db8419c5646f5c9728b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotRotation: {x: 0, y: 0, z: 0}
+  inSlot: 0
+  currentSlot: {fileID: 0}
 --- !u!1 &1666121568
 GameObject:
   m_ObjectHideFlags: 0
@@ -55767,12 +55788,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2013969004}
   m_Mesh: {fileID: 8666320632326923592, guid: 2a83511a782a6aa4dafed1f5a2bd3803, type: 3}
---- !u!1 &2021549978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 305150943477176334, guid: a738826834e5b0b4bb0ab597029098a5,
-    type: 3}
-  m_PrefabInstance: {fileID: 4893567581722938571}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2023583596
 GameObject:
   m_ObjectHideFlags: 0
@@ -62754,7 +62769,7 @@ MonoBehaviour:
   - {fileID: 2170178010110992137}
   - {fileID: 7296751936913890466}
   - {fileID: 423147966}
-  - {fileID: 2021549978}
+  - {fileID: 5265950521699152892}
   deadReason: sfsdfs
   deadPosition: {fileID: 306789727}
   fade_animator: {fileID: 706205180}
@@ -63714,6 +63729,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CellPhone
       objectReference: {fileID: 0}
+    - target: {fileID: 1720113104884249560, guid: a738826834e5b0b4bb0ab597029098a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6265042456627492906, guid: a738826834e5b0b4bb0ab597029098a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -64464,8 +64484,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1561722846}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5265950519992916546, guid: 022e31052241cb742a95cfca58e83a8d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1663630513}
   m_SourcePrefab: {fileID: 100100000, guid: 022e31052241cb742a95cfca58e83a8d, type: 3}
+--- !u!1 &5265950521699152892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3654002749306259046, guid: 022e31052241cb742a95cfca58e83a8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5265950521699152891}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5285459759533018517
 Transform:
   m_ObjectHideFlags: 0
