@@ -6021,8 +6021,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 252460910}
   m_Mesh: {fileID: 5575469538477459821, guid: 2a83511a782a6aa4dafed1f5a2bd3803, type: 3}
-<<<<<<< Updated upstream
-=======
 --- !u!1 &252724889
 GameObject:
   m_ObjectHideFlags: 0
@@ -6133,7 +6131,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253451342}
   m_CullTransparentMesh: 1
->>>>>>> Stashed changes
 --- !u!1 &255112037
 GameObject:
   m_ObjectHideFlags: 0
@@ -13388,11 +13385,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 537588513}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
---- !u!1 &541368051
-=======
 --- !u!1 &539603890
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13400,52 +13393,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
-  - component: {fileID: 541368052}
-  - component: {fileID: 541368054}
-  - component: {fileID: 541368053}
-  m_Layer: 5
-  m_Name: 4
-=======
   - component: {fileID: 539603891}
   - component: {fileID: 539603894}
   - component: {fileID: 539603893}
   - component: {fileID: 539603892}
   m_Layer: 0
   m_Name: slot2
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
-<<<<<<< Updated upstream
---- !u!224 &541368052
-RectTransform:
-=======
 --- !u!4 &539603891
 Transform:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 541368051}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.8526, y: 2.8526, z: 2.8526}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 522793426}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.8, y: -258.7}
-  m_SizeDelta: {x: 171.1, y: 63.4}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &541368053
-=======
   m_GameObject: {fileID: 539603890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -13457,44 +13421,11 @@ Transform:
   m_Father: {fileID: 3964825179956833794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &539603892
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 541368051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 300
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 4
---- !u!222 &541368054
-CanvasRenderer:
-=======
   m_GameObject: {fileID: 539603890}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -13520,15 +13451,10 @@ CanvasRenderer:
   HandInArea: 0
 --- !u!54 &539603893
 Rigidbody:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 541368051}
-  m_CullTransparentMesh: 1
-=======
   m_GameObject: {fileID: 539603890}
   serializedVersion: 4
   m_Mass: 1
@@ -13571,7 +13497,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7256794, y: 0.74770147, z: 0.3}
   m_Center: {x: 0.002413818, y: -0.0010897432, z: 0}
->>>>>>> Stashed changes
 --- !u!1 &543977626
 GameObject:
   m_ObjectHideFlags: 0
@@ -27979,46 +27904,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1175106761363176232}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
---- !u!1 &1019097494
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1019097495}
-  - component: {fileID: 1019097497}
-  - component: {fileID: 1019097496}
-  m_Layer: 5
-  m_Name: 5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1019097495
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1019097494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.8526, y: 2.8526, z: 2.8526}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 522793426}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -15.8, y: -258.7}
-  m_SizeDelta: {x: 171.1, y: 63.4}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1019097496
-=======
   m_GameObject: {fileID: 1018131581}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -28052,44 +27937,11 @@ BoxCollider:
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1018131584
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 1019097494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 300
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 5
---- !u!222 &1019097497
-CanvasRenderer:
-=======
   m_GameObject: {fileID: 1018131581}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -28250,7 +28102,6 @@ CanvasRenderer:
   m_AddDefaultGrabTransformers: 1
 --- !u!54 &1018131585
 Rigidbody:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
