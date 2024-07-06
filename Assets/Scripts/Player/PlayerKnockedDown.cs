@@ -35,7 +35,8 @@ public class PlayerKnockedDown : MonoBehaviour
         {
             bookCaseAnimator.SetBool("isFalling", true);
             // showCanvas.Dead(1);
-            showDeadCanvas.deadReason = "被掉落物砸死";
+            showDeadCanvas.deadReason = "被書櫃壓死";
+            showDeadCanvas.reloadScene = "livingRoom";
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
         }
     }
@@ -54,6 +55,7 @@ public class PlayerKnockedDown : MonoBehaviour
         {
             // showCanvas.Dead(1);
             showDeadCanvas.deadReason = "被掉落物砸死";
+            showDeadCanvas.reloadScene = "livingRoom";
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
         }
 

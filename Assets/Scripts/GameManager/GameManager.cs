@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public List<Slot> slots;
 
-     public void LoadNextScene(string scene)
+    public void LoadNextScene(string scene)
     {
         Debug.Log(" Load ");
         foreach (Slot slot in slots)
@@ -45,5 +45,5 @@ public class GameManager : MonoBehaviour
     {
         slots = inventorySlots;
     }
-    
+
 }

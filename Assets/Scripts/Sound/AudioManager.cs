@@ -26,9 +26,9 @@ public class AudioManager : MonoBehaviour
             backgroundSound.source.loop = backgroundSound.loop;
         }
 
-        // foreach(Sound itemSound in itemSounds)
+        // foreach (Sound    in itemSounds)
         // {
-        //     if(!itemSound.source) itemSound.source = gameObject.AddComponent<AudioSource>();
+        //     if (!itemSound.source) itemSound.source = gameObject.AddComponent<AudioSource>();
 
         //     itemSound.source.clip = itemSound.clip;
         //     itemSound.source.playOnAwake = itemSound.playOnAwake;

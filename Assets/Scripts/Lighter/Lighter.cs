@@ -72,7 +72,8 @@ public class Lighter : MonoBehaviour
         if (isStory2) storytwo.Dead(2);
         else
         {
-            showDeadCanvas.deadReason = "被掉落物砸死";
+            showDeadCanvas.deadReason = "想在室內放煙火";
+            showDeadCanvas.reloadScene = "story2";
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
         }
         flame.SetActive(false);

@@ -12,9 +12,11 @@ public class ShowDeadCanvas : MonoBehaviour
     private GameObject deadPanel;
     private Text deadReasonText;
     public string deadReason;
+    public string reloadScene;
     public bool isDead = false;
 
     private static GameManager gameManager;
+
 
     private void Start()
     {
@@ -56,6 +58,6 @@ public class ShowDeadCanvas : MonoBehaviour
         isDead = false;
 
         //SceneManager.LoadScene("Streets");
-        gameManager.ReloadScene("Streets");
+        gameManager.ReloadScene(reloadScene);
     }
 }

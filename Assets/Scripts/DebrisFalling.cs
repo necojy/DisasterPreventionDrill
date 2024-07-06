@@ -59,6 +59,7 @@ public class DebrisFalling : MonoBehaviour
         if (isFalling && (!Bleft.isPuting || !Bright.isPuting))
         {
             showDeadCanvas.deadReason = "被掉落物砸死";
+            showDeadCanvas.reloadScene = "Streets";
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
         }
     }

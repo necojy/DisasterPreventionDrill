@@ -42,12 +42,10 @@ public class HideUnderTable : MonoBehaviour
         table = GameObject.Find("TableToHide");
 
         hidePos = table.transform.position;
+        hidePos.z -= 0.5f;
+        hidePos.x += 1.5f;
         action = actionReference.action;
         //action.performed += ActivateBehavior;
-
-        // 創建一個GameObject來追蹤實際位置
-        trackedObject = new GameObject("TrackedObject");
-        trackedObject.transform.SetParent(player.transform);
 
         handGuide = GameObject.Find("HandGuide");
         handPrompt = handGuide.GetComponent<Animator>();
@@ -56,8 +54,7 @@ public class HideUnderTable : MonoBehaviour
 
     void Update()
     {
-        hidePos = table.transform.position;
-        hidePos.z += 0.5f;
+
         if (!isHiding)
         {
             origPos = player.transform.position;
@@ -67,10 +64,7 @@ public class HideUnderTable : MonoBehaviour
         }
         else
         {
-            // 在躲藏狀態下，確保玩家位置保持在 hidePos
-            //player.transform.position = hidePos;
-            trackedObject.transform.position = mainCamera.transform.position; // 保持追蹤實際位置
-            trackedObject.transform.rotation = mainCamera.transform.rotation;
+
         }
     }
 
@@ -155,9 +149,9 @@ public class HideUnderTable : MonoBehaviour
     private IEnumerator ShowHandGuide()
     {
         handGuide.SetActive(true);
-        handPrompt.SetBool("showPrompt",true);
+        handPrompt.SetBool("showPrompt", true);
         yield return new WaitForSeconds(promptTime);
-        handPrompt.SetBool("showPrompt",false);
+        handPrompt.SetBool("showPrompt", false);
         handGuide.SetActive(false);
         PromptEnd = true;
     }

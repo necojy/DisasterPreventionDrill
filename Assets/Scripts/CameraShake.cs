@@ -46,6 +46,10 @@ public class CameraShake : MonoBehaviour
             fallObject.GetComponent<Rigidbody>().useGravity = false;
         }
 
+        foreach (GameObject shakingItem in shakingItems)
+        {
+            shakingItem.GetComponent<Rigidbody>().useGravity = false;
+        }
         StartCoroutine(Shake());
     }
 
@@ -61,7 +65,6 @@ public class CameraShake : MonoBehaviour
         float elapsed = 0.0f;
 
         AudioManager.instance.PlayBackground("Earthquake");
-        StartCoroutine(ItemShaking());
 
 
         livingroomShakeAni.SetBool("isShaking", true);
@@ -82,6 +85,7 @@ public class CameraShake : MonoBehaviour
 
         AudioManager.instance.ResumeSound("BackgroundSource");
         livingroomShakeAni.SetBool("maxShaking", true);
+        StartCoroutine(ItemShaking());
 
         elapsed = 0.0f;
         while (elapsed < shakeDuration_max)
@@ -106,8 +110,12 @@ public class CameraShake : MonoBehaviour
         yield return new WaitForSeconds(waitForDown);
         foreach (GameObject fallObject in fallObjects)
         {
-            yield return new WaitForSeconds(Random.Range(0.8f, 1.25f));
-            fallObject.GetComponent<Rigidbody>().useGravity = true;
+            // Debug.Log(fallObject.name);
+            if (!fallObject)
+            {
+                yield return new WaitForSeconds(Random.Range(0.8f, 1.25f));
+                fallObject.GetComponent<Rigidbody>().useGravity = true;
+            }
         }
     }
 
@@ -116,11 +124,29 @@ public class CameraShake : MonoBehaviour
         foreach (GameObject shakingItem in shakingItems)
         {
             yield return new WaitForSeconds(0.5f);
-            Animator shakingItemAnimator = shakingItem.GetComponent<Animator>();
-            if (shakingItemAnimator != null)
+
+            // 隨機目標角度
+            float randomFloat = Random.Range(-10, -9);
+            Quaternion initialRotation = shakingItem.transform.rotation;
+            Quaternion targetRotation = Quaternion.Euler(shakingItem.transform.eulerAngles.x, shakingItem.transform.eulerAngles.y, randomFloat);
+
+            float duration = 1.5f; // 旋轉所需時間
+            float timeElapsed = 0f;
+
+            // 平滑旋轉
+            while (timeElapsed < duration)
             {
-                shakingItemAnimator.SetBool("objectShaking", true);
+                shakingItem.transform.rotation = Quaternion.Lerp(initialRotation, targetRotation, timeElapsed / duration);
+                timeElapsed += Time.deltaTime;
+                yield return null;
             }
+
+            // 確保最終旋轉到目標角度
+            shakingItem.transform.rotation = targetRotation;
+
+            // 啟用重力
+            shakingItem.GetComponent<Rigidbody>().useGravity = true;
         }
     }
+
 }

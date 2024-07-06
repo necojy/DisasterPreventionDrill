@@ -8,6 +8,8 @@ public class ElevatorShake : MonoBehaviour
     public Animator anim;
     public GameObject light;
     private ElevatorArea elevatorArea;
+    private ShowDeadCanvas showDeadCanvas;
+
 
     void Start()
     {
@@ -15,6 +17,8 @@ public class ElevatorShake : MonoBehaviour
         anim = elevator.GetComponent<Animator>();
         light = GameObject.Find("elevatorLight");
         elevatorArea = GameObject.Find("elevatorArea").GetComponent<ElevatorArea>();
+        showDeadCanvas = GameObject.Find("player deadth control").GetComponent<ShowDeadCanvas>();
+
     }
 
     public void OnCloseAnimationEnd()
@@ -25,13 +29,19 @@ public class ElevatorShake : MonoBehaviour
         }
     }
 
-    IEnumerator Shake(){
+    IEnumerator Shake()
+    {
         Debug.Log("Elevator broken");
-        anim.SetBool("isShaking",true);
+        anim.SetBool("isShaking", true);
         AudioManager.instance.PlayItemSound("mechanical-25592");
         yield return new WaitForSeconds(0.1f);
         //anim.SetBool("isShaking",false);
         light.SetActive(false);
+
+        yield return new WaitForSeconds(0.5f);
+        showDeadCanvas.deadReason = "被掉落物砸死";
+        showDeadCanvas.reloadScene = "Corridor";
+        StartCoroutine(showDeadCanvas.ShowDeadCanva());
     }
 
 }

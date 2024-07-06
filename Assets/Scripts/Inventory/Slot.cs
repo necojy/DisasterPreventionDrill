@@ -24,26 +24,18 @@ public class Slot : MonoBehaviour
     void Awake()
     {
         slotItemManager = FindObjectOfType<SlotItemManager>();
-    }
-    void Start()
-    {
         slotImage = GetComponentInChildren<Image>();
         originalColor = slotImage.color;
-        action = actionReference.action;
-        action.canceled += OnActionCanceled;
-        action.performed += OnActionPerformed;
-        ItemInArea = false;
-        HandInArea = false;
-
         //載入場景時讀取slot存取內容
         Slot slot = this;
-        if(slotItemManager != null){
-            if(slotItemManager.itemSlotMap.ContainsKey(slot.name))
+        if (slotItemManager != null)
+        {
+            if (slotItemManager.itemSlotMap.ContainsKey(slot.name))
             {
                 // 實例化該物件
                 foreach (GameObject item in ITEMS)
                 {
-                    if(slotItemManager.itemSlotMap[slot.name] == item.name)
+                    if (slotItemManager.itemSlotMap[slot.name] == item.name)
                     {
                         GameObject instantiatedItem = Instantiate(item);
                         instantiatedItem.name = item.name;
@@ -53,7 +45,16 @@ public class Slot : MonoBehaviour
                 }
             }
         }
-        
+    }
+    void Start()
+    {
+
+        action = actionReference.action;
+        action.canceled += OnActionCanceled;
+        action.performed += OnActionPerformed;
+        ItemInArea = false;
+        HandInArea = false;
+
     }
 
 
@@ -197,7 +198,7 @@ public class Slot : MonoBehaviour
         }
         else
         {
-            if(slotItemManager.itemSlotMap.ContainsKey(slot.name))
+            if (slotItemManager.itemSlotMap.ContainsKey(slot.name))
             {
                 slotItemManager.UnregisterItem(slot);
             }

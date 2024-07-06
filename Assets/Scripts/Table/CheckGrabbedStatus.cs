@@ -42,6 +42,7 @@ public class CheckGrabbedStatus : MonoBehaviour
             {
                 // showCanvas.ShowDeadCanvas();
                 showDeadCanvas.deadReason = "被掉落物砸死";
+                showDeadCanvas.reloadScene = "livingRoom";
                 StartCoroutine(showDeadCanvas.ShowDeadCanva());
             }
 
