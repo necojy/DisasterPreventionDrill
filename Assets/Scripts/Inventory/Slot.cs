@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 public class Slot : MonoBehaviour
 {
@@ -36,20 +37,23 @@ public class Slot : MonoBehaviour
 
         //載入場景時讀取slot存取內容
         Slot slot = this;
-        if(slotItemManager.itemSlotMap.ContainsKey(slot.name))
-        {
-            // 實例化該物件
-            foreach (GameObject item in ITEMS)
+        if(slotItemManager != null){
+            if(slotItemManager.itemSlotMap.ContainsKey(slot.name))
             {
-                if(slotItemManager.itemSlotMap[slot.name] == item.name)
+                // 實例化該物件
+                foreach (GameObject item in ITEMS)
                 {
-                    GameObject instantiatedItem = Instantiate(item);
-                    instantiatedItem.name = item.name;
-                    InsertItem(instantiatedItem);
-                    break;
+                    if(slotItemManager.itemSlotMap[slot.name] == item.name)
+                    {
+                        GameObject instantiatedItem = Instantiate(item);
+                        instantiatedItem.name = item.name;
+                        InsertItem(instantiatedItem);
+                        break;
+                    }
                 }
             }
         }
+        
     }
 
 

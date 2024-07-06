@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class SlotItemManager : MonoBehaviour
 {
-    // 單例模式
     private static SlotItemManager instance;
     public static SlotItemManager Instance
     {

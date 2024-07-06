@@ -122427,10 +122427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c28ae8748e70242ae029d4bd076e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fade_animator: {fileID: 236244354}
-  deadPanel: {fileID: 236244353}
-  deadReasonText: {fileID: 0}
-  deadReason: ttt
 --- !u!65 &1888590469
 BoxCollider:
   m_ObjectHideFlags: 0
