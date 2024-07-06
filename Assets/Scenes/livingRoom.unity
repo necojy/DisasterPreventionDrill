@@ -28106,10 +28106,6 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 1019097494}
-  m_CullTransparentMesh: 1
-=======
   m_GameObject: {fileID: 1018131581}
   serializedVersion: 4
   m_Mass: 1
@@ -28146,7 +28142,6 @@ MonoBehaviour:
   slotRotation: {x: 0, y: 0, z: 0}
   inSlot: 0
   currentSlot: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1 &1021237862
 GameObject:
   m_ObjectHideFlags: 0
@@ -64304,8 +64299,6 @@ Transform:
   - {fileID: 6777689929262942717}
   m_Father: {fileID: 241579921762751641}
   m_LocalEulerAnglesHint: {x: 5.237129e-16, y: 1.1131941e-14, z: -5.3870974}
-<<<<<<< Updated upstream
-=======
 --- !u!1001 &5265950521699152891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64475,7 +64468,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2021549982}
   m_SourcePrefab: {fileID: 100100000, guid: 022e31052241cb742a95cfca58e83a8d, type: 3}
->>>>>>> Stashed changes
 --- !u!4 &5285459759533018517
 Transform:
   m_ObjectHideFlags: 0
@@ -68711,10 +68703,6 @@ SceneRoots:
   - {fileID: 201588862}
   - {fileID: 1161635158}
   - {fileID: 767996423}
-<<<<<<< Updated upstream
-  - {fileID: 86266693033335856}
-=======
   - {fileID: 3964825179956833794}
   - {fileID: 1348453127}
   - {fileID: 1488292331}
->>>>>>> Stashed changes
