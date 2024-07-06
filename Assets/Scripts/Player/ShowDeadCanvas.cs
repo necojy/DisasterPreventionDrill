@@ -14,6 +14,8 @@ public class ShowDeadCanvas : MonoBehaviour
     public string deadReason;
     public bool isDead = false;
 
+    private static GameManager gameManager;
+
     private void Start()
     {
         fade_animator = GameObject.Find("Fade Canvas").GetComponent<Animator>();
@@ -22,6 +24,8 @@ public class ShowDeadCanvas : MonoBehaviour
         deadReasonText = GameObject.Find("deadReason").GetComponent<Text>();
 
         deadPanel.SetActive(false);
+
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     public IEnumerator ShowDeadCanva()
@@ -51,6 +55,7 @@ public class ShowDeadCanvas : MonoBehaviour
         fade_animator.SetBool("fadein", false);
         isDead = false;
 
-        SceneManager.LoadScene("Streets");
+        //SceneManager.LoadScene("Streets");
+        gameManager.ReloadScene("Streets");
     }
 }

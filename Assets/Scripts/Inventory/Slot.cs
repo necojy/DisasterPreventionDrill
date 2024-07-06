@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 
 public class Slot : MonoBehaviour
 {
@@ -17,6 +17,13 @@ public class Slot : MonoBehaviour
     public bool ItemInArea;
     public bool HandInArea;
 
+    public SlotItemManager slotItemManager;
+    public GameObject[] ITEMS;
+
+    void Awake()
+    {
+        slotItemManager = FindObjectOfType<SlotItemManager>();
+    }
     void Start()
     {
         slotImage = GetComponentInChildren<Image>();
@@ -26,7 +33,25 @@ public class Slot : MonoBehaviour
         action.performed += OnActionPerformed;
         ItemInArea = false;
         HandInArea = false;
+
+        //載入場景時讀取slot存取內容
+        Slot slot = this;
+        if(slotItemManager.itemSlotMap.ContainsKey(slot.name))
+        {
+            // 實例化該物件
+            foreach (GameObject item in ITEMS)
+            {
+                if(slotItemManager.itemSlotMap[slot.name] == item.name)
+                {
+                    GameObject instantiatedItem = Instantiate(item);
+                    instantiatedItem.name = item.name;
+                    InsertItem(instantiatedItem);
+                    break;
+                }
+            }
+        }
     }
+
 
     private void OnTriggerStay(Collider coll)
     {
@@ -79,9 +104,6 @@ public class Slot : MonoBehaviour
 
     public void InsertItem(GameObject obj)
     {
-        // 使用全局管理器來添加物品到插槽中
-        SlotItemManager.Instance.RegisterItem(obj, this);
-
         Debug.Log("insert item");
 
         Rigidbody rb = obj.GetComponent<Rigidbody>();
@@ -95,6 +117,12 @@ public class Slot : MonoBehaviour
         if (itemCollider != null)
         {
             itemCollider.isTrigger = true;
+        }
+        // 設置子物件的 Collider 為 trigger
+        Collider[] childColliders = obj.GetComponentsInChildren<Collider>();
+        foreach (var collider in childColliders)
+        {
+            collider.isTrigger = true;
         }
 
         obj.transform.SetParent(gameObject.transform, true);
@@ -115,10 +143,8 @@ public class Slot : MonoBehaviour
 
     public void RemoveItem()
     {
-        // 使用全局管理器來移除插槽中的物品
-        SlotItemManager.Instance.UnregisterItem(this);
         Debug.Log("remove item");
-        
+
         if (ItemInSlot != null)
         {
             Rigidbody rb = ItemInSlot.GetComponent<Rigidbody>();
@@ -132,6 +158,12 @@ public class Slot : MonoBehaviour
             if (itemCollider != null)
             {
                 itemCollider.isTrigger = false;
+            }
+            // 恢復子物件的 Collider 的 trigger 屬性
+            Collider[] childColliders = ItemInSlot.GetComponentsInChildren<Collider>();
+            foreach (var collider in childColliders)
+            {
+                collider.isTrigger = false;
             }
 
             ItemInSlot.transform.SetParent(null);
@@ -150,5 +182,21 @@ public class Slot : MonoBehaviour
     public void ResetColor()
     {
         slotImage.color = originalColor;
+    }
+
+    public void RecordChanges()
+    {
+        Slot slot = this;
+        if (ItemInSlot != null)
+        {
+            slotItemManager.RegisterItem(slot, ItemInSlot);
+        }
+        else
+        {
+            if(slotItemManager.itemSlotMap.ContainsKey(slot.name))
+            {
+                slotItemManager.UnregisterItem(slot);
+            }
+        }
     }
 }

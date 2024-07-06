@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 
 public class InventoryVR : MonoBehaviour
 {
-    public GameObject Inventory;
+    private GameManager gameManager;
+    public GameObject inventory;
     public GameObject Anchor;
+    public List<Slot> slots;
     private bool isUIActive;
     private int currentSlotIndex;
-    private List<Slot> slots;
+    
 
     public InputActionReference secondaryActionReference;
     public InputActionReference primaryActionReference;
@@ -19,29 +22,39 @@ public class InventoryVR : MonoBehaviour
 
     private void Start()
     {
-        Inventory.SetActive(false);
+        inventory = GameObject.Find("Inventory");
+        gameManager = transform.GetComponent<GameManager>();
+        slots = new List<Slot>(inventory.GetComponentsInChildren<Slot>(true));
+        gameManager.GetSlots(slots);
+        inventory.SetActive(false);
         isUIActive = false;
         currentSlotIndex = 0;
-
-        // 過濾具有 Slot 腳本的子對象
-        slots = new List<Slot>(Inventory.GetComponentsInChildren<Slot>(true));
 
         secondaryAction = secondaryActionReference.action;
         secondaryAction.performed += ToggleInventory;
 
         primaryAction = primaryActionReference.action;
         primaryAction.performed += SwitchSlot;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
         
     }
-
     private void Update()
     {
         Anchor = GameObject.Find("Inventory Anchor");
         if (isUIActive)
         {
-            Inventory.transform.position = Anchor.transform.position;
-            Inventory.transform.eulerAngles = new Vector3(Anchor.transform.eulerAngles.x + 15, Anchor.transform.eulerAngles.y, 0);
+            inventory.transform.position = Anchor.transform.position;
+            inventory.transform.eulerAngles = new Vector3(Anchor.transform.eulerAngles.x + 15, Anchor.transform.eulerAngles.y, 0);
         }
+    }
+
+        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        inventory = GameObject.Find("Inventory");
+        slots = new List<Slot>(inventory.GetComponentsInChildren<Slot>(true));
+        gameManager.GetSlots(slots);
+        inventory.SetActive(false);
     }
 
     private void OnDestroy()
@@ -53,7 +66,7 @@ public class InventoryVR : MonoBehaviour
     private void ToggleInventory(InputAction.CallbackContext context)
     {
         isUIActive = !isUIActive;
-        Inventory.SetActive(isUIActive);
+        inventory.SetActive(isUIActive);
 
         if (isUIActive)
         {
@@ -76,6 +89,7 @@ public class InventoryVR : MonoBehaviour
 
     private void ShowCurrentSlot()
     {
+        HideAllSlots();
         slots[currentSlotIndex].gameObject.SetActive(true);
     }
 

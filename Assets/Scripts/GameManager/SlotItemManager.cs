@@ -23,32 +23,23 @@ public class SlotItemManager : MonoBehaviour
     }
 
     // 保存物品及其所在插槽
-    private Dictionary<GameObject, Slot> itemSlotMap = new Dictionary<GameObject, Slot>();
+   public Dictionary<string, string> itemSlotMap = new Dictionary<string, string>();
 
     // 註冊物品及其所在插槽
-    public void RegisterItem(GameObject item, Slot slot)
+    public void RegisterItem(Slot slot, GameObject item)
     {
-        if (!itemSlotMap.ContainsKey(item))
-        {
-            itemSlotMap[item] = slot;
-            Debug.Log(slot+":"+item);
-        }
+        itemSlotMap[slot.name] = item.name;
+        Debug.Log(slot + ":" + item);
+        
     }
 
     // 取消註冊物品及其所在插槽
     public void UnregisterItem(Slot slot)
     {
-        GameObject item = slot.ItemInSlot;
-        if (item != null && itemSlotMap.ContainsKey(item) && itemSlotMap[item] == slot)
+        if (itemSlotMap.ContainsKey(slot.name))
         {
-            itemSlotMap.Remove(item);
+            Debug.Log("Remove "+ slot + ":" + itemSlotMap[slot.name]);
+            itemSlotMap.Remove(slot.name);    
         }
     }
-
-    // 根據插槽獲取物品
-    public GameObject GetItemInSlot(Slot slot)
-    {
-        return slot.ItemInSlot;
-    }
-
 }
