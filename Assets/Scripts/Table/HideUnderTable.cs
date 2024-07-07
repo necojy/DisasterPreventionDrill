@@ -43,7 +43,7 @@ public class HideUnderTable : MonoBehaviour
 
         hidePos = table.transform.position;
         hidePos.z -= 0.5f;
-        hidePos.x += 1.5f;
+        hidePos.x += 1.25f;
         action = actionReference.action;
         //action.performed += ActivateBehavior;
 
@@ -60,7 +60,7 @@ public class HideUnderTable : MonoBehaviour
             origPos = player.transform.position;
             origRot = player.transform.rotation;
             //flippedRotation = Quaternion.Euler(origRot.eulerAngles.x, origRot.eulerAngles.y + 180f, origRot.eulerAngles.z);
-            flippedRotation = Quaternion.Euler(0, 270f, 0);
+            //flippedRotation = Quaternion.Euler(0, 270f, 0);
         }
         else
         {
@@ -90,7 +90,7 @@ public class HideUnderTable : MonoBehaviour
     {
         charCtrlDriver.enabled = false; // 禁用移動控制器
         isHiding = true;
-        StartCoroutine(MovePlayer(hidePos, flippedRotation));
+        StartCoroutine(MovePlayer(hidePos,  -Vector3.right));
         StartCoroutine(ShowHandGuide());
     }
 
@@ -102,26 +102,41 @@ public class HideUnderTable : MonoBehaviour
         charCtrlDriver.enabled = true; // 重新啟用移動控制器
     }
 
-    IEnumerator MovePlayer(Vector3 targetPos, Quaternion targetRot)
+ IEnumerator MovePlayer(Vector3 targetPos, Vector3 targetDirection)
+{
+    float duration = 1.0f; // 移動時間（秒）
+    float elapsedTime = 0f;
+    Vector3 startPos = player.transform.position;
+    Quaternion startRot = player.transform.rotation;
+
+    while (elapsedTime < duration)
     {
-        float duration = 1.0f; // 移動時間（秒）
-        float elapsedTime = 0f;
-        Vector3 startPos = player.transform.position;
-        Quaternion startRot = player.transform.rotation;
+        float t = elapsedTime / duration;
+        player.transform.position = Vector3.Lerp(startPos, targetPos, t);
 
-        while (elapsedTime < duration)
-        {
-            player.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
-            player.transform.rotation = Quaternion.Lerp(startRot, targetRot, elapsedTime / duration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
+        // 目標旋轉
+        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
-        // 確保最後的位置和旋轉是準確的
-        player.transform.position = targetPos;
-        player.transform.rotation = targetRot;
-        canHide = true;
+        // 當前頭顯（HMD）旋轉
+        Quaternion hmdRotation = InputTracking.GetLocalRotation(XRNode.Head);
+
+        // 調整XR Rig的旋轉，使頭顯（HMD）面向全局的目標方向
+        Quaternion correctedRotation = targetRotation * Quaternion.Inverse(hmdRotation);
+        player.transform.rotation = Quaternion.Lerp(startRot, correctedRotation, t);
+
+        elapsedTime += Time.deltaTime;
+        yield return null;
     }
+
+    // 確保最後的位置是準確的
+    player.transform.position = targetPos;
+    
+    canHide = true;
+}
+
+
+
+
 
     /* private void ActivateBehavior(InputAction.CallbackContext context)
     {
