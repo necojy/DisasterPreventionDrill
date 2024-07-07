@@ -3,10 +3,13 @@ using UnityEngine.UI;
 
 public class CellPhoneControl : MonoBehaviour
 {
-    public GameObject spotlight; 
+    public GameObject spotlight;
+    private GameObject alert;
 
-    private void Start() 
+    private void Start()
     {
+        alert = GameObject.Find("alert");
+        alert.SetActive(true);
         spotlight.SetActive(false);
     }
 
@@ -14,5 +17,10 @@ public class CellPhoneControl : MonoBehaviour
     {
         AudioManager.instance.PlayItemSound("Open_cellPhone");
         spotlight.SetActive(!spotlight.activeSelf);
+    }
+
+    public void CloseAlert()
+    {
+        alert.SetActive(false);
     }
 }
