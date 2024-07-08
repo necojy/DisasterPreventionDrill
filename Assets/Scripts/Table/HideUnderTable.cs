@@ -7,19 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class HideUnderTable : MonoBehaviour
 {
-    public Vector3 hidePos;
-    public Vector3 origPos;
-    public Quaternion origRot;
-    public Quaternion flippedRotation;
-    private GameObject player;
-    private GameObject mainCamera;
-    private GameObject table;
-    private CharacterControllerDriver charCtrlDriver;
     public bool isHiding = false;
-    //public bool inHidingArea = false;
     public bool canHide = true;
-    public InputActionReference actionReference;
-    public InputAction action;
 
     public Camera option2Camera;
     public ShowCanvas showCanvas;
@@ -34,44 +23,23 @@ public class HideUnderTable : MonoBehaviour
     public float promptTime = 3f;
     public bool PromptEnd = false;
 
+    public Transform head;
+    public Transform original;
+    public Transform target;
+
     void Start()
     {
-        player = GameObject.Find("XR Origin (XR Rig)");
-        charCtrlDriver = player.GetComponent<CharacterControllerDriver>();
-        mainCamera = GameObject.Find("Main Camera");
-        table = GameObject.Find("TableToHide");
-
-        hidePos = table.transform.position;
-        action = actionReference.action;
-        //action.performed += ActivateBehavior;
-
         handGuide = GameObject.Find("HandGuide");
         handPrompt = handGuide.GetComponent<Animator>();
         handGuide.SetActive(false);
     }
 
-    void Update()
-    {
-
-        if (!isHiding)
-        {
-            origPos = player.transform.position;
-            origRot = player.transform.rotation;
-            //flippedRotation = Quaternion.Euler(origRot.eulerAngles.x, origRot.eulerAngles.y + 180f, origRot.eulerAngles.z);
-            //flippedRotation = Quaternion.Euler(0, 270f, 0);
-        }
-        else
-        {
-
-        }
-    }
 
     private void OnTriggerEnter(Collider coll)
     {
         if (coll.CompareTag("Player") && canHide)
         {
             Hide();
-            //inHidingArea = true;
         }
     }
 
@@ -80,85 +48,47 @@ public class HideUnderTable : MonoBehaviour
         if (coll.CompareTag("Player"))
         {
             Leave();
-            //inHidingArea = false;
         }
     }
 
     public void Hide()
     {
-        charCtrlDriver.enabled = false; // 禁用移動控制器
         isHiding = true;
-        StartCoroutine(MovePlayer(hidePos, -Vector3.right));
+        Recenter();
         StartCoroutine(ShowHandGuide());
     }
 
     public void Leave()
     {
-        //StartCoroutine(MovePlayer(origPos, origRot));
         if (Countdown.timeOut && canHide) StartCoroutine(Open_OptionCanva());
         isHiding = false;
-        charCtrlDriver.enabled = true; // 重新啟用移動控制器
+
     }
 
-
-IEnumerator MovePlayer(Vector3 targetPos, Vector3 targetDirection)
-{
-    float duration = 1.0f; // 移動時間（秒）
-    float elapsedTime = 0f;
-    Vector3 startPos = player.transform.position;
-    Quaternion startRot = player.transform.rotation;
-
-    while (elapsedTime < duration)
+    public void Recenter()
     {
-        float t = elapsedTime / duration;
-        player.transform.position = Vector3.Lerp(startPos, targetPos, t);
+        // 計算頭部（頭顯）位置和原始位置之間的偏移量
+        Vector3 offset = head.position - original.position;
+        offset.y = 0; // 忽略 y 軸上的偏移量，僅考慮水平平面的偏移
 
-        // 目標旋轉，僅保留 Y 軸旋轉
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        targetRotation.eulerAngles = new Vector3(0, targetRotation.eulerAngles.y, 0); // 確保 X 和 Z 軸旋轉為0
+        // 將原始位置設置為目標位置減去偏移量
+        original.position = target.position - offset;
 
-        // 當前頭顯（HMD）旋轉
-        Quaternion hmdRotation = InputTracking.GetLocalRotation(XRNode.Head);
+        // 獲取目標的前向向量，並將 y 軸設置為 0，僅考慮水平平面的方向
+        Vector3 targetFoward = target.forward;
+        targetFoward.y = 0;
 
-        // 調整XR Rig的旋轉，使頭顯（HMD）面向全局的目標方向
-        Quaternion correctedRotation = targetRotation * Quaternion.Inverse(hmdRotation);
-        player.transform.rotation = Quaternion.Lerp(startRot, correctedRotation, t);
+        // 獲取頭部（頭顯）的前向向量，並將 y 軸設置為 0，僅考慮水平平面的方向
+        Vector3 cameraFoward = head.forward;
+        cameraFoward.y = 0;
 
-        elapsedTime += Time.deltaTime;
-        yield return null;
+        // 計算頭部（頭顯）前向向量與目標前向向量之間的夾角
+        float angle = Vector3.SignedAngle(cameraFoward, targetFoward, Vector3.up);
+
+        // 以頭部（頭顯）位置為中心，繞 y 軸旋轉原始位置，使其對準目標方向
+        original.RotateAround(head.position, Vector3.up, angle);
     }
 
-    // 確保最後的位置是準確的
-    player.transform.position = targetPos;
-
-    // 最終確保 XR Rig 的旋轉只有 Y 軸旋轉，X 和 Z 軸旋轉為0
-    Quaternion finalRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-    finalRotation.eulerAngles = new Vector3(0, finalRotation.eulerAngles.y, 0);
-    player.transform.rotation = finalRotation;
-
-    canHide = true;
-}
-
-
-
-
-
-
-    /* private void ActivateBehavior(InputAction.CallbackContext context)
-    {
-        if (isHiding && canHide)
-        {
-            Leave();
-            isHiding = false;
-            canHide = false;
-        }
-        else if (!isHiding && inHidingArea && canHide)
-        {
-            canHide = false;
-            Hide();
-            isHiding = true;
-        }
-    } */
 
     private IEnumerator Open_OptionCanva()
     {

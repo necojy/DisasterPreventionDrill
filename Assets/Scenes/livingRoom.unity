@@ -4313,7 +4313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 188751169}
   m_Layer: 0
-  m_Name: 01
+  m_Name: "\u8EB2\u85CF\u9EDE"
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4327,13 +4327,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 188751168}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.38, y: -1.17, z: 8.08}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 11.69, y: 1.615, z: -8.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 242628329}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &198960083
 GameObject:
   m_ObjectHideFlags: 0
@@ -5666,38 +5666,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.19890729, y: 0.15496437, z: 0.19890729}
   m_Center: {x: 0, y: 0.07321825, z: -0.000000007450581}
---- !u!1 &242628328
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 242628329}
-  m_Layer: 0
-  m_Name: "\u73A9\u5BB6\u91CD\u751F\u9EDE"
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &242628329
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 242628328}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04968524, y: 3.72, z: -16.96}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 188751169}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246807824
 GameObject:
   m_ObjectHideFlags: 0
@@ -36336,23 +36304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bc49a73c4bc494389c47ec33a01954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hidePos: {x: 0, y: 0, z: 0}
-  origPos: {x: 0, y: 0, z: 0}
-  origRot: {x: 0, y: 0, z: 0, w: 0}
-  flippedRotation: {x: 0, y: 0, z: 0, w: 0}
   isHiding: 0
   canHide: 1
-  actionReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  action:
-    m_Name: Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 82180915-6ff6-4bea-908f-10fc3565de89
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
   option2Camera: {fileID: 1567461344}
   showCanvas: {fileID: 4033666130943224809}
   gasEffect: {fileID: 163477573}
@@ -36361,6 +36314,9 @@ MonoBehaviour:
   handPrompt: {fileID: 0}
   promptTime: 3
   PromptEnd: 0
+  head: {fileID: 0}
+  original: {fileID: 0}
+  target: {fileID: 0}
 --- !u!54 &1258708552
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50733,7 +50689,6 @@ GameObject:
   - component: {fileID: 1835448440}
   - component: {fileID: 1835448443}
   - component: {fileID: 1835448442}
-  - component: {fileID: 1835448441}
   - component: {fileID: 1835448444}
   m_Layer: 0
   m_Name: HideArea
@@ -50757,43 +50712,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5119893960160382435}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1835448441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835448439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1bc49a73c4bc494389c47ec33a01954, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hidePos: {x: 0, y: 0, z: 0}
-  origPos: {x: 0, y: 0, z: 0}
-  origRot: {x: 0, y: 0, z: 0, w: 0}
-  flippedRotation: {x: 0, y: 0, z: 0, w: 0}
-  isHiding: 0
-  canHide: 1
-  actionReference: {fileID: 187161793506945269, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
-  action:
-    m_Name: Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 82180915-6ff6-4bea-908f-10fc3565de89
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  option2Camera: {fileID: 1567461344}
-  showCanvas: {fileID: 4033666130943224809}
-  gasEffect: {fileID: 163477573}
-  Countdown: {fileID: 358380516}
-  handGuide: {fileID: 0}
-  handPrompt: {fileID: 0}
-  promptTime: 3.5
-  PromptEnd: 0
 --- !u!54 &1835448442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50840,8 +50758,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8989097, y: 0.79628444, z: 1.3672097}
-  m_Center: {x: -0.052880876, y: 0.44146046, z: -0.096238166}
+  m_Size: {x: 1.767431, y: 0.79628444, z: 1.3672097}
+  m_Center: {x: 0.012856531, y: 0.44146046, z: -0.096238166}
 --- !u!114 &1835448444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50851,11 +50769,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1835448439}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c28ae8748e70242ae029d4bd076e46, type: 3}
+  m_Script: {fileID: 11500000, guid: e1bc49a73c4bc494389c47ec33a01954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Start: {fileID: 6943955500203922979}
-  end: {fileID: 0}
+  isHiding: 0
+  canHide: 1
+  option2Camera: {fileID: 0}
+  showCanvas: {fileID: 0}
+  gasEffect: {fileID: 0}
+  Countdown: {fileID: 0}
+  handGuide: {fileID: 0}
+  handPrompt: {fileID: 0}
+  promptTime: 3
+  PromptEnd: 0
+  head: {fileID: 6467175540486892338}
+  original: {fileID: 3450626992133533153}
+  target: {fileID: 188751169}
 --- !u!1 &1836921266
 GameObject:
   m_ObjectHideFlags: 0
@@ -67085,7 +67014,7 @@ MonoBehaviour:
   timeControl: {fileID: 358380516}
   Timer: {fileID: 358380517}
   cameraShake: {fileID: 4588073654863182664}
-  hideUnderTable: {fileID: 1835448441}
+  hideUnderTable: {fileID: 0}
   bookCaseAnimator: {fileID: 2125676270}
 --- !u!1 &7277769758058777327
 GameObject:
@@ -69428,7 +69357,7 @@ SceneRoots:
   - {fileID: 1164261066}
   - {fileID: 198960087}
   - {fileID: 1070475819}
-  - {fileID: 242628329}
+  - {fileID: 188751169}
   - {fileID: 1721544496}
   - {fileID: 1096940713704677524}
   - {fileID: 201588862}
