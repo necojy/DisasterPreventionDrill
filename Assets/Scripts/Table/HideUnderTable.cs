@@ -43,7 +43,7 @@ public class HideUnderTable : MonoBehaviour
 
         hidePos = table.transform.position;
         hidePos.z -= 0.5f;
-        hidePos.x += 1.25f;
+        hidePos.x += 0.5f;
         action = actionReference.action;
         //action.performed += ActivateBehavior;
 
@@ -102,37 +102,43 @@ public class HideUnderTable : MonoBehaviour
         charCtrlDriver.enabled = true; // 重新啟用移動控制器
     }
 
- IEnumerator MovePlayer(Vector3 targetPos, Vector3 targetDirection)
-{
-    float duration = 1.0f; // 移動時間（秒）
-    float elapsedTime = 0f;
-    Vector3 startPos = player.transform.position;
-    Quaternion startRot = player.transform.rotation;
 
-    while (elapsedTime < duration)
+    IEnumerator MovePlayer(Vector3 targetPos, Vector3 targetDirection)
     {
-        float t = elapsedTime / duration;
-        player.transform.position = Vector3.Lerp(startPos, targetPos, t);
+        float duration = 1.0f; // 移動時間（秒）
+        float elapsedTime = 0f;
+        Vector3 startPos = player.transform.position;
+        Quaternion startRot = player.transform.rotation;
 
-        // 目標旋轉
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            player.transform.position = Vector3.Lerp(startPos, targetPos, t);
 
-        // 當前頭顯（HMD）旋轉
-        Quaternion hmdRotation = InputTracking.GetLocalRotation(XRNode.Head);
+            // 目標旋轉
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
-        // 調整XR Rig的旋轉，使頭顯（HMD）面向全局的目標方向
-        Quaternion correctedRotation = targetRotation * Quaternion.Inverse(hmdRotation);
-        player.transform.rotation = Quaternion.Lerp(startRot, correctedRotation, t);
+            // 當前頭顯（HMD）旋轉
+            Quaternion hmdRotation = InputTracking.GetLocalRotation(XRNode.Head);
 
-        elapsedTime += Time.deltaTime;
-        yield return null;
+            // 調整XR Rig的旋轉，使頭顯（HMD）面向全局的目標方向
+            Quaternion correctedRotation = targetRotation * Quaternion.Inverse(hmdRotation);
+            player.transform.rotation = Quaternion.Lerp(startRot, correctedRotation, t);
+
+            // 校正 X 軸和 Z 軸偏移
+            Vector3 correctedPosition = new Vector3(player.transform.position.x, targetPos.y, player.transform.position.z);
+            player.transform.position = correctedPosition;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 確保最後的位置是準確的
+        player.transform.position = targetPos;
+
+        canHide = true;
     }
 
-    // 確保最後的位置是準確的
-    player.transform.position = targetPos;
-    
-    canHide = true;
-}
 
 
 
