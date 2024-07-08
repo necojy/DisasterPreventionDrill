@@ -88,7 +88,7 @@ public class HideUnderTable : MonoBehaviour
     {
         charCtrlDriver.enabled = false; // 禁用移動控制器
         isHiding = true;
-        StartCoroutine(MovePlayer(hidePos,  -Vector3.right));
+        StartCoroutine(MovePlayer(hidePos, -Vector3.right));
         StartCoroutine(ShowHandGuide());
     }
 
