@@ -4328,7 +4328,7 @@ Transform:
   m_GameObject: {fileID: 188751168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 11.69, y: 1.615, z: -8.72}
+  m_LocalPosition: {x: 11.69, y: 1.47, z: -8.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -50774,10 +50774,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHiding: 0
   canHide: 1
-  option2Camera: {fileID: 0}
-  showCanvas: {fileID: 0}
-  gasEffect: {fileID: 0}
-  Countdown: {fileID: 0}
+  option2Camera: {fileID: 1567461344}
+  showCanvas: {fileID: 4033666130943224809}
+  gasEffect: {fileID: 163477573}
+  Countdown: {fileID: 358380516}
   handGuide: {fileID: 0}
   handPrompt: {fileID: 0}
   promptTime: 3
@@ -64012,7 +64012,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3625253400727175545}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70ac3c9ca4ef64f4aa70295fba7522f0, type: 3}
   m_Name: 

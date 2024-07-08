@@ -27,8 +27,11 @@ public class HideUnderTable : MonoBehaviour
     public Transform original;
     public Transform target;
 
+
+    private GameObject player;
     void Start()
     {
+        player = GameObject.Find("Camera Offset");
         handGuide = GameObject.Find("HandGuide");
         handPrompt = handGuide.GetComponent<Animator>();
         handGuide.SetActive(false);
@@ -39,7 +42,7 @@ public class HideUnderTable : MonoBehaviour
     {
         if (coll.CompareTag("Player") && canHide)
         {
-            Hide();
+            StartCoroutine(Hide());
         }
     }
 
@@ -51,9 +54,10 @@ public class HideUnderTable : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public IEnumerator Hide()
     {
         isHiding = true;
+        yield return StartCoroutine(MovePlayer(target.position, Quaternion.Euler(0, 270f, 0)));
         Recenter();
         StartCoroutine(ShowHandGuide());
     }
@@ -88,6 +92,28 @@ public class HideUnderTable : MonoBehaviour
         // 以頭部（頭顯）位置為中心，繞 y 軸旋轉原始位置，使其對準目標方向
         original.RotateAround(head.position, Vector3.up, angle);
     }
+
+    IEnumerator MovePlayer(Vector3 targetPos, Quaternion targetRot)
+    {
+        float duration = 0.5f; // 移動時間（秒）
+        float elapsedTime = 0f;
+        Vector3 startPos = player.transform.position;
+        Quaternion startRot = player.transform.rotation;
+
+        while (elapsedTime < duration)
+        {
+            player.transform.position = Vector3.Lerp(startPos, targetPos, elapsedTime / duration);
+            player.transform.rotation = Quaternion.Lerp(startRot, targetRot, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 確保最後的位置和旋轉是準確的
+        player.transform.position = targetPos;
+        player.transform.rotation = targetRot;
+        canHide = true;
+    }
+
 
 
     private IEnumerator Open_OptionCanva()
