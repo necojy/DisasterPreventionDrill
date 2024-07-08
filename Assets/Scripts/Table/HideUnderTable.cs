@@ -42,7 +42,6 @@ public class HideUnderTable : MonoBehaviour
         table = GameObject.Find("TableToHide");
 
         hidePos = table.transform.position;
-        hidePos.z -= 0.5f;
         action = actionReference.action;
         //action.performed += ActivateBehavior;
 
