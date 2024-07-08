@@ -113,8 +113,9 @@ IEnumerator MovePlayer(Vector3 targetPos, Vector3 targetDirection)
         float t = elapsedTime / duration;
         player.transform.position = Vector3.Lerp(startPos, targetPos, t);
 
-        // 目標旋轉
+        // 目標旋轉，僅保留 Y 軸旋轉
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        targetRotation.eulerAngles = new Vector3(0, targetRotation.eulerAngles.y, 0); // 確保 X 和 Z 軸旋轉為0
 
         // 當前頭顯（HMD）旋轉
         Quaternion hmdRotation = InputTracking.GetLocalRotation(XRNode.Head);
@@ -129,7 +130,12 @@ IEnumerator MovePlayer(Vector3 targetPos, Vector3 targetDirection)
 
     // 確保最後的位置是準確的
     player.transform.position = targetPos;
-    
+
+    // 最終確保 XR Rig 的旋轉只有 Y 軸旋轉，X 和 Z 軸旋轉為0
+    Quaternion finalRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+    finalRotation.eulerAngles = new Vector3(0, finalRotation.eulerAngles.y, 0);
+    player.transform.rotation = finalRotation;
+
     canHide = true;
 }
 
