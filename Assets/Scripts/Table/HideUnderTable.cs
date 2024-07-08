@@ -134,9 +134,7 @@ public class HideUnderTable : MonoBehaviour
 
         // 確保最後的位置和旋轉是準確的
         player.transform.position = targetPos;
-        Quaternion finalRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        finalRotation.eulerAngles = new Vector3(0, finalRotation.eulerAngles.y, 0); // 確保X和Z軸旋轉為0
-        player.transform.rotation = finalRotation;
+        player.transform.rotation = Quaternion.LookRotation(targetDirection, Vector3.up);
 
         canHide = true;
     }
