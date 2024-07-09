@@ -64,6 +64,7 @@ public class CheckGrabbedStatus : MonoBehaviour
         if (cameraShake.isShaking == true)
         {
             showDeadCanvas.deadReason = "被掉落物砸死";
+            showDeadCanvas.reloadScene = "livingRoom";
             StartCoroutine(showDeadCanvas.ShowDeadCanva());
             // showCanvas.ShowDeadCanvas();
         }

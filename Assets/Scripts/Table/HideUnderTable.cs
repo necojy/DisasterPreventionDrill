@@ -20,7 +20,7 @@ public class HideUnderTable : MonoBehaviour
 
     public GameObject handGuide;
     public Animator handPrompt;
-    public float promptTime = 3f;
+    public float promptTime = 6f;
     public bool PromptEnd = false;
 
     public Transform head;
@@ -29,12 +29,17 @@ public class HideUnderTable : MonoBehaviour
 
 
     private GameObject player;
+
+    private GameObject tableHint;
     void Start()
     {
         player = GameObject.Find("Camera Offset");
+        tableHint = GameObject.Find("tableHint");
+
         handGuide = GameObject.Find("HandGuide");
         handPrompt = handGuide.GetComponent<Animator>();
         handGuide.SetActive(false);
+        tableHint.SetActive(false);
     }
 
 
@@ -57,7 +62,8 @@ public class HideUnderTable : MonoBehaviour
     public IEnumerator Hide()
     {
         isHiding = true;
-        yield return StartCoroutine(MovePlayer(target.position, Quaternion.Euler(0, 270f, 0)));
+        yield return new WaitForSeconds(0f);
+        //yield return StartCoroutine(MovePlayer(target.position, Quaternion.Euler(0, 270f, 0)));
         Recenter();
         StartCoroutine(ShowHandGuide());
     }
@@ -127,10 +133,20 @@ public class HideUnderTable : MonoBehaviour
     {
         handGuide.SetActive(true);
         handPrompt.SetBool("showPrompt", true);
+        tableHint.SetActive(true);
+
         yield return new WaitForSeconds(promptTime);
+        EndAnimation();
+        PromptEnd = true;
+    }
+
+    public void EndAnimation()
+    {
         handPrompt.SetBool("showPrompt", false);
         handGuide.SetActive(false);
-        PromptEnd = true;
+
+        tableHint.SetActive(false);
+
     }
 
 }
