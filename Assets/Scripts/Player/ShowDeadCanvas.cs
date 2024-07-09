@@ -58,6 +58,12 @@ public class ShowDeadCanvas : MonoBehaviour
         isDead = false;
 
         //SceneManager.LoadScene("Streets");
-        gameManager.ReloadScene(reloadScene);
+        if (gameManager != null){
+            gameManager.ReloadScene(reloadScene);
+        }
+        else{
+            SceneManager.LoadScene(reloadScene);
+        }
     }
+
 }
