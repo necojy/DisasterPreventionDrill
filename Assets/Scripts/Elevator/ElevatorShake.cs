@@ -6,7 +6,6 @@ public class ElevatorShake : MonoBehaviour
 {
     public GameObject elevator;
     public Animator anim;
-    public GameObject light;
     private ElevatorArea elevatorArea;
     private ShowDeadCanvas showDeadCanvas;
 
@@ -15,7 +14,6 @@ public class ElevatorShake : MonoBehaviour
     {
         elevator = GameObject.Find("Elevator");
         anim = elevator.GetComponent<Animator>();
-        light = GameObject.Find("elevatorLight");
         elevatorArea = GameObject.Find("elevatorArea").GetComponent<ElevatorArea>();
         showDeadCanvas = GameObject.Find("player deadth control").GetComponent<ShowDeadCanvas>();
 
@@ -34,12 +32,9 @@ public class ElevatorShake : MonoBehaviour
         Debug.Log("Elevator broken");
         anim.SetBool("isShaking", true);
         AudioManager.instance.PlayItemSound("mechanical-25592");
-        yield return new WaitForSeconds(0.1f);
-        //anim.SetBool("isShaking",false);
-        light.SetActive(false);
 
-        yield return new WaitForSeconds(0.5f);
-        showDeadCanvas.deadReason = "被掉落物砸死";
+        yield return new WaitForSeconds(7f);
+        showDeadCanvas.deadReason = "被困於電梯";
         showDeadCanvas.reloadScene = "Corridor";
         StartCoroutine(showDeadCanvas.ShowDeadCanva());
     }
