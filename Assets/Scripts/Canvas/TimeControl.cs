@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class TimeControl : MonoBehaviour
@@ -25,6 +26,13 @@ public class TimeControl : MonoBehaviour
     public RectTransform timeBarFillArea; // Slider 的填充區域
     private bool sparkStarted = false;
 
+    public Image clockImage;
+    public Image clockImage_2;
+    public float swingSpeed; // 搖擺速度
+    public float swingAngle; // 搖擺角度
+    private bool swingStarted = false;
+    private float customTime = 0f;
+
     void Awake()
     {
         nowtime = cameraShake.shakeDuration_max - diff;
@@ -33,6 +41,8 @@ public class TimeControl : MonoBehaviour
         timeBar.value = nowtime;
 
         fillImage.color = startColor;
+        clockImage_2.enabled = false;
+        customTime = 0f;
     }
     public IEnumerator UpdateTimer()
     {
@@ -41,6 +51,7 @@ public class TimeControl : MonoBehaviour
         while (nowtime > 0)
         {
             nowtime -= Time.deltaTime;
+            customTime += Time.deltaTime;
             timeBar.value = nowtime;
 
             // 根據剩餘時間計算顏色
@@ -48,16 +59,20 @@ public class TimeControl : MonoBehaviour
             fillImage.color = Color.Lerp(endColor, startColor, t);
 
             // 剩餘時間少於一半時啟動
-            if (nowtime <= maxtime / 2 && !sparkStarted)
+            if (nowtime <= maxtime / 2)
             {
-                sparkStarted = true;
-                if (sparkParticleSystem != null)
+                if (!sparkStarted)
                 {
-                    sparkParticleSystem.Play();
+                    sparkStarted = true;
+                    if (sparkParticleSystem != null)
+                    {
+                        sparkParticleSystem.Play();
+                    }
                 }
+
             }
 
-            // 更新效果的位置
+            // 更新火花效果的位置
             if (sparkParticleSystem != null && sparkParticleSystem.isPlaying)
             {
                 Vector3[] corners = new Vector3[4];
@@ -67,6 +82,15 @@ public class TimeControl : MonoBehaviour
                 Vector3 sparkPosition = corners[2]; // 右上角的位置
                 sparkParticleSystem.transform.position = sparkPosition;
             }
+
+            // 開始搖擺效果
+            if (!swingStarted)
+            {
+                swingStarted = true;
+                swingSpeed = 1;
+                StartCoroutine(SwingImage());
+            }
+
 
             yield return null;
         }
@@ -80,6 +104,28 @@ public class TimeControl : MonoBehaviour
         {
             sparkParticleSystem.Stop();
         }
+
+    }
+
+    private IEnumerator SwingImage()
+    {
+        while (nowtime > 0)
+        {
+            if (nowtime <= maxtime / 2)
+            {
+                clockImage.enabled = false;
+                clockImage_2.enabled = true;
+                clockImage = clockImage_2;
+            }
+            float t = 1 - (nowtime / maxtime);
+            float swingSpeed = Mathf.Lerp(1, 10, t);
+            float angle = Mathf.Sin(customTime * swingSpeed) * swingAngle;
+            clockImage.rectTransform.localRotation = Quaternion.Euler(0, 0, angle);
+            yield return null;
+        }
+
+        // 重置旋轉角度
+        clockImage.rectTransform.localRotation = Quaternion.Euler(0, 0, 0);
     }
 
 }
