@@ -9,6 +9,7 @@ public class DebrisFalling : MonoBehaviour
     private bool isFalling = false;
     public GameObject[] fallObjects;
     public SelectRodaHint selectRoadHint;
+    public SelectRodaHint selectRoadHintB;
     private ShowDeadCanvas showDeadCanvas;
 
     #region 包包判定
@@ -124,11 +125,12 @@ public class DebrisFalling : MonoBehaviour
         yield return new WaitForSeconds(3f);
         isFalling = false;
 
-        CloseBagCol();
+        // CloseBagCol();
 
         if (!showDeadCanvas.isDead)
         {
             StartCoroutine(selectRoadHint.StartHint());
+            StartCoroutine(selectRoadHintB.StartHintB());
         }
 
     }

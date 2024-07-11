@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SelectRodaHint : MonoBehaviour
 {
-    private Camera mainCamera;
-    private Camera hintCamera;
-    private GameObject selectRoda;
+    // private Camera mainCamera;
+    // private Camera hintCamera;
+    public GameObject selectRoda;
     private Animator SelectRodaAnimator;
     // private Animator hintCameraAnimator;
 
@@ -19,9 +19,9 @@ public class SelectRodaHint : MonoBehaviour
 
     private void Start()
     {
-        mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        // mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 
-        hintCamera = GameObject.Find("roadCamera").GetComponent<Camera>();
+        // hintCamera = GameObject.Find("roadCamera").GetComponent<Camera>();
         // hintCameraAnimator = hintCamera.GetComponent<Animator>();
 
         // left = GameObject.Find("left");
@@ -33,8 +33,8 @@ public class SelectRodaHint : MonoBehaviour
         // left.SetActive(false);
         // right.SetActive(false);
 
-        hintCamera.enabled = false;
-        selectRoda = GameObject.Find("SelectRoad");
+        // hintCamera.enabled = false;
+        // selectRoda = GameObject.Find("SelectRoad");
         SelectRodaAnimator = selectRoda.GetComponent<Animator>();
     }
 
@@ -43,6 +43,7 @@ public class SelectRodaHint : MonoBehaviour
         if (other.CompareTag("Player") && !isTrigger)
         {
             // StartCoroutine(StartHint());
+            // StartCoroutine(StartHintB());
         }
     }
 
@@ -50,8 +51,8 @@ public class SelectRodaHint : MonoBehaviour
     {
         isTrigger = true;
 
-        hintCamera.enabled = true;
-        mainCamera.enabled = false;
+        // hintCamera.enabled = true;
+        // mainCamera.enabled = false;
         // left.SetActive(true);
         // right.SetActive(true);
 
@@ -69,17 +70,28 @@ public class SelectRodaHint : MonoBehaviour
 
 
         SelectRodaAnimator.SetBool("isRight", true);
-        yield return new WaitForSeconds(2.5f);
+        // yield return new WaitForSeconds(2.5f);
 
-        SelectRodaAnimator.SetBool("isRotate", true);
-        yield return new WaitForSeconds(2f);
+        // SelectRodaAnimator.SetBool("isRotate", true);
+        // yield return new WaitForSeconds(2f);
+
+        // SelectRodaAnimator.SetBool("isLeft", true);
+        yield return new WaitForSeconds(3f);
+
+
+        // mainCamera.enabled = true;
+        // hintCamera.enabled = false;
+        selectRoda.SetActive(false);
+    }
+
+    public IEnumerator StartHintB()
+    {
+        isTrigger = true;
+
 
         SelectRodaAnimator.SetBool("isLeft", true);
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3f);
 
-
-        mainCamera.enabled = true;
-        hintCamera.enabled = false;
         selectRoda.SetActive(false);
     }
 }
