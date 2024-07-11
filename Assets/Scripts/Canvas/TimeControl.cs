@@ -79,7 +79,7 @@ public class TimeControl : MonoBehaviour
                 timeBarFillArea.GetWorldCorners(corners);
 
                 // 計算位置，設定在填充區域的右側
-                Vector3 sparkPosition = corners[2]; // 右上角的位置
+                Vector3 sparkPosition = corners[3]; // 右上角的位置
                 sparkParticleSystem.transform.position = sparkPosition;
             }
 
