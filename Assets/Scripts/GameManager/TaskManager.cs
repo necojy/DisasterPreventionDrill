@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -64,6 +65,30 @@ public class TaskManager : MonoBehaviour
             taskAlignments.Add(TaskAlignment.Left);
         else if (alignment == 'r')
             taskAlignments.Add(TaskAlignment.Right);
-        UpdateTaskUI();
+
+        // 新增任務並淡入顯示
+        Transform parent = alignment == 'l' ? leftTaskListParent : rightTaskListParent;
+        var taskItem = Instantiate(taskPrefab, parent);
+        var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
+        taskText.text = " - " + newTask + "\n";
+        taskItems.Add(taskItem);
+        StartCoroutine(FadeIn(taskItem));
+    }
+
+    private IEnumerator FadeIn(GameObject taskItem)
+    {
+        CanvasGroup canvasGroup = taskItem.AddComponent<CanvasGroup>();
+        canvasGroup.alpha = 0f;
+        float duration = 1f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(0f, 1f, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        canvasGroup.alpha = 1f;
     }
 }
