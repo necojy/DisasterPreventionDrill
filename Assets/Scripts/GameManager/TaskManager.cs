@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,10 +5,18 @@ using UnityEngine.UI;
 
 public class TaskManager : MonoBehaviour
 {
+    public enum TaskAlignment
+    {
+        Left,
+        Right
+    }
+
     public GameObject taskPrefab; // 任務條目預製件
-    public Transform taskListParent; // 任務列表的父物件，用於顯示任務條目
+    public Transform leftTaskListParent; // 左側任務列表的父物件
+    public Transform rightTaskListParent; // 右側任務列表的父物件
     private List<string> tasks = new List<string>(); // 任務列表
     private List<GameObject> taskItems = new List<GameObject>(); // 存儲當前顯示的任務條目
+    private List<TaskAlignment> taskAlignments = new List<TaskAlignment>(); // 存儲每個任務的對齊方式
 
     void Start()
     {
@@ -26,20 +33,15 @@ public class TaskManager : MonoBehaviour
         taskItems.Clear();
 
         // 創建並顯示新的任務條目
-        if (tasks.Count > 0)
+        for (int i = 0; i < tasks.Count; i++)
         {
-            foreach (var task in tasks)
-            {
-                var taskItem = Instantiate(taskPrefab, taskListParent);
-                taskItem.GetComponentInChildren<TextMeshProUGUI>().text = task;
-                taskItems.Add(taskItem);
-            }
-        }
-        else
-        {
-            // 如果沒有任務，顯示默認信息
-
-
+            var task = tasks[i];
+            var alignment = taskAlignments[i];
+            Transform parent = alignment == TaskAlignment.Left ? leftTaskListParent : rightTaskListParent;
+            var taskItem = Instantiate(taskPrefab, parent);
+            var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
+            taskText.text = task;
+            taskItems.Add(taskItem);
         }
     }
 
@@ -48,15 +50,20 @@ public class TaskManager : MonoBehaviour
         completedTask = " - " + completedTask + "\n";
         if (tasks.Contains(completedTask))
         {
-            tasks.Remove(completedTask); // 移除已完成的任務
+            int index = tasks.IndexOf(completedTask);
+            tasks.RemoveAt(index); // 移除已完成的任務
+            taskAlignments.RemoveAt(index); // 移除對應的對齊方式
             UpdateTaskUI(); // 更新任務UI
         }
     }
 
-    public void AddTask(string newTask)
+    public void AddTask(string newTask, char alignment)
     {
         tasks.Add(" - " + newTask + "\n");
+        if (alignment == 'l')
+            taskAlignments.Add(TaskAlignment.Left);
+        else if (alignment == 'r')
+            taskAlignments.Add(TaskAlignment.Right);
         UpdateTaskUI();
     }
 }
-

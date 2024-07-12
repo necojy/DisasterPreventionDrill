@@ -13,6 +13,9 @@ public class LineHint : MonoBehaviour
 
     public TaskManager taskManager;
     public string taskMessage;
+    public char alignment;
+    
+
     public bool isTaskAdd = false;
 
     void Awake()
@@ -52,7 +55,7 @@ public class LineHint : MonoBehaviour
                 // 顯示任務
                 if (!isTaskAdd)
                 {
-                    taskManager.AddTask(taskMessage);
+                    taskManager.AddTask(taskMessage, alignment);
                     isTaskAdd = true;
                 }
             }

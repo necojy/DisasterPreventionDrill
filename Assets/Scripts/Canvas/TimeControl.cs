@@ -27,7 +27,6 @@ public class TimeControl : MonoBehaviour
     private bool sparkStarted = false;
 
     public Image clockImage;
-    public Image clockImage_2;
     public float swingSpeed; // 搖擺速度
     public float swingAngle; // 搖擺角度
     private bool swingStarted = false;
@@ -41,7 +40,6 @@ public class TimeControl : MonoBehaviour
         timeBar.value = nowtime;
 
         fillImage.color = startColor;
-        clockImage_2.enabled = false;
         customTime = 0f;
     }
     public IEnumerator UpdateTimer()
@@ -57,6 +55,7 @@ public class TimeControl : MonoBehaviour
             // 根據剩餘時間計算顏色
             float t = nowtime / maxtime;
             fillImage.color = Color.Lerp(endColor, startColor, t);
+            clockImage.color = Color.Lerp(endColor, startColor, t);
 
             // 剩餘時間少於一半時啟動
             if (nowtime <= maxtime / 2)
@@ -111,12 +110,6 @@ public class TimeControl : MonoBehaviour
     {
         while (nowtime > 0)
         {
-            if (nowtime <= maxtime / 2)
-            {
-                clockImage.enabled = false;
-                clockImage_2.enabled = true;
-                clockImage = clockImage_2;
-            }
             float t = 1 - (nowtime / maxtime);
             float swingSpeed = Mathf.Lerp(1, 10, t);
             float angle = Mathf.Sin(customTime * swingSpeed) * swingAngle;
