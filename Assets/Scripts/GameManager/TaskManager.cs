@@ -12,7 +12,8 @@ public class TaskManager : MonoBehaviour
         Right
     }
 
-    public GameObject taskPrefab; // 任務條目預製件
+    public GameObject taskPrefabL; // 任務條目預製件
+    public GameObject taskPrefabR;
     public Transform leftTaskListParent; // 左側任務列表的父物件
     public Transform rightTaskListParent; // 右側任務列表的父物件
     private List<string> tasks = new List<string>(); // 任務列表
@@ -38,11 +39,25 @@ public class TaskManager : MonoBehaviour
         {
             var task = tasks[i];
             var alignment = taskAlignments[i];
-            Transform parent = alignment == TaskAlignment.Left ? leftTaskListParent : rightTaskListParent;
-            var taskItem = Instantiate(taskPrefab, parent);
-            var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
-            taskText.text = task;
-            taskItems.Add(taskItem);
+            if (alignment == TaskAlignment.Left)
+            {
+                Transform parent = leftTaskListParent;
+                var taskItem = Instantiate(taskPrefabL, parent);
+                var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
+                taskText.text = task;
+                taskItems.Add(taskItem);
+            }
+            else if (alignment == TaskAlignment.Right)
+            {
+                Transform parent = rightTaskListParent;
+                var taskItem = Instantiate(taskPrefabR, parent);
+                var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
+                taskText.text = task;
+                taskItems.Add(taskItem);
+            }
+
+
+
         }
     }
 
@@ -66,13 +81,28 @@ public class TaskManager : MonoBehaviour
         else if (alignment == 'r')
             taskAlignments.Add(TaskAlignment.Right);
 
+
         // 新增任務並淡入顯示
-        Transform parent = alignment == 'l' ? leftTaskListParent : rightTaskListParent;
-        var taskItem = Instantiate(taskPrefab, parent);
-        var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
-        taskText.text = " - " + newTask + "\n";
-        taskItems.Add(taskItem);
-        StartCoroutine(FadeIn(taskItem));
+        if (alignment == 'l')
+        {
+            Transform parent = leftTaskListParent;
+            var taskItem = Instantiate(taskPrefabL, parent);
+            var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
+            taskText.text = " - " + newTask + "\n";
+            taskItems.Add(taskItem);
+            StartCoroutine(FadeIn(taskItem));
+        }
+        else if (alignment == 'r')
+        {
+            Transform parent = rightTaskListParent;
+            var taskItem = Instantiate(taskPrefabR, parent);
+            var taskText = taskItem.GetComponentInChildren<TextMeshProUGUI>();
+            taskText.text = " - " + newTask + "\n";
+            taskItems.Add(taskItem);
+            StartCoroutine(FadeIn(taskItem));
+        }
+
+
     }
 
     private IEnumerator FadeIn(GameObject taskItem)

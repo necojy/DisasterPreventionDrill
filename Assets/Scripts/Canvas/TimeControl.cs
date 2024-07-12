@@ -111,7 +111,7 @@ public class TimeControl : MonoBehaviour
         while (nowtime > 0)
         {
             float t = 1 - (nowtime / maxtime);
-            float swingSpeed = Mathf.Lerp(1, 10, t);
+            float swingSpeed = Mathf.Lerp(1, 20, t);
             float angle = Mathf.Sin(customTime * swingSpeed) * swingAngle;
             clockImage.rectTransform.localRotation = Quaternion.Euler(0, 0, angle);
             yield return null;
