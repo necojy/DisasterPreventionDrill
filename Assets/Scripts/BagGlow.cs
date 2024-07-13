@@ -12,10 +12,12 @@ public class BagGlow : MonoBehaviour
     private Animator itemColumnHintAnimator;
     public bool isHint = false;
 
+    private CameraShake cameraShake;
 
     private void Start()
     {
         itemColumnHint = GameObject.Find("itemColumnHint");
+        cameraShake = GameObject.Find("Camera Offset").GetComponent<CameraShake>();
         itemColumnHint.SetActive(false);
     }
 
@@ -44,7 +46,7 @@ public class BagGlow : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !cameraShake.isShaking)
         {
             StartCoroutine(StartHint());
         }

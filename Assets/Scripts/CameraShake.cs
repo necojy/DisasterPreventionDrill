@@ -88,6 +88,8 @@ public class CameraShake : MonoBehaviour
         livingroomShakeAni.SetBool("maxShaking", true);
         StartCoroutine(ItemShaking());
 
+        StartCoroutine(PlayWaterBoilMusic());
+
         elapsed = 0.0f;
         while (elapsed < shakeDuration_max)
         {
@@ -148,4 +150,9 @@ public class CameraShake : MonoBehaviour
         }
     }
 
+    private IEnumerator PlayWaterBoilMusic()
+    {
+        yield return new WaitForSeconds(8f);
+        AudioManager.instance.PlayItemSound("water boiling");
+    }
 }

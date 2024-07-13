@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.2
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.025463784, g: 0.026829725, b: 0.024215648, a: 0.2}
+  m_IndirectSpecularColor: {r: 0.025463883, g: 0.026829774, b: 0.024215668, a: 0.2}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8251,6 +8251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabGameObject: {fileID: 224641196}
   dis: 5
+  musicName: safeDoor
 --- !u!59 &224641198
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -8335,7 +8336,19 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 224641197}
+        m_TargetAssemblyTypeName: CloseComponent, Assembly-CSharp
+        m_MethodName: PlayMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -10481,6 +10494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabGameObject: {fileID: 297276051}
   dis: 5
+  musicName: 
 --- !u!59 &297276056
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -27456,6 +27470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabGameObject: {fileID: 805011187}
   dis: 5
+  musicName: safeDoor
 --- !u!59 &805011189
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -44875,6 +44890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabGameObject: {fileID: 1363337966}
   dis: 5
+  musicName: 
 --- !u!59 &1363337971
 HingeJoint:
   m_ObjectHideFlags: 0
@@ -61315,7 +61331,7 @@ PrefabInstance:
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
       propertyPath: itemSounds.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
@@ -61334,12 +61350,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
+      propertyPath: itemSounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b03f288f544a8dc4fa783da8e9e0d956, type: 3}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
+      propertyPath: itemSounds.Array.data[5].name
+      value: safeDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
+      propertyPath: itemSounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 43a0b4502d9ec8244b38e8578cf70dd6, type: 3}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
+      propertyPath: itemSounds.Array.data[6].name
+      value: water boiling
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
       propertyPath: itemSounds.Array.data[4].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
+      propertyPath: itemSounds.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
+      propertyPath: itemSounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
       propertyPath: itemSounds.Array.data[4].volume
+      value: 0.053
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
+      propertyPath: itemSounds.Array.data[5].volume
+      value: 0.053
+      objectReference: {fileID: 0}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
+      propertyPath: itemSounds.Array.data[6].volume
       value: 0.053
       objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
@@ -61364,13 +61420,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
-      propertyPath: elevatorSounds.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 712da2333a50b14448031f6299b6ccd8, type: 3}
-    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
-        type: 3}
-      propertyPath: elevatorSounds.Array.data[2].name
-      value: Elevator_Broken
+      propertyPath: elevatorSounds.Array.data[0].pitch
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
@@ -61379,14 +61430,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
-      propertyPath: elevatorSounds.Array.data[2].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
-        type: 3}
       propertyPath: backgroundSounds.Array.data[0].clip
       value: 
       objectReference: {fileID: 8300000, guid: ae54023741ef15842b17b6641202b2e4, type: 3}
+    - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
+        type: 3}
+      propertyPath: elevatorSounds.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
       propertyPath: elevatorSounds.Array.data[1].volume

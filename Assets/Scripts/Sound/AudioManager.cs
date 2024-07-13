@@ -106,6 +106,25 @@ public class AudioManager : MonoBehaviour
         {
             itemSources.PlayOneShot(s.clip);
         }
+        else if (s.name == "safeDoor")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "water boiling")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "glass01")
+        {
+            Debug.Log("dsa");
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "glass02")
+        {
+            Debug.Log("dsa2");
+
+            itemSources.PlayOneShot(s.clip);
+        }
     }
 
     public void PlayElevatorSound(string name)
@@ -164,11 +183,32 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    IEnumerator PlayAndPause(AudioSource source, AudioClip clip, float waitTime, string sourceName)
+    public void StopAllSounds()
     {
-        source.PlayOneShot(clip);
-        yield return new WaitForSeconds(waitTime);
-        PauseSound(sourceName);
+        foreach (Sound backgroundSound in backgroundSounds)
+        {
+            if (backgroundSound.source && backgroundSound.source.isPlaying)
+            {
+                backgroundSound.source.Stop();
+            }
+        }
+
+        foreach (Sound itemSound in itemSounds)
+        {
+            if (itemSound.source && itemSound.source.isPlaying)
+            {
+                itemSound.source.Stop();
+            }
+        }
+
+        if (BackgroundSource.isPlaying)
+        {
+            BackgroundSource.Stop();
+        }
+        if (itemSources.isPlaying)
+        {
+            itemSources.Stop();
+        }
     }
 
 }
