@@ -57,6 +57,12 @@ public class AudioManager : MonoBehaviour
         {
             BackgroundSource.PlayOneShot(s.clip);
         }
+        else if (s.name == "Corridor")
+        {
+            BackgroundSource.clip = s.clip;
+            BackgroundSource.loop = true; // 設置循環播放
+            BackgroundSource.Play();
+        }
     }
 
     public void PlayItemSound(string name)
