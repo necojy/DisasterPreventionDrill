@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.2
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.025463883, g: 0.026829774, b: 0.024215668, a: 0.2}
+  m_IndirectSpecularColor: {r: 0.025463784, g: 0.026829725, b: 0.024215648, a: 0.2}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -41866,6 +41866,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1244413700}
+  - component: {fileID: 1244413701}
+  - component: {fileID: 1244413703}
+  - component: {fileID: 1244413702}
   m_Layer: 0
   m_Name: elevatorButton
   m_TagString: Untagged
@@ -41899,6 +41902,67 @@ Transform:
   - {fileID: 628944454}
   m_Father: {fileID: 598159814}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!65 &1244413701
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244413699}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.0650094, y: 1, z: 7.074103}
+  m_Center: {x: -0.03753789, y: 0, z: -3.037052}
+--- !u!114 &1244413702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244413699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d46512490a46c94bbe883b00db5e991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elevatorControl: {fileID: 0}
+--- !u!54 &1244413703
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244413699}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &1246312458
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50496,8 +50560,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.932764, y: 0.096627325, z: 1.0092425}
-  m_Center: {x: -4.6645937, y: -0.21665622, z: -0.02396704}
+  m_Size: {x: 6.5656595, y: 0.096627325, z: 0.87954444}
+  m_Center: {x: -2.9810414, y: -0.21665625, z: -0.0006997945}
 --- !u!114 &1549959898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66603,8 +66667,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.355774, y: 0.096627325, z: 1.0092425}
-  m_Center: {x: -12.109365, y: -0.21665622, z: -0.02396704}
+  m_Size: {x: 6.1575184, y: 0.096627325, z: 0.88701373}
+  m_Center: {x: -10.088502, y: -0.21665625, z: -0.03319606}
 --- !u!1 &2049152486
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class CameraShake : MonoBehaviour
     public float shakeDuration_max = 10f;
     public float shakeMagnitude = 0.25f;
     public bool isShaking = false;
+    public bool shakingEnd = false;
     #endregion
 
     #region 搖晃後的掉落物
@@ -100,6 +101,7 @@ public class CameraShake : MonoBehaviour
 
         transform.localPosition = originalPosition;
         isShaking = false;
+        shakingEnd = true;
 
 
     }

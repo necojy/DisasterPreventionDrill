@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.012731749, g: 0.013414757, b: 0.012107871, a: 0.1}
+  m_IndirectSpecularColor: {r: 0.012731704, g: 0.0134147275, b: 0.012107854, a: 0.1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -10263,6 +10263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48658c1c8050692499a4a96569c3a8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onceGrab: 0
 --- !u!1001 &392630605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22099,6 +22100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48658c1c8050692499a4a96569c3a8f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onceGrab: 0
 --- !u!1 &787239911
 GameObject:
   m_ObjectHideFlags: 0
@@ -26525,17 +26527,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950425633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -77.8879}
-  m_LocalScale: {x: 0.006742777, y: 0.006742777, z: 0.006742777}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247120833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -448.23395, y: -268.539}
-  m_SizeDelta: {x: 803, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &950425635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59101,17 +59103,17 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920830122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -77.8879}
-  m_LocalScale: {x: 0.006742777, y: 0.006742777, z: 0.006742777}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247120833}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -448.23395, y: -268.539}
-  m_SizeDelta: {x: 803, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1920830131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69471,6 +69473,7 @@ MonoBehaviour:
   shakeDuration_max: 10
   shakeMagnitude: 0.25
   isShaking: 0
+  shakingEnd: 0
   waitForDown: 1
   fallObjects:
   - {fileID: 608679014}

@@ -26,7 +26,7 @@ public class ElevatorControl : MonoBehaviour
         if (coll.CompareTag("Player"))
         {
 
-            Close();
+            //Close();
         }
     }
 
