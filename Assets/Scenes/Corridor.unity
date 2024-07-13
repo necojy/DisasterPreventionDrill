@@ -24581,7 +24581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &715570035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27340,7 +27340,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 117.95, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -23.952536, y: 1.3871768, z: 11.887503}
+  m_ConnectedAnchor: {x: -38.593887, y: -9.580439, z: 11.268936}
   serializedVersion: 2
   m_UseSpring: 0
   m_Spring:
@@ -28790,8 +28790,8 @@ Transform:
   m_GameObject: {fileID: 839367188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.49, y: -8.326, z: 12.164}
-  m_LocalScale: {x: 0.25, y: 2.4021678, z: 0.25}
+  m_LocalPosition: {x: -32.49, y: -8.6073, z: 12.164}
+  m_LocalScale: {x: 0.25, y: 2.9647555, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1464949070}
@@ -56948,7 +56948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a4693107e593b4b88efbda73b19922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Streets
+  nextSceneName: Streets 2
 --- !u!65 &1714152724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -99513,7 +99513,6 @@ SceneRoots:
   - {fileID: 1464949070}
   - {fileID: 112037677}
   - {fileID: 1613563825}
-  - {fileID: 1714152726}
   - {fileID: 2099488654}
   - {fileID: 1382065039}
   - {fileID: 194601486}
@@ -99526,3 +99525,4 @@ SceneRoots:
   - {fileID: 2049687867}
   - {fileID: 1590101074}
   - {fileID: 186187745}
+  - {fileID: 1714152726}
