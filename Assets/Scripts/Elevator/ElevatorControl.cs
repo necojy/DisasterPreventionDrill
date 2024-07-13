@@ -13,11 +13,10 @@ public class ElevatorControl : MonoBehaviour
         anim = elevator.GetComponent<Animator>();
     }
 
-    private void OnTriggerStay(Collider coll)
+    private void OnTriggerEnter(Collider coll)
     {
         if (coll.CompareTag("Player"))
         {
-
             Open();
         }
     }
@@ -32,13 +31,21 @@ public class ElevatorControl : MonoBehaviour
 
     public void Open()
     {
-        anim.SetBool("isClosing", false);
-        anim.SetBool("isOpening", true);
+        if (anim.GetBool("isOpening") == false)
+        {
+            anim.SetBool("isClosing", false);
+            anim.SetBool("isOpening", true);
+            AudioManager.instance.PlayElevatorSound("Open_Close_Door");
+        }
     }
 
     public void Close()
     {
-        anim.SetBool("isOpening", false);
-        anim.SetBool("isClosing", true);
+        if (anim.GetBool("isClosing") == false)
+        {
+            anim.SetBool("isOpening", false);
+            anim.SetBool("isClosing", true);
+            AudioManager.instance.PlayElevatorSound("Open_Close_Door");
+        }
     }
 }

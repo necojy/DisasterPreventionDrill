@@ -16,7 +16,7 @@ public class ButtonControl : MonoBehaviour
         
     }
 
-    private void OnTriggerStay(Collider coll)
+    private void OnTriggerEnter(Collider coll)
     {
         if (coll.CompareTag("Right Hand") || coll.CompareTag("Left Hand"))
         {

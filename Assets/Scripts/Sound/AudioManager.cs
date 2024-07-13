@@ -7,8 +7,8 @@ using System;//使用Array需呼叫
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
-    public Sound[] backgroundSounds, itemSounds;
-    public AudioSource BackgroundSource, itemSources;
+    public Sound[] backgroundSounds, itemSounds, elevatorSounds;
+    public AudioSource BackgroundSource, itemSources, elevatorSources;
 
 
     public void Awake()
@@ -108,6 +108,30 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayElevatorSound(string name)
+    {
+        Sound s = Array.Find(elevatorSounds, elevatorSound => elevatorSound.name == name);
+
+        if (s == null)
+        {
+            Debug.Log(name + "Sound not found");
+        }
+        else if (s.name == "Open_Close_Door")
+        {
+            elevatorSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "Elevator_Shaking")
+        {
+            //StartCoroutine(PlayAndPause(elevatorSources, s.clip, 4f, "elevatorSources"));
+            elevatorSources.PlayOneShot(s.clip);
+        }
+        /* else if (s.name == "Elevator_Broken")
+        {
+            elevatorSources.PlayOneShot(s.clip);
+        } */
+
+    }
+
 
 
     public void PauseSound(string name)
@@ -117,6 +141,13 @@ public class AudioManager : MonoBehaviour
             if (BackgroundSource.isPlaying)
             {
                 BackgroundSource.Pause();
+            }
+        }
+        if (name == "elevatorSources")
+        {
+            if (elevatorSources.isPlaying)
+            {
+                elevatorSources.Pause();
             }
         }
 
@@ -131,6 +162,13 @@ public class AudioManager : MonoBehaviour
                 BackgroundSource.UnPause();
             }
         }
+    }
+
+    IEnumerator PlayAndPause(AudioSource source, AudioClip clip, float waitTime, string sourceName)
+    {
+        source.PlayOneShot(clip);
+        yield return new WaitForSeconds(waitTime);
+        PauseSound(sourceName);
     }
 
 }

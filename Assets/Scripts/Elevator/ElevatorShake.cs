@@ -31,7 +31,7 @@ public class ElevatorShake : MonoBehaviour
     {
         Debug.Log("Elevator broken");
         anim.SetBool("isShaking", true);
-        AudioManager.instance.PlayItemSound("mechanical-25592");
+        AudioManager.instance.PlayElevatorSound("Elevator_Shaking");
 
         yield return new WaitForSeconds(7f);
         showDeadCanvas.deadReason = "被困於電梯";
