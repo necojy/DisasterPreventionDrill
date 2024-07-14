@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class ElevorStairOption : MonoBehaviour
 {
+    // public GameObject[] hint_obj1;
+    // public GameObject[] hint_obj2;
+    // public int hint_start,hint_end;
+    public GameObject hint1;
+    public GameObject hint2;
     public GameObject glowbox;
     public Transform rotatePosition1;
     public Transform rotatePosition2;
@@ -18,9 +23,11 @@ public class ElevorStairOption : MonoBehaviour
     public Camera optionCamera;
 
 
-    void Update()
+    void Start()
     {
-
+        hint1.SetActive(false);
+        hint2.SetActive(false);
+        optionCamera.enabled = false;
     }
     public void OnTriggerEnter(Collider other)
     {
@@ -45,7 +52,7 @@ public class ElevorStairOption : MonoBehaviour
     }
     IEnumerator MovePlayer(Transform initial, Transform target, Transform playerPos)
     {
-
+        hint1.SetActive(true);
         //初始角度、目標角度
         Quaternion initialRotation = initial.rotation;
         Quaternion targetRotation = target.rotation;
@@ -53,6 +60,7 @@ public class ElevorStairOption : MonoBehaviour
         Vector3 initialPos = initial.position;
         Vector3 targetPos = target.position;
         float elapsedTime = 0f;
+
         while (elapsedTime < rotateViewTime)
         {
             optionCamera.transform.rotation = Quaternion.Slerp(initialRotation, targetRotation, elapsedTime / rotateViewTime);
@@ -61,16 +69,14 @@ public class ElevorStairOption : MonoBehaviour
             elapsedTime += Time.deltaTime * rotateSpeed;
             yield return null;
         }
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(4f);
         StartCoroutine(MovePlayer2(optionCamera.transform, rotatePosition2, xr_orig));
-
-
-        //glowbox.SetActive(false);
+        hint1.SetActive(false);
 
     }
     IEnumerator MovePlayer2(Transform initial, Transform target, Transform playerPos)
     {
-
+        hint2.SetActive(true);
         //初始角度、目標角度
         Quaternion initialRotation = initial.rotation;
         Quaternion targetRotation = target.rotation;
@@ -87,11 +93,9 @@ public class ElevorStairOption : MonoBehaviour
             yield return null;
         }
         yield return new WaitForSeconds(3f);
+        hint2.SetActive(false);
         optionCamera.enabled = false;
         mainCamera.enabled = true;
-
-
-
         //glowbox.SetActive(false);
 
     }
