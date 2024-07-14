@@ -11,5 +11,9 @@ public class BackGroundmusicControl : MonoBehaviour
         {
             AudioManager.instance.PlayBackground("Corridor");
         }
+        else
+        {
+            AudioManager.instance.StopAllSounds();
+        }
     }
 }
