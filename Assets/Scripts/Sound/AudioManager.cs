@@ -63,6 +63,13 @@ public class AudioManager : MonoBehaviour
             BackgroundSource.loop = true; // 設置循環播放
             BackgroundSource.Play();
         }
+        else if (s.name == "End")
+        {
+            BackgroundSource.clip = s.clip;
+            BackgroundSource.loop = true; // 設置循環播放
+            BackgroundSource.Play();
+        }
+
     }
 
     public void PlayItemSound(string name)
@@ -152,13 +159,9 @@ public class AudioManager : MonoBehaviour
         }
         else if (s.name == "Elevator_Shaking")
         {
-            //StartCoroutine(PlayAndPause(elevatorSources, s.clip, 4f, "elevatorSources"));
             elevatorSources.PlayOneShot(s.clip);
         }
-        /* else if (s.name == "Elevator_Broken")
-        {
-            elevatorSources.PlayOneShot(s.clip);
-        } */
+
 
     }
 

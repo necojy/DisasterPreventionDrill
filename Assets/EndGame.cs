@@ -18,7 +18,7 @@ public class EndGame : MonoBehaviour
         endCamera = GameObject.Find("endCamera").GetComponent<Camera>();
         MainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         endCamera.enabled = false;
-        
+
         endImage = GameObject.Find("endingCanvas");
         endImage.SetActive(false);
 
@@ -27,8 +27,9 @@ public class EndGame : MonoBehaviour
     {
         if (coll.CompareTag("Player"))
         {
-            MainCamera.enabled = false;
             endCamera.enabled = true;
+            MainCamera.enabled = false;
+            // AudioManager.instance.PlayBackground("End");
             StartCoroutine(WaitToOpen());
             //endAnimator.SetBool("isEnding", true);
         }
