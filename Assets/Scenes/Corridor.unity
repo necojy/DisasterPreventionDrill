@@ -27567,7 +27567,19 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 805011188}
+        m_TargetAssemblyTypeName: CloseComponent, Assembly-CSharp
+        m_MethodName: PlayMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
@@ -57136,7 +57148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a4693107e593b4b88efbda73b19922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Streets 2
+  nextSceneName: Streets
 --- !u!65 &1714152724
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -61486,7 +61498,7 @@ PrefabInstance:
         type: 3}
       propertyPath: backgroundSounds.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: a0cf5021ed1a83d41a6016de25ee59c1, type: 3}
+      objectReference: {fileID: 8300000, guid: f372c89559d14944f88113ddb9f409d5, type: 3}
     - target: {fileID: 1096940713040892902, guid: 7f6d1df8298a8404ab0d3641b57ac6e4,
         type: 3}
       propertyPath: backgroundSounds.Array.data[1].name
