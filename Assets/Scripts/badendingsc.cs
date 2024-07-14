@@ -40,10 +40,19 @@ public class badendingsc : MonoBehaviour
 
         hintCameraAnimator.SetBool("Apartment",true);
         objAnimator.SetBool("Airconfall",true);
-        yield return new WaitForSeconds(3.5f);
+        StartCoroutine(WaitToPlay());
+        yield return new WaitForSeconds(4f);
 
-        // showDeadCanvas.deadReason = "被掉落物砸死";
-        // showDeadCanvas.reloadScene = "Streets";
-        // StartCoroutine(showDeadCanvas.ShowDeadCanva());
+        AudioManager.instance.PlayItemSound("aircondition_after");
+
+        showDeadCanvas.deadReason = "被掉落物砸死";
+        showDeadCanvas.reloadScene = "Streets";
+        StartCoroutine(showDeadCanvas.ShowDeadCanva());
+    }
+
+    private IEnumerator WaitToPlay()
+    {
+        yield return new WaitForSeconds(2f);
+        AudioManager.instance.PlayItemSound("aircondition_before");
     }
 }

@@ -122,13 +122,18 @@ public class AudioManager : MonoBehaviour
         }
         else if (s.name == "glass01")
         {
-            Debug.Log("dsa");
             itemSources.PlayOneShot(s.clip);
         }
         else if (s.name == "glass02")
         {
-            Debug.Log("dsa2");
-
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "aircondition_before")
+        {
+            itemSources.PlayOneShot(s.clip);
+        }
+        else if (s.name == "aircondition_after")
+        {
             itemSources.PlayOneShot(s.clip);
         }
     }
