@@ -56,12 +56,15 @@ public class ShowDeadCanvas : MonoBehaviour
         deadPanel.SetActive(false);
         fade_animator.SetBool("fadein", false);
         isDead = false;
+        AudioManager.instance.StopAllSounds();
 
         //SceneManager.LoadScene("Streets");
-        if (gameManager != null){
+        if (gameManager != null)
+        {
             gameManager.ReloadScene(reloadScene);
         }
-        else{
+        else
+        {
             SceneManager.LoadScene(reloadScene);
         }
     }

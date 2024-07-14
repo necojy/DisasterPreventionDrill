@@ -11,6 +11,8 @@ public class CloseComponent : MonoBehaviour
     public Transform GrabGameObject;
     private XRGrabInteractable xRGrabInteractable;
     public float dis;
+    public string musicName;
+    private bool isPlayingMusic = false;
 
     private void Start()
     {
@@ -27,6 +29,15 @@ public class CloseComponent : MonoBehaviour
         else
         {
             xRGrabInteractable.enabled = true;
+        }
+    }
+
+    public void PlayMusic()
+    {
+        if (!isPlayingMusic)
+        {
+            isPlayingMusic = true;
+            AudioManager.instance.PlayItemSound(musicName);
         }
     }
 }

@@ -26,9 +26,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Backup2.unity
     guid: 88c82504763790d4aa1645df5bfc1781
+  - enabled: 0
+    path: Assets/Scenes/Streets(old).unity
+    guid: 463cf8c85c154cb4d8a296b1b85e47a2
   - enabled: 1
     path: Assets/Scenes/Streets.unity
-    guid: 463cf8c85c154cb4d8a296b1b85e47a2
+    guid: b5e1fa6e06a459b4fac23629a93debf8
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 534199b313cf46f41a1cbfb12c3500ef,
       type: 2}

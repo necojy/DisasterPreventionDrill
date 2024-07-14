@@ -14,13 +14,13 @@ public class LineHint : MonoBehaviour
     public TaskManager taskManager;
     public string taskMessage;
     public char alignment;
-    
+
 
     public bool isTaskAdd = false;
 
     void Awake()
     {
-        playerHand = GameObject.Find("Right Controller").transform;
+
     }
     void Start()
     {

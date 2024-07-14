@@ -107,7 +107,7 @@ public class ShowCanvas : MonoBehaviour
         if (usingWhat == 1) yield return StartCoroutine(RotateView(mainCamera.transform, rotatePosition, false, optionCanvas_index));
         else if (usingWhat == 2) yield return StartCoroutine(RotateView_Animator(optionCanvas_index, rotateCamera));
 
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(2f);
 
         Hint_Glow(false, hint_start, hint_end);
 

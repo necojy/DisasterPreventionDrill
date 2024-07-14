@@ -5,45 +5,76 @@ using UnityEngine;
 public class BagGlow : MonoBehaviour
 {
     public GameObject[] hint_bag;
-    public int hint_start,hint_end;
+    public int hint_start, hint_end;
     public GameObject glowbox;
 
-    // private void start()
-    // {
-    //     Skode_Glinting skode_Glinting = hint_bag.GetComponent<Skode_Glinting>();
-    //     skode_Glinting.StartGlinting();
-    // }
+    private GameObject itemColumnHint;
+    private Animator itemColumnHintAnimator;
+    public bool isHint = false;
+
+    private CameraShake cameraShake;
+
+    private void Start()
+    {
+        itemColumnHint = GameObject.Find("itemColumnHint");
+        cameraShake = GameObject.Find("Camera Offset").GetComponent<CameraShake>();
+        itemColumnHint.SetActive(false);
+    }
+
+    public void CheckCanOpen()
+    {
+        if (isHint == false)
+        {
+            isHint = true;
+            StartCoroutine(OpenHint());
+        }
+    }
+
+    private IEnumerator OpenHint()
+    {
+        itemColumnHint.SetActive(true);
+        itemColumnHintAnimator = itemColumnHint.GetComponent<Animator>();
+
+        itemColumnHintAnimator.SetBool("isHint", true);
+
+        yield return new WaitForSeconds(3.5f);
+        itemColumnHint.SetActive(false);
+        glowbox.SetActive(false);
+    }
+
 
     public void OnTriggerEnter(Collider other)
     {
 
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !cameraShake.isShaking)
         {
-        StartCoroutine(StartHint());
+            StartCoroutine(StartHint());
         }
     }
 
-    public IEnumerator StartHint(){
-        Hint_Glow(true,hint_start,hint_end);
+    public IEnumerator StartHint()
+    {
+        Hint_Glow(true, hint_start, hint_end);
         yield return new WaitForSeconds(3f);
-        Hint_Glow(false,hint_start,hint_end);
-        glowbox.SetActive(false);
+        Hint_Glow(false, hint_start, hint_end);
+        CheckCanOpen();
     }
 
-    private void Hint_Glow(bool is_open,int start, int end)
+    private void Hint_Glow(bool is_open, int start, int end)
     {
-        for(int i=start; i<=end; i++)
+        for (int i = start; i <= end; i++)
         {
-            if(hint_bag[i]!=null)
+            if (hint_bag[i] != null)
             {
                 Skode_Glinting skode_Glinting = hint_bag[i].GetComponent<Skode_Glinting>();
-                if (skode_Glinting != null){
+                if (skode_Glinting != null)
+                {
                     if (is_open) skode_Glinting.StartGlinting();
-                    
+
                     else skode_Glinting.StopGlinting();
                 }
             }
         }
     }
- 
+
 }
