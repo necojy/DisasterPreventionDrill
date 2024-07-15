@@ -69,7 +69,7 @@ public class ElevorStairOption : MonoBehaviour
             elapsedTime += Time.deltaTime * rotateSpeed;
             yield return null;
         }
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         StartCoroutine(MovePlayer2(optionCamera.transform, rotatePosition2, xr_orig));
         hint1.SetActive(false);
 
@@ -92,7 +92,7 @@ public class ElevorStairOption : MonoBehaviour
             elapsedTime += Time.deltaTime * rotateSpeed;
             yield return null;
         }
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         hint2.SetActive(false);
         optionCamera.enabled = false;
         mainCamera.enabled = true;
