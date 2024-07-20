@@ -26630,7 +26630,7 @@ RectTransform:
   m_GameObject: {fileID: 950425633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -77.8879}
-  m_LocalScale: {x: 0.009445403, y: 0.009445403, z: 0.009445403}
+  m_LocalScale: {x: 0.008585134, y: 0.008585134, z: 0.008585134}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247120833}
@@ -26638,7 +26638,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -448.23395, y: -268.539}
-  m_SizeDelta: {x: 750, y: 0}
+  m_SizeDelta: {x: 1140.0001, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &950425635
 MonoBehaviour:
@@ -59305,7 +59305,7 @@ RectTransform:
   m_GameObject: {fileID: 1920830122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -77.8879}
-  m_LocalScale: {x: 0.009445403, y: 0.009445403, z: 0.009445403}
+  m_LocalScale: {x: 0.008585134, y: 0.008585134, z: 0.008585134}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 247120833}
@@ -59313,7 +59313,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -448.23395, y: -268.539}
-  m_SizeDelta: {x: 750, y: 0}
+  m_SizeDelta: {x: 1140.0001, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1920830131
 MonoBehaviour:
@@ -68747,6 +68747,39 @@ PrefabInstance:
       objectReference: {fileID: 647967715}
     - target: {fileID: 1668052923, guid: d9ff2396752dd31408c05828455d5875, type: 3}
       propertyPath: m_PlaneDistance
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965431592, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.8894086
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965431592, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9.688983
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965431592, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 7.8894086
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965431592, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -134
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965431593, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b41edd69faea6c044a45ad5a256fb84e,
+        type: 3}
+    - target: {fileID: 1965431593, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965431593, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965431593, guid: d9ff2396752dd31408c05828455d5875, type: 3}
+      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 152276841533177616, guid: d9ff2396752dd31408c05828455d5875,

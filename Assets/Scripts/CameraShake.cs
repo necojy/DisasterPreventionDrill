@@ -88,7 +88,7 @@ public class CameraShake : MonoBehaviour
         livingroomShakeAni.SetBool("maxShaking", true);
         StartCoroutine(ItemShaking());
 
-        StartCoroutine(PlayWaterBoilMusic());
+        // StartCoroutine(PlayWaterBoilMusic());
 
         elapsed = 0.0f;
         while (elapsed < shakeDuration_max)
