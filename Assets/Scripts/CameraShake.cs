@@ -6,6 +6,7 @@ public class CameraShake : MonoBehaviour
 {
     //地震開始時間
     public float startTime = 3f;
+    public float AlertStartTime = 3f;
 
     #region 搖晃參數   
     public float shakeDuration_small = 3f;
@@ -54,8 +55,10 @@ public class CameraShake : MonoBehaviour
         StartCoroutine(Shake());
     }
 
+
     public IEnumerator Shake()
     {
+        yield return new WaitForSeconds(AlertStartTime);
         AudioManager.instance.PlayItemSound("alert_Sound");
         yield return new WaitForSeconds(startTime);
 
